@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="61cm" height="33cm" viewBox="-308 -657 1211 660" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #e9ecff" x="311.994" y="-254" width="220" height="120"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #0000ff" x="311.994" y="-254" width="220" height="120"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="421.994" y="-190.119">
+      <tspan x="421.994" y="-190.119">Обработка в EasyCompare</tspan>
+    </text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:end;font-family:sans-serif;font-style:normal;font-weight:700" x="528.394" y="-137.6">A-0</text>
+  </g>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 311.994,-211.702 A 9.6816,9.6816 0 0 0 302.313,-221.384"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="-306.756" y1="-221.384" x2="302.313" y2="-221.384"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="311.994" y1="-211.702" x2="311.994" y2="-194"/>
+  </g>
+  <g>
+    <rect style="fill: #adadad" x="-158.756" y="-233.265" width="322.75" height="14.9"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="2.61923" y="-221.384">
+      <tspan x="2.61923" y="-221.384">Данные о фильтрах моделей обьектов раздела</tspan>
+    </text>
+  </g>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 304.253,-172.104 A 7.74137,7.74137 0 0 0 311.994,-179.846"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="-305.46" y1="-172.104" x2="304.253" y2="-172.104"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="311.994" y1="-179.846" x2="311.994" y2="-194"/>
+  </g>
+  <g>
+    <rect style="fill: #adadad" x="-122.608" y="-183.986" width="251.75" height="14.9"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="3.26723" y="-172.104">
+      <tspan x="3.26723" y="-172.104">Данные о моделях обьектов раздела</tspan>
+    </text>
+  </g>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 311.994,-256.312 A 15,15 0 0 0 296.994,-271.312"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="-306.756" y1="-271.312" x2="296.994" y2="-271.312"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="311.994" y1="-256.312" x2="311.994" y2="-207.692"/>
+  </g>
+  <g>
+    <rect style="fill: #adadad" x="-77.7558" y="-283.193" width="160.75" height="14.9"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="2.61923" y="-271.312">
+      <tspan x="2.61923" y="-271.312">Данные о виде раздела</tspan>
+    </text>
+  </g>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #727272" d="M 345.967,-503.644 A 2.02931,2.02931 0 0 0 343.938,-501.615"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #727272" x1="343.938" y1="-497.904" x2="343.938" y2="-501.615"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #727272" d="M 399.994,-488.644 A 15,15 0 0 0 384.994,-503.644"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #727272" x1="345.967" y1="-503.644" x2="384.994" y2="-503.644"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #727272" x1="399.994" y1="-488.644" x2="399.994" y2="-254"/>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="399.994" y="-378.822">
+    <tspan x="399.994" y="-378.822"></tspan>
+  </text>
+  <g>
+    <rect style="fill: #adadad" x="288.413" y="-512.655" width="111.05" height="14.9"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="343.938" y="-500.774">
+      <tspan x="343.938" y="-500.774">Модель раздела</tspan>
+    </text>
+  </g>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 502.994,-560.454 A 15,15 0 0 0 487.994,-545.454"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="699.655" y1="-560.454" x2="502.994" y2="-560.454"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="487.994" y1="-545.454" x2="487.994" y2="-254"/>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="487.994" y="-407.227">
+    <tspan x="487.994" y="-407.227"></tspan>
+  </text>
+  <g>
+    <rect style="fill: #adadad" x="485.85" y="-572.335" width="215.95" height="30.9"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="593.825" y="-560.454">
+      <tspan x="593.825" y="-560.454">Соглашение о данных, которые</tspan>
+      <tspan x="593.825" y="-544.454"> передаются в HTML шаблоны</tspan>
+    </text>
+  </g>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 376.185,-50.702 A 9.14248,9.14248 0 0 0 385.328,-59.8445"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="359.469" y1="-50.702" x2="376.185" y2="-50.702"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="385.328" y1="-59.8445" x2="385.328" y2="-134"/>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="385.328" y="-92.3512">
+    <tspan x="385.328" y="-92.3512"></tspan>
+  </text>
+  <g>
+    <rect style="fill: #adadad" x="358.973" y="-62.5833" width="26.85" height="14.9"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="372.398" y="-50.702">
+      <tspan x="372.398" y="-50.702">Jinja</tspan>
+    </text>
+  </g>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 452.063,0 A 6.5977,6.5977 0 0 0 458.661,-6.5977"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="440" y1="0" x2="452.063" y2="0"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="458.661" y1="-6.5977" x2="458.661" y2="-134"/>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="458.661" y="-67.0001">
+    <tspan x="458.661" y="-67.0001"></tspan>
+  </text>
+  <g>
+    <rect style="fill: #adadad" x="409.606" y="-11.8812" width="79.45" height="14.9"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="449.331" y="0">
+      <tspan x="449.331" y="0">Django ORM</tspan>
+    </text>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="560.386" y="-1.57117">
+    <tspan x="560.386" y="-1.57117"></tspan>
+  </text>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 533.882,-199.338 A 1.88716,1.88716 0 0 0 531.994,-197.451"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="531.994" y1="-194" x2="531.994" y2="-197.451"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="533.882" y1="-199.338" x2="869.336" y2="-199.338"/>
+    <polygon style="fill: #000000" points="869.336,-191.338 885.336,-199.338 869.336,-207.338 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="869.336,-191.338 885.336,-199.338 869.336,-207.338 "/>
+  </g>
+  <g>
+    <rect style="fill: #adadad" x="555.79" y="-211.219" width="306.75" height="14.9"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="709.165" y="-199.338">
+      <tspan x="709.165" y="-199.338">Отсортированные обьекты на HTML шаблоне</tspan>
+    </text>
+  </g>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #727272" d="M 531.727,-645.458 A 2.95459,2.95459 0 0 0 528.772,-648.413"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #727272" x1="531.727" y1="-640.056" x2="531.727" y2="-645.458"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #727272" d="M 458.994,-648.413 A 15,15 0 0 0 443.994,-633.413"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #727272" x1="528.772" y1="-648.413" x2="458.994" y2="-648.413"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #727272" x1="443.994" y1="-633.413" x2="443.994" y2="-254"/>
+  </g>
+  <g>
+    <rect style="fill: #adadad" x="451.702" y="-656.116" width="160.05" height="14.9"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="531.727" y="-644.234">
+      <tspan x="531.727" y="-644.234">Типы обьектов раздела</tspan>
+    </text>
+  </g>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 296.994,-125.744 A 15,15 0 0 0 311.994,-140.744"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="-304.863" y1="-125.744" x2="296.994" y2="-125.744"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="311.994" y1="-140.744" x2="311.994" y2="-194"/>
+  </g>
+  <g>
+    <rect style="fill: #adadad" x="-168.809" y="-137.625" width="344.75" height="14.9"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="3.5659" y="-125.744">
+      <tspan x="3.5659" y="-125.744">Характеристики для каждого отдельного объекта</tspan>
+    </text>
+  </g>
+</svg>
