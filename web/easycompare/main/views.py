@@ -10,7 +10,7 @@ def sections_list(request):
     }
     return render(request, 'sections_list.html', context)
 
-def section(request):
+def section(request, section_name):
     class Attribute:
         def __init__(self, attribute, value):
             self.attribute = attribute
