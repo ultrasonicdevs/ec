@@ -9,11 +9,7 @@
 <body>
     <ul>
         {% for section in sections %}
-<<<<<<< HEAD:web/easycompare/main/templates/main/sections_list.html
-        <li><a href="{% url 'section_objects' section.section_name %}">{{ section }}</a></li>
-=======
-           <li><a href="{% url 'section_detail' section.section_name %}">{{ section }}</a></li>
->>>>>>> 708c9995f2f5d5081d7a8cb48e321a94a9e00d75:web/easycompare/main/templates/sections_list.html
+           <li><a href="{% url 'main:section_detail' section.section_name %}">{{ section }}</a></li>
         {% endfor %}
     </ul>
 </body>
