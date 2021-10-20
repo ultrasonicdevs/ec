@@ -22,7 +22,7 @@ from main import urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('main.urls'))
+    path('ec/', include('main.urls'))
 ]
 
 # NOT FOR PRODUCTION!!! SEE: https://docs.djangoproject.com/en/3.2/howto/static-files/deployment/

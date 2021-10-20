@@ -5,5 +5,5 @@ from . import views
 
 urlpatterns = [
     path('', views.sections_list),
-    path('section', views.section)
+    path('<str:section_name>', views.section, name='section_objects')
 ]

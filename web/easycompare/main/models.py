@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Section(models.Model):
     class Meta:
         verbose_name = 'Раздел'
@@ -50,3 +49,14 @@ class ObjectAttribute(models.Model):
     
     def __str__(self) -> str:
         return '{} {}'.format(self.attribute_type.filter_name, self.parent_object.object_name)
+
+
+# class FinalizedObject(models.Model):
+#     def __init__(self) -> None:
+#         objects_queryset = Object.objects.all()
+#         objects_attributes_queryset = ObjectAttribute.objects.all()
+#         for object in objects_queryset:
+#             self.object_instance = object
+#             self.object_instance_properties = objects_attributes_queryset.filter(parent_object=object)
+#             self.save()
+# FinalizedObject()
