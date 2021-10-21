@@ -36,9 +36,13 @@ def section(request, section_name):
     objects_with_attributes = []
     attributes = []
     for object in objects_queryset:
+        count = 0
         for attribute in objects_attributes_queryset:
-            if attribute.parent_object.id == object.id:
+            if attribute.parent_object.id == object.id and count < 3:
+                count += 1
                 attributes.append([attribute.attribute_type.filter_name, attribute.attribute_value])
+        for asdf in range(3 - count):
+            attributes.append(['', ''])
         object_with_dot_notation = FrozenObject(object.object_name, attributes)
         objects_with_attributes.append(object_with_dot_notation)
         attributes = []
