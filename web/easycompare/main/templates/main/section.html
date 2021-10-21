@@ -16,24 +16,25 @@
         {% for object in objects %}
             <div class="product">
                 <div class="product-container">
-                    <div class="product-img-div">
-                        <img src="#" alt="" class="product-img-file" width="200px" height="200px">
-                    </div>
+                        <img src="#" alt="" class="product-img-file">
                     <div class="product-data">
                         <h3 class="product-name">{{ object }}</h3>
                         <div class="product-description">
                             <div class="product-description-atributes-list">
                             {% for attribute in object.attributes %}
-                                <h4 class="product-description-atribute">{{ attribute }}  -  {{ attribute.value }}</h4>
+                                <div class="product-description-atribute">
+                                    <h4 class="product-description-atribute-item">{{ attribute }}</h4>
+                                    <h4 class="product-description-atribute-item">{{ attribute.value }}</h4>
+                                </div>
                             {% endfor %}
-                            </div>
-                            <div class="product-btn">
-                                <a href="#" class="detales">Подробнее</a>
-                                <button class="add-to-compare"><img src="#"  alt="" width="45px">Com</button>
-                                <button class="add-to-cart"><img src="#"  alt="" width="45px">Buy</button>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="product-btn">
+                    <a href="#" class="detales">Подробнее</a>
+                    <button class="add-to-compare"><img src="#"  alt="" width="45px">Com</button>
+                    <button class="add-to-cart"><img src="#"  alt="" width="45px">Buy</button>
                 </div>
             </div>
         {% endfor %}
