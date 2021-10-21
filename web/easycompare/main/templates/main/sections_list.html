@@ -9,7 +9,7 @@
 <body>
     <ul>
         {% for section in sections %}
-           <li><a href="{% url 'main:section_detail' section.section_name %}">{{ section }}</a></li>
+            <li><a href="{% url 'main:section_detail' section.section_name %}">{{ section }}</a></li>
         {% endfor %}
     </ul>
 </body>
