@@ -3,6 +3,19 @@ from django.shortcuts import render
 from .models import *
 
 
+def base(request):
+    header_links = {
+        'Главная': 'http://127.0.0.1:8000',
+        'Сравнение техники': '1',
+        'Подбор техники': 'section',
+    }
+    context = {
+        'title': 'Main',
+        'header_links': header_links.items(),
+    }
+    return render(request, 'main/main.html', context)
+
+
 def sections_list(request):
     sections = Section.objects.all()
     context = {
@@ -10,13 +23,16 @@ def sections_list(request):
     }
     return render(request, 'main/sections_list.html', context)
 
+
 def section(request, section_name):
     class Attribute:
         def __init__(self, attribute, value):
             self.attribute = attribute
             self.value = value
+
         def __str__(self):
             return self.attribute
+
     class FrozenObject:
         def __init__(self, name, attributes):
             self.name = name
@@ -26,11 +42,10 @@ def section(request, section_name):
                 property_attributes.append(Attribute(attribute, value))
 
             self.attributes = property_attributes
-     
+
         def __str__(self):
             return self.name
 
-        
     objects_queryset = Object.objects.all()
     objects_attributes_queryset = ObjectAttribute.objects.all()
     objects_with_attributes = []
@@ -41,7 +56,6 @@ def section(request, section_name):
             if attribute.parent_object.id == object.id and count < 3:
                 count += 1
                 attributes.append([attribute.attribute_type.filter_name, attribute.attribute_value])
-
 
         object_with_dot_notation = FrozenObject(object.object_name, attributes)
         objects_with_attributes.append(object_with_dot_notation)
