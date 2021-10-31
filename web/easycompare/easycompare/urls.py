@@ -21,6 +21,7 @@ from django.conf import settings
 from main import urls
 
 urlpatterns = [
+    path('jet/', include('jet.urls')),
     path('admin/', admin.site.urls),
     path('ec/', include('main.urls')),
     path('', include('main.urls'))

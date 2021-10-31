@@ -10,7 +10,8 @@ def base(request):
         'Подбор техники': 'section',
     }
     context = {
-        'title': 'Main',
+        'logo': 'EC',
+        'title': 'EasyCompare',
         'header_links': header_links.items(),
     }
     return render(request, 'main/main.html', context)

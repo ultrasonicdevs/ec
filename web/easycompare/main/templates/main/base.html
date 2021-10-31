@@ -3,18 +3,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" href="{% static 'main/images/ico/Logo.ico' %}">
     <link rel="stylesheet" href="{% static 'main/css/nullstyle.css' %}">
     <link rel="stylesheet" href="{% static 'main/css/base.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Germania+One&family=Roboto+Condensed:wght@300;400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <title>{{ title }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Germania+One&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    {% block optional-links %}{% endblock %}
+    <title>{% block title %}{{ title | default:'EasyCompare' }}{% endblock %}</title>
 </head>
 <body>
     <div class="wrapper">
 
         <header>
-            <div class="header-logo">EC</div>
+            <div class="header-logo">{{ logo }}</div>
             <ul class="header-navbar">
                 {% for linkname, link in header_links %}
                     <li class="header-navbar-link"><a href="{{ link }}">{{ linkname }}</a></li>
