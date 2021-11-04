@@ -1,17 +1,11 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends 'main/base.html' %}
+{% load static%}
+
+{% block optional-links %}
     <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <title>Document</title>
-</head>
-<body>
+{% endblock %}
+
+{% block content %}
     <div class="product-list">
         {% for object in objects %}
             <div class="product">
@@ -39,5 +33,4 @@
             </div>
         {% endfor %}
     </div>
-</body>
-</html>
+{% endblock %}

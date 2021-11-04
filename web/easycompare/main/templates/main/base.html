@@ -2,13 +2,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {# Мета теги #}
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {# Иконка сайта #}
     <link rel="shortcut icon" href="{% static 'main/images/ico/Logo.ico' %}">
+    {# Подключение файлов стилей #}
     <link rel="stylesheet" href="{% static 'main/css/nullstyle.css' %}">
     <link rel="stylesheet" href="{% static 'main/css/base.css' %}">
+    {# Подключение шрифтов #}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Germania+One&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    {# Подключение стилей (опционально) для других страниц #}
     {% block optional-links %}{% endblock %}
     <title>{% block title %}{{ title | default:'EasyCompare' }}{% endblock %}</title>
 </head>
