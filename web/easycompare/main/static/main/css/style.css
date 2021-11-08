@@ -1,8 +1,8 @@
 .product-list{
   width: 100%;
   display: grid;
-  grid-template-columns : repeat(7,2fr);
-  grid-row-gap: 1%;
+  grid-template-columns : repeat(4,2fr);
+  grid-row-gap: 5%;
   column-gap : 1%;
 }
 

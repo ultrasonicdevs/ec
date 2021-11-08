@@ -4,15 +4,6 @@ from .models import *
 
 
 def base(request):
-    header_links = {
-        'Главная': 'http://127.0.0.1:8000',
-        'Сравнение техники': '1',
-        'Подбор техники': 'section',
-    }
-    context = {
-        'title': 'Main',
-        'header_links': header_links.items(),
-    }
     return render(request, 'main/main.html', context)
 
 
