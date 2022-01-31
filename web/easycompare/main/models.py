@@ -36,7 +36,7 @@ class SectionFilter(models.Model):
     filter_section = models.ForeignKey(Section, on_delete=models.CASCADE, default=None, verbose_name='Раздел, в котором будет доступен фильтр')
 
     def __str__(self) -> str:
-        return '{}: фильтр типа {} в разделе {}'.format(self.filter_name, self.filter_type, self.filter_section)
+        return '{}: фильтр типа {} в разделе {}'.format(self.filter_name, self.TYPES[self.filter_type], self.filter_section)
 
 class ObjectAttribute(models.Model):
     class Meta:

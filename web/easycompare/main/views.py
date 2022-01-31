@@ -4,7 +4,7 @@ from .models import *
 
 
 def base(request):
-    return render(request, 'main/main.html', context)
+    return render(request, 'main/main.html')
 
 
 def sections_list(request):
