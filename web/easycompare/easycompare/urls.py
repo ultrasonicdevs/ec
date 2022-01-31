@@ -22,10 +22,11 @@ from main import urls
 
 urlpatterns = [
     path('jet/', include('jet.urls')),
-    path('admin/', admin.site.urls),
-    path('ec/', include('main.urls'))
+    path('django-admin/', admin.site.urls),
+    path('ec/', include('main.urls')),
+    path('ec-admin/', include('ec_admin.urls')),
 ]
 
 # NOT FOR PRODUCTION!!! SEE: https://docs.djangoproject.com/en/3.2/howto/static-files/deployment/
-# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

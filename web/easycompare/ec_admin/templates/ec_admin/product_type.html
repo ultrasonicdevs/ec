@@ -1,0 +1,47 @@
+{% extends 'ec_admin/base.html' %}
+
+
+{% block content %}
+<form>
+<fieldset>
+    <legend>Добавить тип товара</legend>
+    <div class="form-group">
+    <label for="name">Название типа:</label>
+    <input type="text" id="category_name" name="category_name" class="form-control">
+    </div>
+    <div class="form-group mb-2">
+    <label for="section">Раздел:</label>
+    <select id="section" name="section" class="form-select">
+        <option value="no_section">--Выберите раздел для типа--</option>
+        <option value="test_section">Test</option>
+    </select>
+    </div>
+    <button type="submit" class="btn btn-primary col-12">Сохранить тип</button>
+</fieldset>
+</form>
+<hr>
+<h1>Характеристики типа</h1>
+<ul class="list-group">
+<div class="d-flex">
+    <li class="list-group-item col-sm">Цена: Число</li>
+    <button class="btn btn-outline-danger col-1">X</button>
+</div>
+</ul>
+<hr>
+<fieldset>
+<legend>Добавить характеристику</legend>
+<div class="form-group">
+    <label for="attribute_name">Название характеристики:</label>
+    <input type="text" id="attribute_name" name="attribute_name" class="form-control">
+</div>
+<div class="form-group mb-2">
+    <label for="attribute_type">Тип значения характеристики:</label>
+    <select id="attribute_type" name="attribute_type" class="form-select">
+    <option value="no_attribute_type">--Выберите тип значения--</option>
+    <option value="number">Числовое</option>
+    <option value="text">Текстовое</option>
+    </select>
+</div>
+<button type="submit" class="btn btn-primary col-12" id="">Добавить</button>
+</fieldset>
+{% endblock %}
