@@ -15,7 +15,7 @@ function addAttribute(e) {
     if (attributeName == '' || attributeTypeValue == '') {
         alert("Необходимо указать значения!");
         return;
-    }
+    };
 
     const attributeDiv= document.createElement("div");
     attributeDiv.classList.add("d-flex");
