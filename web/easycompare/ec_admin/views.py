@@ -1,7 +1,7 @@
 import json
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
-from django.core import serializers
+from ec_admin.mongoworker import MongoWorker
 
 
 def section(request):
@@ -10,13 +10,13 @@ def section(request):
 def product_type(request):
     return render(request, 'ec_admin/product_type.html', {'active_nav': 'add_type'})
 
-def json_processing(request):
-    data = None
+def product_type_submit(request):
+    product_type_json = None
     if request.is_ajax and request.method == "POST":
-        data = json.loads(request.body)
-        print(data)
-    if data:
-        return HttpResponse('Success!')
+        product_type_json = json.loads(request.body)
+        worker = MongoWorker()
+        worker.insert_product_type(product_type_json)
+        return JsonResponse({'status': 'ok', 'message': 'successfully added to db'}, status=200)
     else:
-        return HttpResponse('Failure :(')
+        return HttpResponse('<h1>BadRequest 400</h1>', status=400)
     

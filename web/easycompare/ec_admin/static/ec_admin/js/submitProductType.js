@@ -23,8 +23,10 @@ function sendCategoryJsonToServer(e) {
     xhr.onreadystatechange = function () {
         const DONE = 4;
         const SUCCESS = 200;
-        if (xhr.readyState === DONE && xhr.status === SUCCESS) {
-            alert('Обработано на сервере');
+        let requestCompleted = (xhr.readyState === DONE) && (xhr.status === SUCCESS);
+        if (requestCompleted) {
+            responseJson = JSON.parse(xhr.response);
+            alert(responseJson.message);
         }
     };
 
@@ -52,6 +54,7 @@ function createProductTypeJson() {
         }
         productTypeJson.attributes.push(singleAttributeJson);
     });
+
     return(productTypeJson);
 }
 

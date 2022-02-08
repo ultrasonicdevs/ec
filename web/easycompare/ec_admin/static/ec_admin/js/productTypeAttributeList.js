@@ -3,16 +3,18 @@ const attributeTypeSelect = document.getElementById('new-attribute-type');
 const attributeNameInput = document.getElementById('new-attribute-name');
 const attributesUl = document.getElementById('attributes-list');
 
-var attributeTypeValue = attributeTypeSelect.options[attributeTypeSelect.selectedIndex].value;
-var attributeTypeText = attributeTypeSelect.options[attributeTypeSelect.selectedIndex].text;
-var attributeName = attributeNameInput.value;
-
 addAttributeButton.addEventListener('click', addAttributeToList);
 attributesUl.addEventListener('click', deleteAttributeFromList);
 
 function addAttributeToList(e) {
-    if (isFieldsEmpty()) {
-        alert('Заполните поля!')
+    let attributeTypeValue = attributeTypeSelect.options[attributeTypeSelect.selectedIndex].value;
+    let attributeTypeText = attributeTypeSelect.options[attributeTypeSelect.selectedIndex].text;
+    let attributeName = attributeNameInput.value;
+
+    let isFieldsEmpty = (attributeName === '') || (attributeTypeValue === '');
+
+    if (isFieldsEmpty) {
+        alert('Заполните поля!');
         return;
     }
 
@@ -46,13 +48,5 @@ function deleteAttributeFromList(e) {
     if (ulItemIsDeleteButton) {
         const attributeLi = attributesUlItem.parentElement;
         attributeLi.remove();
-    }
-}
-
-function isFieldsEmpty() {
-    if (attributeName === '' || attributeTypeValue === '') {
-        return 1;
-    } else {
-        return 0;
     }
 }
