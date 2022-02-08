@@ -3,21 +3,21 @@
 
 {% block content %}
 <form>
-<fieldset>
-    <legend>Добавить тип товара</legend>
-    <div class="form-group">
-    <label for="name">Название типа:</label>
-    <input type="text" id="category_name" name="category_name" class="form-control">
-    </div>
-    <div class="form-group mb-2">
-    <label for="section">Раздел:</label>
-    <select id="section" name="section" class="form-select" required>
-        <option value="">--Выберите раздел для типа--</option>
-        <option value="test_section">Test</option>
-    </select>
-    </div>
-    <button type="button" class="btn btn-primary col-12" id="submit-type">Сохранить тип</button>
-</fieldset>
+    <fieldset>
+        <legend>Добавить тип товара</legend>
+        <div class="form-group">
+            <label for="type-name">Название типа:</label>
+            <input type="text" id="type-name" class="form-control">
+        </div>
+        <div class="form-group mb-2">
+            <label for="type-section">Раздел:</label>
+            <select id="type-section" class="form-select">
+                <option value="">--Выберите раздел для типа--</option>
+                <option value="test-section">Test</option>
+            </select>
+        </div>
+        <button type="button" id="submit-type" class="btn btn-primary col-12">Сохранить тип</button>
+    </fieldset>
 </form>
 <hr>
 <h1>Характеристики типа</h1>
@@ -25,19 +25,19 @@
 </ul>
 <hr>
 <fieldset>
-<legend>Добавить характеристику</legend>
-<div class="form-group">
-    <label for="attribute_name">Название характеристики:</label>
-    <input value="" type="text" id="attribute_name" name="attribute_name" class="form-control">
-</div>
-<div class="form-group mb-2">
-    <label for="attribute_type">Тип значения характеристики:</label>
-    <select id="attribute_type" name="attribute_type" class="form-select" required>
-        <option value="">--Выберите тип значения--</option>
-        <option value="number">Число</option>
-        <option value="text">Текст</option>
-    </select>
-</div>
-<button type="submit" class="btn btn-primary col-12" id="add-attribute-btn">Добавить</button>
+    <legend>Добавить характеристику</legend>
+    <div class="form-group">
+        <label for="new-attribute-name">Название характеристики:</label>
+        <input type="text" id="new-attribute-name" class="form-control">
+    </div>
+    <div class="form-group mb-2">
+        <label for="new-attribute-type">Тип значения характеристики:</label>
+        <select id="new-attribute-type" class="form-select">
+            <option value="">--Выберите тип значения--</option>
+            <option value="number">Число</option>
+            <option value="text">Текст</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary col-12" id="add-attribute-btn">Добавить</button>
 </fieldset>
 {% endblock %}

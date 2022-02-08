@@ -7,5 +7,5 @@ app_name = 'ec_admin'
 urlpatterns = [
     path('', views.section, name='add_section'),
     path('add-product-type/', views.product_type, name='add_product_type'),
-    path('add-product-type/add-product-type-processing/', views.json_processing, name='type_json_processing'),
+    path('add-product-type/processing/', views.json_processing, name='type_json_processing'),
 ]
