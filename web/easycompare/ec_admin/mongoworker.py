@@ -30,7 +30,30 @@ class MongoWorker:
             })
         print(response)
         return response
- 
+    
+    def get_product_types(self):
+        response = {
+            'product_types': []
+        }
+        product_types_coll = MongoWorker.db['product_types']
+        encoder = JSONEncoder()
+        for product_type in product_types_coll.find():
+            response['product_types'].append({
+                'id': encoder.default(product_type['_id']),
+                'name': product_type['name'],
+            })
+        return response
+
+    def get_product_type_attributes(self, product_type_id):
+        response = {
+            'attributes': []
+        }
+        product_types_coll = MongoWorker.db['product_types']
+        product_type = product_types_coll.find_one({'_id': ObjectId(product_type_id)})
+        print(product_type)
+        response['attributes'] = product_type['attributes']
+        return response
+
 
 class JSONEncoder(json.JSONEncoder):
     def default(self, item):

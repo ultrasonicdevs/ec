@@ -1,5 +1,4 @@
 import json
-from urllib import response
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from ec_admin.mongoworker import MongoWorker
@@ -13,6 +12,25 @@ def section(request):
 
 def product_type(request):
     return render(request, 'ec_admin/product_type.html', {'active_nav': 'add_type'})
+
+def product(request):
+    worker = MongoWorker()
+    context = {
+        'active_nav': 'add_product',
+        'types': worker.get_product_types()['product_types']
+        }
+    return render(request, 'ec_admin/product.html', context)
+
+def get_product_types(request):
+    worker = MongoWorker()
+    if request.is_ajax and request.method == "GET":
+        return JsonResponse(worker.get_product_types())
+
+def get_type_attributes(request):
+    worker = MongoWorker()
+    if request.is_ajax and request.method == "GET":
+        product_type_id = request.headers['Product-Type-Id']
+        return JsonResponse(worker.get_product_type_attributes(product_type_id))
 
 def product_type_submit(request):
     product_type_json = None

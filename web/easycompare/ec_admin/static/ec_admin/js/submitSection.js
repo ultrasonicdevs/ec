@@ -1,5 +1,5 @@
 const sectionNameInput = document.getElementById('parent-section-name');
-const parentSectionNameSelect = document.getElementById('parent-section');
+const productTypeSelect = document.getElementById('parent-section');
 const submitSectionBtn = document.getElementById('submit-section');
 
 submitSectionBtn.addEventListener('click', sendSectionJsonToServer);
@@ -31,7 +31,7 @@ function sendSectionJsonToServer(e) {
 
 function getSectionJson(){
     let sectionName = sectionNameInput.value;
-    let parentSectionName = parentSectionNameSelect.value;
+    let parentSectionName = productTypeSelect.value;
 
     let isFieldsEmpty = (sectionName === '') || (parentSectionName === '');
    
@@ -69,7 +69,7 @@ function createParentSectionsSelect(){
                 const parentSectionOption = document.createElement('option');
                 parentSectionOption.innerText = section.name;
                 parentSectionOption.value = section._id;
-                parentSectionNameSelect.appendChild(parentSectionOption);
+                productTypeSelect.appendChild(parentSectionOption);
             });
         }
     };

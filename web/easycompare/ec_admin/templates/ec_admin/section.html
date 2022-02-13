@@ -1,4 +1,5 @@
 {% extends 'ec_admin/base.html' %}
+{% load static %}
 
 
 {% block content %}
@@ -18,4 +19,8 @@
         <button type="button" id="submit-section" class="btn btn-primary col-12">Сохранить раздел</button>
     </fieldset>
 </form>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="{% static 'ec_admin/js/submitSection.js' %}"></script>
 {% endblock %}

@@ -1,4 +1,5 @@
 {% extends 'ec_admin/base.html' %}
+{% load static %}
 
 
 {% block content %}
@@ -33,10 +34,15 @@
         <label for="new-attribute-type">Тип значения характеристики:</label>
         <select id="new-attribute-type" class="form-select">
             <option value="">--Выберите тип значения--</option>
-            <option value="number">Число</option>
-            <option value="text">Текст</option>
+            <option value="Число">Число</option>
+            <option value="Текст">Текст</option>
         </select>
     </div>
     <button type="button" class="btn btn-primary col-12" id="add-attribute-btn">Добавить</button>
 </fieldset>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="{% static 'ec_admin/js/productTypeAttributeList.js' %}"></script>
+<script type="text/javascript" src="{% static 'ec_admin/js/submitProductType.js' %}"></script>
 {% endblock %}
