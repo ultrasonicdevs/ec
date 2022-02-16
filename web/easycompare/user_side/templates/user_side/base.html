@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %} | Easy compare</title>
+
+    {% block optional_links %}{% endblock %}
+
+    <link rel="stylesheet" href="{% static 'user_side/css/menu-style.css' %}">
+
+</head>
+
+<header class="nav-bar">
+    <img src="{% static 'user_side/img/EasyCompare_menuBtn.svg' %}" alt="" class="nav-bar-logo">
+    <div class="nav-bar-btns">
+        <form action=""  class="search-panel">
+            <button class="search-btn" type="button"><img src="{% static 'user_side/img/search_menuBtn.svg' %}" alt=""></button>
+        </form>
+        <a href="#" class="profile-btn"><img src="{% static 'user_side/img/profile_menuBtn.svg' %}" alt=""></a>
+    </div>
+</header>
+
+<div class="wrapper">
+    <div class="content">
+
+    {% block content %}{% endblock %}
+
+    </div>
+
+    <section class="search-parameters" style="display: none">
+        <form action="" method="post" class="form">
+            {% csrf_token %}
+            <div class="sections">
+                <h2 class="block">Выберите раздел</h2>
+                <select name="select-section" id="select-section">
+                    <option value="">Выберите раздел</option>
+
+                    {# TODO load all sections #}
+
+                </select>
+            </div>
+            <div class="categories">
+                <h2 class="block">Выбкрите категорию</h2>
+                <select name="select-category" id="select-category">
+                    <option value="">Выбкрите категорию</option>
+
+                    {# TODO load all categories #}
+
+                </select>
+            </div>
+            <button class="submit" type="submit">Применить</button>
+        </form>
+    </section>
+
+</div>
+
+</body>
+    <script src="{% static 'user_side/js/navBar.js' %}"></script>
+</html>

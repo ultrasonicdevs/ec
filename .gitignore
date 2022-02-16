@@ -132,3 +132,7 @@ dmypy.json
 #vscode workspace dir
 .vscode/
 .idea/
+
+# sass cache
+.sass-cache/
+*.map
