@@ -8,19 +8,19 @@
 
     {% block optional_links %}{% endblock %}
 
-    <link rel="stylesheet" href="{% static 'user_side/css/menu-style.css' %}">
+    <link rel="stylesheet" href="{% static 'user_side/css/navBar.css' %}">
 
 </head>
 
-<header class="nav-bar">
-    <img src="{% static 'user_side/img/EasyCompare_menuBtn.svg' %}" alt="" class="nav-bar-logo">
-    <div class="nav-bar-btns">
-        <form action=""  class="search-panel">
+<nav class="nav-bar">
+    <div class="container">
+        <img src="{% static 'user_side/img/EasyCompare_menuBtn.svg' %}" alt="" class="nav-bar-logo">
+        <div class="nav-bar-btns">
             <button class="search-btn" type="button"><img src="{% static 'user_side/img/search_menuBtn.svg' %}" alt=""></button>
-        </form>
-        <a href="#" class="profile-btn"><img src="{% static 'user_side/img/profile_menuBtn.svg' %}" alt=""></a>
+            <a href="#" class="profile-btn"><img src="{% static 'user_side/img/profile_menuBtn.svg' %}" alt=""></a>
+        </div>
     </div>
-</header>
+</nav>
 
 <div class="wrapper">
     <div class="content">
@@ -33,16 +33,16 @@
         <form action="" method="post" class="form">
             {% csrf_token %}
             <div class="sections">
-                <h2 class="block">Выберите раздел</h2>
+                <h2 class="search-block-header">Раздел</h2>
                 <select name="select-section" id="select-section">
-                    <option value="">Выберите раздел</option>
+                    <option value="">Выбкрите раздел</option>
 
                     {# TODO load all sections #}
 
                 </select>
             </div>
             <div class="categories">
-                <h2 class="block">Выбкрите категорию</h2>
+                <h2 class="search-block-header">Категория</h2>
                 <select name="select-category" id="select-category">
                     <option value="">Выбкрите категорию</option>
 

@@ -1,8 +1,6 @@
 const searchBtn = document.querySelector('.search-btn');
-console.log('ddd')
 
 searchBtn.addEventListener('click', () => {
-    console.log('ddd')
 
     const searchParams = document.querySelector('.search-parameters'),
         content = document.querySelector('.content');
@@ -12,7 +10,7 @@ searchBtn.addEventListener('click', () => {
 
         setTimeout(() => {
             content.style.filter = 'blur(1rem)';
-            searchParams.style.display = 'block';
+            searchParams.style.display = 'flex';
             searchParams.style.opacity = '1';
         })
     }

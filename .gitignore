@@ -134,5 +134,5 @@ dmypy.json
 .idea/
 
 # sass cache
-.sass-cache/
 *.map
+*.sass-cache/
