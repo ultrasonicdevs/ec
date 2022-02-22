@@ -23,7 +23,7 @@ searchBtn.addEventListener('click', () => {
             <div class="categories">
                 <h2 class="search-block-header">Категория</h2>
                 <select name="select-category" id="select-category">
-                    <option value="">Выбкрите категорию</option>`
+                    <option value="">Выберите категорию</option>`
 
                     // TODO load all categories
     searchForm += `
