@@ -29,30 +29,7 @@
 
     </div>
 
-    <section class="search-parameters" style="display: none">
-        <form action="" method="post" class="form">
-            {% csrf_token %}
-            <div class="sections">
-                <h2 class="search-block-header">Раздел</h2>
-                <select name="select-section" id="select-section">
-                    <option value="">Выбкрите раздел</option>
-
-                    {# TODO load all sections #}
-
-                </select>
-            </div>
-            <div class="categories">
-                <h2 class="search-block-header">Категория</h2>
-                <select name="select-category" id="select-category">
-                    <option value="">Выбкрите категорию</option>
-
-                    {# TODO load all categories #}
-
-                </select>
-            </div>
-            <button class="submit" type="submit">Применить</button>
-        </form>
-    </section>
+    <section class="search-panel" style="display: none"></section>
 
 </div>
 
