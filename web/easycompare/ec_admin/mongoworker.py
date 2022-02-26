@@ -1,4 +1,6 @@
-from django.http import JsonResponse
+from mimetypes import init
+from urllib import response
+from django.http import HttpResponse, JsonResponse
 from pip import main
 from pymongo import MongoClient
 import json
@@ -7,18 +9,23 @@ from bson import ObjectId
 class MongoWorker:
     client = MongoClient('localhost', 27017)
     db = client['ec_products']
-    
+    sections_coll = db['sections']
+    product_types_coll = db['product_types']
+    products_coll = db['products']
+
     def insert_product_type(self, product_type_json):
-        product_types_coll = MongoWorker.db['product_types']
-        product_types_coll.insert_one(product_type_json)
+        self.product_types_coll.insert_one(product_type_json)
     
     def insert_section(self, section_json):
-        sections_coll = MongoWorker.db['sections']
-        sections_coll.insert_one(section_json)
+        self.sections_coll.insert_one(section_json)
 
-    def insert_product(self, product_json):
-        products_coll = MongoWorker.db['products']
-        products_coll.insert_one(product_json)
+    def get_section(self, section_id):
+        response = self.sections_coll.find_one({'_id': ObjectId(section_id)})
+        if response:
+            response['_id'] = JSONEncoder().default(response['_id'])
+            return response
+        else:
+            return {'error': 'Error 404. Object do not exist or something got wrong'}
 
     def get_sections(self):
         response = {
@@ -34,16 +41,30 @@ class MongoWorker:
             })
         print(response)
         return response
+
+    def insert_product(self, product_json): 
+        self.products_coll.insert_one(product_json)
     
     def get_product_types(self):
         response = {
             'product_types': []
         }
-        product_types_coll = MongoWorker.db['product_types']
         encoder = JSONEncoder()
-        for product_type in product_types_coll.find():
+        for product_type in self.product_types_coll.find():
             response['product_types'].append({
-                'id': encoder.default(product_type['_id']),
+                '_id': encoder.default(product_type['_id']),
+                'name': product_type['name'],
+            })
+        return response
+
+    def get_section_product_types(self, section_id):
+        response = {
+            'product_types': []
+        }
+        encoder = JSONEncoder()
+        for product_type in self.product_types_coll.find({'section': section_id}):
+            response['product_types'].append({
+                '_id': encoder.default(product_type['_id']),
                 'name': product_type['name'],
             })
         return response
@@ -52,8 +73,7 @@ class MongoWorker:
         response = {
             'attributes': []
         }
-        product_types_coll = MongoWorker.db['product_types']
-        product_type = product_types_coll.find_one({'_id': ObjectId(product_type_id)})
+        product_type = self.product_types_coll.find_one({'_id': ObjectId(product_type_id)})
         print(product_type)
         response['attributes'] = product_type['attributes']
         return response
@@ -69,6 +89,7 @@ class JSONEncoder(json.JSONEncoder):
 def main():
     w = MongoWorker()
     w.get_sections()
+    print(w.get_section('6215397de5dcaa359fc84295'))
 
 if __name__ == '__main__':
     main()
