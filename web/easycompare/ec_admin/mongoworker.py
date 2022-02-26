@@ -16,6 +16,10 @@ class MongoWorker:
         sections_coll = MongoWorker.db['sections']
         sections_coll.insert_one(section_json)
 
+    def insert_product(self, product_json):
+        products_coll = MongoWorker.db['products']
+        products_coll.insert_one(product_json)
+
     def get_sections(self):
         response = {
             'sections': []

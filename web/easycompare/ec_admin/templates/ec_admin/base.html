@@ -17,6 +17,7 @@
                     <li class="nav-item"><a href="{% url 'ec_admin:add_section' %}" class="nav-link {% if active_nav == 'add_section' %}active{% endif %}">Добавить раздел</a></li>
                     <li class="nav-item"><a href="{% url 'ec_admin:add_product_type' %}" class="nav-link {% if active_nav == 'add_type' %}active{% endif %}">Добавить тип товара</a></li>
                     <li class="nav-item"><a href="{% url 'ec_admin:add_product' %}" class="nav-link {% if active_nav == 'add_product' %}active{% endif %}">Добавить товар</a></li>
+                    <li class="nav-item"><a href="{% url 'ec_admin:facets' %}" class="nav-link {% if active_nav == 'facets' %}active{% endif %}">Фасеты</a></li>
                 </ul>
             </header>
             {% block content %}
