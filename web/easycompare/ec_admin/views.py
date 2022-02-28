@@ -21,6 +21,16 @@ def product(request):
         }
     return render(request, 'ec_admin/product.html', context)
 
+def product_submit(request):
+    product_json = None
+    if request.is_ajax and request.method == "POST":
+        product_json = json.loads(request.body)
+        worker = MongoWorker()
+        worker.insert_product(product_json)
+        return JsonResponse({'status': 'ok', 'message': 'successfully added to db'}, status=200)
+    else:
+        return HttpResponse('<h1>BadRequest 400</h1>', status=400)
+
 def get_product_types(request):
     worker = MongoWorker()
     if request.is_ajax and request.method == "GET":
@@ -56,3 +66,6 @@ def get_parent_sections(request):
     worker = MongoWorker()
     if request.is_ajax and request.method == "GET":
         return JsonResponse(worker.get_sections())
+
+def facets(request):
+    return render(request, 'ec_admin/facets.html', {'active_nav': 'facets'})

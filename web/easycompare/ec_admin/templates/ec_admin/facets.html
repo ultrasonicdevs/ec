@@ -1,0 +1,31 @@
+{% extends 'ec_admin/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <form>
+                <fieldset>
+                    <legend>Фасеты</legend>
+                    <div class="form-group mb-2">
+                        <label for="product-type">По какому типу искать:</label>
+                        <select id="product-type" class="form-select">
+                            <option value="no-type">Не выбран тип</option>
+                        </select>
+                    </div>
+                    <ul id="filter-groups">
+                    </ul>
+                    <button type="button" id="submit-filters" class="btn btn-primary col-12">Найти</button>
+                </fieldset>
+            </form>
+        </div>
+      <div id="found-products" class="col-sm">
+      </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="{% static 'ec_admin/js/facets.js' %}"></script>
+{% endblock %}
