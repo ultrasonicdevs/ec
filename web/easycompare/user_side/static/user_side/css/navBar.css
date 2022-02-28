@@ -150,6 +150,15 @@ button {
     font-size: 0.75rem; } }
 @media screen and (max-width: 350px) {
   h1 {
-    font-size: 2rem; } }
+    font-size: 2rem; }
+
+  .search-block-header {
+    font-size: 1rem; }
+
+  .search-panel {
+    margin-top: 3rem; }
+
+  .submit {
+    margin-top: 2rem; } }
 
 /*# sourceMappingURL=navBar.css.map */

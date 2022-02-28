@@ -1,13 +1,8 @@
 const searchBtn = document.querySelector('.search-btn');
 
-
-
-
 searchBtn.addEventListener('click', searchPanelDisplay);
 
-
 async function searchPanelDisplay() {
-
     let searchForm = `
     <form action="" method="get" class="form">
         <div class="sections">
@@ -65,25 +60,25 @@ async function searchPanelDisplay() {
     const selectSection = document.querySelector('#select-section'),
         selectProductType = document.querySelector('#select-category');
 
-    selectSection.addEventListener('change', async () => {
+    selectSection.addEventListener('change', selectProductTypeDisplay);
+
+
+    async function selectProductTypeDisplay() {
         const index = selectSection.options.selectedIndex,
             value = selectSection.options[index].text,
             id = selectSection.options[index].id;
-            console.log(value);
+        console.log(value);
         selectProductType.disabled = false;
 
         const selected = JSON.stringify({"selected section": value});
-        const selectedB64 = toBase64(selected);
-        const productTypes = await getJSON(`http://127.0.0.1:8000/api/sections/${id}/product-types/`,"GET", null);
-        for (let productType in productTypes) {
-            let productTypeOption = `<option value="">${productTypes.product_types[productType].name}</option>;`;
-            selectProductType.appendChild(productTypeOption);
+        const productTypes = await getJSON(`http://127.0.0.1:8000/api/sections/${id}/product-types/`, "GET", null);
+        selectProductType.remove(selectProductType.children);
+        selectProductType.innerHTML = '<option value="" selected hidden>Выберите категорию</option>';
+        for (let productType in productTypes.product_types) {
+            let productTypeOption = `<option value="" id="${productTypes.product_types[productType]._id}">${productTypes.product_types[productType].name}</option>;`;
+            selectProductType.innerHTML += productTypeOption;
         }
-    });
-}
-
-function toBase64(str) {
-    return window.btoa(unescape(encodeURIComponent(str)))
+    }
 }
 
 async function getJSON(url, method, body) {
