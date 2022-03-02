@@ -1,44 +1,53 @@
 const searchBtn = document.querySelector('.search-btn');
-
 searchBtn.addEventListener('click', searchPanelDisplay);
 
 async function searchPanelDisplay() {
-    let searchForm = `
-    <form action="" method="get" class="form">
-        <div class="sections">
-            <h2 class="search-block-header">Раздел</h2>
-            <select name="select-section" id="select-section">
-                <option value="" selected hidden>Выберите раздел</option>`;
-
-    let sectionList = await getJSON('http://127.0.0.1:8000/ec-admin/add-section/get-parent-sections/',"GET", null);
-    // console.log(sectionList, sectionList.sections, sectionList.name);
-
-    for (let section in sectionList.sections) {
-        searchForm += `<option value="" id="${sectionList.sections[section]._id}">${sectionList.sections[section].name}</option>;`
-    }
-
-    searchForm += `
-            </select>
-        </div>
-        <div class="categories">
-            <h2 class="search-block-header">Категория</h2>
-            <select name="select-category" id="select-category" disabled="disabled">
-                <option value="" selected hidden>Выберите категорию</option>`;
-
-    searchForm += `
-                </select>
-            </div>
-            <button class="submit" type="submit">Применить</button>
-        </form>`;
-
     const searchPanel = document.querySelector('.search-panel'),
         content = document.querySelector('.content'),
         searchBtnImg = document.querySelector('#search-img'),
-        delForm = document.querySelector('.form');
+
+        form = document.createElement('form'),
+        sectionsDiv = document.createElement('div'),
+        productTypesDiv = document.createElement('div'),
+        selectTitleS = document.createElement('h2'),
+        selectTitleP = document.createElement('h2'),
+        selectSection = document.createElement('select'),
+        selectProductType = document.createElement('select'),
+        optionS = document.createElement('option'),
+        optionP = document.createElement('option'),
+        submit = document.createElement('button');
+
+    form.className ='form';
+    sectionsDiv.className = 'sections';
+    productTypesDiv.className = 'categories';
+    selectTitleS.className = 'search-block-header';
+    selectTitleS.appendChild(document.createTextNode('Выберите раздел'));
+    selectTitleP.className = 'search-block-header';
+    selectTitleP.appendChild(document.createTextNode('Выберите категорию'));
+    selectSection.id = 'select-section';
+    selectProductType.id = 'select-category';
+    selectProductType.disabled = true;
+    submit.className = 'submit';
+    optionS.appendChild(document.createTextNode('Выберите раздел'));
+    optionS.hidden = true;
+    optionS.selected = true;
+    optionP.appendChild(document.createTextNode('Выберите категорию'));
+    optionP.hidden = true;
+    optionP.selected = true;
+    submit.appendChild(document.createTextNode('Подтвердить'));
+
+    form.appendChild(sectionsDiv);
+    form.appendChild(productTypesDiv);
+    sectionsDiv.appendChild(selectTitleS);
+    sectionsDiv.appendChild(selectSection);
+    selectSection.appendChild(optionS);
+    productTypesDiv.appendChild(selectTitleP);
+    productTypesDiv.appendChild(selectProductType);
+    selectProductType.appendChild(optionP);
+    form.appendChild(submit);
 
     if (searchPanel.style.display === 'none') {
-
-        searchPanel.innerHTML = searchForm;
+        searchPanel.appendChild(form);
         searchPanel.style.opacity = '0';
         setTimeout(() => {
             content.style.filter = 'blur(1rem)';
@@ -54,29 +63,37 @@ async function searchPanelDisplay() {
             content.style.filter = 'none';
             searchBtnImg.src = 'static/user_side/img/search_menuBtn.svg';
         });
-        delForm.remove()
+        form.remove()
     }
 
-    const selectSection = document.querySelector('#select-section'),
-        selectProductType = document.querySelector('#select-category');
+    const sectionListJSON = await getJSON('http://127.0.0.1:8000/ec-admin/add-section/get-parent-sections/', "GET", null),
+        sectionList = sectionListJSON.sections;
+    for (let section of sectionList) {
+        const option = document.createElement('option');
+        option.id = section._id;
+        option.appendChild(document.createTextNode(section.name))
+        selectSection.appendChild(option);
+    }
 
     selectSection.addEventListener('change', selectProductTypeDisplay);
 
-
     async function selectProductTypeDisplay() {
         const index = selectSection.options.selectedIndex,
-            value = selectSection.options[index].text,
-            id = selectSection.options[index].id;
-        console.log(value);
-        selectProductType.disabled = false;
+            id = selectSection.options[index].id,
+            productTypesJSON = await getJSON(`http://127.0.0.1:8000/api/sections/${id}/product-types/`, "GET", null),
+            productTypes = productTypesJSON.product_types;
 
-        const selected = JSON.stringify({"selected section": value});
-        const productTypes = await getJSON(`http://127.0.0.1:8000/api/sections/${id}/product-types/`, "GET", null);
-        selectProductType.remove(selectProductType.children);
-        selectProductType.innerHTML = '<option value="" selected hidden>Выберите категорию</option>';
-        for (let productType in productTypes.product_types) {
-            let productTypeOption = `<option value="" id="${productTypes.product_types[productType]._id}">${productTypes.product_types[productType].name}</option>;`;
-            selectProductType.innerHTML += productTypeOption;
+        selectProductType.disabled = false;
+        selectProductType.innerHTML = '';
+
+        selectProductType.appendChild(optionP);
+        optionP.hidden = true;
+        optionP.selected = true;
+        for (let productType of productTypes) {
+            const option = document.createElement('option');
+            option.id = productType._id;
+            option.appendChild(document.createTextNode(productType.name))
+            selectProductType.appendChild(option);
         }
     }
 }
@@ -84,7 +101,7 @@ async function searchPanelDisplay() {
 async function getJSON(url, method, body) {
     let response = await fetch(url, {method, body});
     response = await response.json();
-    console.log(response)
+    console.log(response);
 
     return response
 }
