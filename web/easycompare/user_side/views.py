@@ -6,3 +6,9 @@ class MainView(View):
     @staticmethod
     def get(request):
         return render(request, 'user_side/main_page.html')
+
+
+class ProductCardView(View):
+    @staticmethod
+    def get(request):
+        return render(request, 'user_side/product_card.html')

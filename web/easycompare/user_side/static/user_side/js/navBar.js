@@ -63,7 +63,8 @@ async function searchPanelDisplay() {
             content.style.filter = 'none';
             searchBtnImg.src = 'static/user_side/img/search_menuBtn.svg';
         });
-        form.remove()
+        const delForm = document.querySelector('form');
+        delForm.remove()
     }
 
     const sectionListJSON = await getJSON('http://127.0.0.1:8000/ec-admin/add-section/get-parent-sections/', "GET", null),
