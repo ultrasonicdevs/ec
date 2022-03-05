@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+
+    {% block optional_links %}{% endblock %}
+
+    <link rel="stylesheet" href="{% static 'user_side/css/navBar.css' %}">
+
+</head>
+
+<body>
+<nav class="nav-bar">
+    <div class="container">
+        <div>{{ title }}</div>
+        <div class="nav-bar-btns">
+            <button class="search-btn" type="button"><img src="{% static 'user_side/img/search_menuBtn.svg' %}" alt="" id="search-img"></button>
+            <a href="#" class="profile-btn"><img src="{% static 'user_side/img/profile_menuBtn.svg' %}" alt=""></a>
+        </div>
+    </div>
+</nav>
+
+<div class="wrapper">
+    <div class="content">
+
+    {% block content %}{% endblock %}
+
+    </div>
+
+    <section class="search-panel" style="display: none"></section>
+
+</div>
+
+{% block scripts %}
+{% endblock %}
+</body>
+
+</html>

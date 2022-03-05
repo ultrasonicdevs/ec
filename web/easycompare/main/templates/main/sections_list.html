@@ -1,7 +1,0 @@
-{% extends 'main/base.html' %}
-
-{% block content %}
-    {% for section in sections %}
-        <li><a href="{% url 'main:section_detail' section.section_name %}">{{ section }}</a></li>
-    {% endfor %}
-{% endblock %}

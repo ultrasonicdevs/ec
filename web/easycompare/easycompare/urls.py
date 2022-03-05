@@ -22,9 +22,10 @@ from django.conf import settings
 urlpatterns = [
     path('jet/', include('jet.urls')),
     path('django-admin/', admin.site.urls),
-    path('ec/', include('main.urls')),
     path('ec-admin/', include('ec_admin.urls')),
     path('api/', include('api.urls')),
+    path('user_admin/', include('user_admin.urls')),
+    path('', include('user_side.urls')),
 ]
 
 # NOT FOR PRODUCTION!!! SEE: https://docs.djangoproject.com/en/3.2/howto/static-files/deployment/
