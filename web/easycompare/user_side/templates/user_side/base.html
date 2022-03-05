@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %} | Easy compare</title>
+    <title>{{ title }}</title>
 
     {% block optional_links %}{% endblock %}
 
@@ -15,7 +15,7 @@
 <body>
 <nav class="nav-bar">
     <div class="container">
-        <img src="{% static 'user_side/img/EasyCompare_menuBtn.svg' %}" alt="" class="nav-bar-logo">
+        <div>{{ title }}</div>
         <div class="nav-bar-btns">
             <button class="search-btn" type="button"><img src="{% static 'user_side/img/search_menuBtn.svg' %}" alt="" id="search-img"></button>
             <a href="#" class="profile-btn"><img src="{% static 'user_side/img/profile_menuBtn.svg' %}" alt=""></a>
@@ -34,6 +34,8 @@
 
 </div>
 
+{% block scripts %}
+{% endblock %}
 </body>
-    <script src="{% static 'user_side/js/navBar.js' %}"></script>
+
 </html>
