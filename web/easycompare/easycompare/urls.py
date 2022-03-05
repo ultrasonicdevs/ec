@@ -22,7 +22,6 @@ from django.conf import settings
 urlpatterns = [
     path('jet/', include('jet.urls')),
     path('django-admin/', admin.site.urls),
-    path('ec/', include('main.urls')),
     path('ec-admin/', include('ec_admin.urls')),
     path('api/', include('api.urls')),
     path('', include('user_side.urls'))
