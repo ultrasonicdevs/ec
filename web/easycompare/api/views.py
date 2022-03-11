@@ -23,6 +23,16 @@ def section_product_types(request, section_id):
     if request.is_ajax and request.method == "GET":
         return JsonResponse(worker.get_section_product_types(section_id))
 
+def product_types(request):
+    worker = MongoWorker()
+    if request.is_ajax and request.method == "GET":
+        return JsonResponse(worker.get_product_types())
+
+def product_type_detail(request, type_id):
+    worker = MongoWorker()
+    if request.is_ajax and request.method == "GET":
+        return JsonResponse(worker.get_product_type(type_id))
+
 def products_of_certain_type(request, type_id):
     worker = MongoWorker()
     if request.is_ajax and request.method == "GET":
