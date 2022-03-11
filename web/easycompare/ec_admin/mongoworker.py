@@ -1,6 +1,3 @@
-from mimetypes import init
-from urllib import response
-from django.http import HttpResponse, JsonResponse
 from pip import main
 from pymongo import MongoClient
 import json
@@ -76,6 +73,17 @@ class MongoWorker:
         product_type = self.product_types_coll.find_one({'_id': ObjectId(product_type_id)})
         print(product_type)
         response['attributes'] = product_type['attributes']
+        return response
+
+    def get_products_of_certain_type(self, type_id):
+        response = {
+            'products': []
+        }
+        encoder = JSONEncoder()
+        for product in self.products_coll.find({'type': type_id}):
+            product['_id'] = encoder.default(product['_id'])
+            response['products'].append(product)
+        print(response)
         return response
 
 
