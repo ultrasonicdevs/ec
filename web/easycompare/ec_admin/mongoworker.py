@@ -52,7 +52,7 @@ class MongoWorker:
         encoder = JSONEncoder()
         for product_type in self.product_types_coll.find():
             response['product_types'].append({
-                '_id': encoder.default(product_type['_id']),
+                'id': encoder.default(product_type['_id']),
                 'name': product_type['name'],
             })
         return response
