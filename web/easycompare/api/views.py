@@ -37,3 +37,8 @@ def products_of_certain_type(request, type_id):
     worker = MongoWorker()
     if request.is_ajax and request.method == "GET":
         return JsonResponse(worker.get_products_of_certain_type(type_id))
+
+def products(request):
+    worker = MongoWorker()
+    if request.is_ajax and request.method == "GET":
+        return JsonResponse(worker.get_products())

@@ -1,3 +1,5 @@
+from urllib import response
+from django.http import JsonResponse
 from pip import main
 from pymongo import MongoClient
 import json
@@ -92,6 +94,16 @@ class MongoWorker:
             product['_id'] = encoder.default(product['_id'])
             response['products'].append(product)
         print(response)
+        return response
+
+    def get_products(self):
+        response = {
+            'products': []
+        }
+        encoder = JSONEncoder()
+        for product in self.products_coll.find():
+            product['_id'] = encoder.default(product['_id'])
+            response['products'].append(product)
         return response
 
 
