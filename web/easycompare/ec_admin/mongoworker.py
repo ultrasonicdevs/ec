@@ -106,6 +106,14 @@ class MongoWorker:
             response['products'].append(product)
         return response
 
+    def get_product(self, product_id):
+        response = self.products_coll.find_one({'_id': ObjectId(product_id)})
+        if response:
+            response['_id'] = JSONEncoder().default(response['_id'])
+            return response
+        else:
+            return {'error': 'Error 404. Object do not exist or something got wrong'}
+
 
 class JSONEncoder(json.JSONEncoder):
     def default(self, item):

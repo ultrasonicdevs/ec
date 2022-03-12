@@ -42,3 +42,8 @@ def products(request):
     worker = MongoWorker()
     if request.is_ajax and request.method == "GET":
         return JsonResponse(worker.get_products())
+
+def product_detail(request, product_id):
+    worker = MongoWorker()
+    if request.is_ajax and request.method == "GET":
+        return JsonResponse(worker.get_product(product_id))
