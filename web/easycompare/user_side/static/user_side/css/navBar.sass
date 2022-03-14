@@ -1,200 +1,183 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;700&display=swap')
 
+$nav-width: calc(75rem - 2rem)
+$nav-height: 4rem
+$section-height: 4rem * 6
 
-$wrapper-width: 75rem
-$wrapper-width-laptop: 95%
-$wrapper-width-mobile: 90%
 
-$buttons-width-mobile: 90vw
+$main-margin: $nav-height + 1rem
 
-$search-padding-height: 5rem
-$search-padding-height: 10rem
+$icon-size: 1.5rem
 
+
+@mixin font($font-size, $font-weight)
+  font-family: 'Inter', sans-serif
+  font-size: $font-size
+  font-weight: $font-weight
+  text-decoration: none
+
+@mixin flex($justify-content, $align-items, $flex-direction, $flex-wrap)
+  display: flex
+  justify-content: $justify-content
+  align-items: $align-items
+  flex-direction: $flex-direction
+  flex-wrap: $flex-wrap
 
 *
   margin: 0
   padding: 0
   box-sizing: border-box
-  font-family: 'Inter', sans-serif
-  font-weight: 500
-
 
 html
   font-size: 16px
 
+a
+  @include font(1.5rem, bold)
+  color: #000
 
-.nav-bar
+header
+  @include flex(flex-start, center, column, nowrap)
   width: 100%
-  height: 3.125rem
-  background-color: #FFFFFF
-  position: fixed
-  z-index: 11
-
-
-.container
-  height: 3.125rem
-  position: fixed
-  left: 50%
-  transform: translate(-50%, 0)
-  width: $wrapper-width
-
-  display: flex
-  flex-direction: row
-  align-items: center
-  justify-content: space-between
-
-  background: #FFFFFF
-  border-bottom: 1px solid #000000
-
-
-.nav-bar-logo
-  margin-left: 1rem
-
-
-.nav-bar-btns
-  display: flex
-
-
-.search-btn
-  margin: 0 3rem 0 0
-  border: none
-  width: 1.5rem
-  height: 1.5rem
-  background-color: #FFFFFF
-
-
-.profile-btn
-  margin-right: 1rem
-  width: 1.5rem
-  height: 1.5rem
-
-
-.nav-bar-btns img
-  object-fit: cover
-  width: 100%
-  height: 100%
-
-.wrapper
-  width: $wrapper-width
-  margin: 0 auto
-  padding-top: 5rem
-
-
-.content
-  transition: all .5s
-
-
-h1
-  display: flex
-  align-items: center
-  justify-content: center
-  font-size: 10rem
-
-
-.search-panel
-  height: 100vh
-  width: $wrapper-width
-  position: fixed
+  height: $nav-height
   z-index: 10
-  transition: all .1ms
-
+  background-color: #fff
+  position: fixed
   top: 0
-  display: flex
-  align-items: center
-  justify-content: center
 
-.form
-  position: relative
-  width: 100%
-  display: flex
-  flex-wrap: wrap
-  justify-content: space-between
+  nav
+    width:  $nav-width
+    height: $nav-height
+    margin: 0 auto
+    z-index: 11
+
+    @include flex(space-between, center, row, nowrap)
+    border-bottom: 1px solid #000
+
+    .nav-logo
+      @include font(1rem, regular)
+      margin-left: 1rem
+
+    .nav-btns
+      width: 13rem
+      @include flex(space-around, center, row, nowrap)
+
+      a
+        width: $icon-size
+        height: $icon-size
+
+      label
+        width: $icon-size
+        height: $icon-size
+        display: flex
+        @include flex(center, center, row, nowrap)
+
+        span
+          position: absolute
+          width: $icon-size
+          height: $icon-size / 12
+          background-color: #000
+          transition: all .5s cubic-bezier(0.23, 1, 0.32, 1)
+
+          &:before
+            content: ''
+            position: absolute
+            margin-top: -.5rem
+            right: 0
+            width: $icon-size
+            height: $icon-size / 12
+            background-color: #000
+            transition: all .5s cubic-bezier(0.23, 1, 0.32, 1)
+
+          &:after
+            content: ''
+            position: absolute
+            margin-top: .5rem
+            right: 0
+            width: $icon-size
+            height: $icon-size / 12
+            background-color: #000
+            transition: all .5s cubic-bezier(0.23, 1, 0.32, 1)
 
 
-.search-block-header
-  font-size: 2.5rem
-  padding-bottom: 1.5rem
+      input[type=checkbox]:checked + label span
+        background: rgba(255, 255, 255, 0)
 
+      input[type=checkbox]:checked + label span:before
+        transform: rotate(405deg)
+        margin-top: 0
 
-select
-  width: 18.75rem
-  height: 3.125rem
-  border-radius: 1rem
-
-  font-size: 1.25rem
-
-  background: #F5F5F5
-  border: none
-  color: #B0B0B0
-
-  padding-left: .75rem
-
-button
-  margin-top: 4.5625rem
-  width: 18.75rem
-  height: 3.125rem
-
-  font-size: 1.25rem
-
-  border: 2rem
-  background: #1A57CE
-  border-radius: 1rem
-  color: #FFFFFF
-
-
-@media screen and (max-width: 1200px)
-  .wrapper, .container, .search-panel
-    width: $wrapper-width-laptop
-
-  h1
-    font-size: 6.5rem
-
-  .form
-    justify-content: space-around
-
-
-@media screen and (max-width: 600px)
-  .nav-bar
-    border-bottom: 1px solid #000000
-
-  .wrapper, .container, .search-panel
-    width: $wrapper-width-mobile
-
-  html
-    font-size: 24px
-
-  h1
-    font-size: 3rem
-
-  .nav-bar-logo
-    margin: 0
-
-  .profile-btn
-    width: 1rem
-    height: 1rem
-    margin: 0
-
-  .search-btn
-    font-size: 1rem
-    width: 1rem
-    height: 1rem
-    margin-right: .3rem
-
-  select, button
-    width: $buttons-width-mobile
-    border: .5rem
-    font-size: .75rem
-
-@media screen and (max-width: 350px)
-
-  h1
-    font-size: 2rem
-
-  .search-block-header
-    font-size: 1rem
+      input[type=checkbox]:checked + label span:after
+        transform: rotate(-405deg)
+        margin-top: 0
 
   .search-panel
-    margin-top: 3rem
+    width: 100%
+    height: 100vh
+    margin: 0 auto
+    opacity: 0
+    position: fixed
+    transition: all .3s cubic-bezier(0.23, 1, 0.32, 1)
+    background-color: #fff
 
-  .submit
-    margin-top: 2rem
+    .uls
+      @include flex(flex-start, flex-start, row, nowrap)
+
+    #section-list
+      @include flex(flex-start, flex-start, column, wrap)
+      height: $section-height
+      flex-basis: 70%
+
+    .submit
+
+      background: #E5E5E5
+      border: none
+      padding: .75rem 4rem
+      float: right
+      margin-right: 3rem
+
+    ul
+      margin: $main-margin+3rem 0 0 3rem
+      position: relative
+      list-style: none
+      transition: all .3s cubic-bezier(0.23, 1, 0.32, 1)
+
+      li
+        @include font(1.5rem, bold)
+        padding-bottom: 2rem
+
+        input[type=radio]
+          display: none
+
+        .grey
+          color: #CCC
+
+        .act
+          transition: all .3s cubic-bezier(0.23, 1, 0.32, 1)
+          color: #000
+          &:before
+            transition: all .3s cubic-bezier(0.23, 1, 0.32, 1)
+            content: ''
+            position: absolute
+            height: .5rem
+            width: 2rem
+            background: #000
+            margin-top: .7rem
+            display: none
+
+        input[type=radio]:checked + label .act
+          margin-left: 3rem
+
+        input[type=radio]:checked + label .act:before
+          display: block
+
+        input[type=radio]:checked + .section-list
+          height: 100%
+          flex-wrap: nowrap
+
+
+main
+  margin: 0 auto
+
+  .content
+    margin: $main-margin 0 0 0
+    transition: all .3s cubic-bezier(0.23, 1, 0.32, 1)

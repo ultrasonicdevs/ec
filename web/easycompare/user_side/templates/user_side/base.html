@@ -11,31 +11,27 @@
     <link rel="stylesheet" href="{% static 'user_side/css/navBar.css' %}">
 
 </head>
-
 <body>
-<nav class="nav-bar">
-    <div class="container">
-        <div>{{ title }}</div>
-        <div class="nav-bar-btns">
-            <button class="search-btn" type="button"><img src="{% static 'user_side/img/search_menuBtn.svg' %}" alt="" id="search-img"></button>
-            <a href="#" class="profile-btn"><img src="{% static 'user_side/img/profile_menuBtn.svg' %}" alt=""></a>
+
+<header>
+    <nav>
+        <div class="nav-logo">{% block navbar_title %}{% endblock %}</div>
+        <div class="nav-btns">{% block navbar_buttons %}{% endblock %}</div>
+    </nav>
+    <section class="search-panel" style="display: none">
+        <div class="uls">
+            <ul id="section-list"></ul>
+            <ul id="product-type-list"></ul>
         </div>
-    </div>
-</nav>
+{#        <button class="submit" type="button" >Подтвердить</button>#}
+    </section>
+</header>
 
-<div class="wrapper">
-    <div class="content">
-
+<main class="main">
     {% block content %}{% endblock %}
+</main>
 
-    </div>
-
-    <section class="search-panel" style="display: none"></section>
-
-</div>
-
-{% block scripts %}
-{% endblock %}
+{% block scripts %}{% endblock %}
+<script defer src="{% static 'user_side/js/navBar.js' %}"></script>
 </body>
-
 </html>
