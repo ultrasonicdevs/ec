@@ -6,8 +6,6 @@ searchBtn.addEventListener('click', searchPanelDisplay);
 
 
 async function searchPanelDisplay() {
-
-    const checkForm = document.getElementById('form-btn');
     if (document.getElementById('form-btn').checked === false) {
         const sectionList = await getJSON('http://127.0.0.1:8000/ec-admin/add-section/get-parent-sections/', "GET", null);
 
@@ -16,27 +14,27 @@ async function searchPanelDisplay() {
             let label = document.createElement('label'),
                 input = document.createElement('input'),
                 span = document.createElement('span');
-            input.type = 'radio';
-            input.id = section._id + '-input';
-            input.className =
-            label.htmlFor = input.id;
+
             sectionHTML.className = 'section';
             sectionHTML.id = section._id;
+            label.htmlFor = input.id;
+            input.type = 'radio';
+            input.id = section._id + '-input';
+            // input.className = 'input';
+            span.id = section._id + '-span';
+            span.className = 'span';
+            span.appendChild(document.createTextNode(section.name));
+            label.appendChild(span);
             sectionHTML.appendChild(input);
             sectionHTML.appendChild(label);
-            label.appendChild(span);
-            span.appendChild(document.createTextNode(section.name));
-            span.id = section._id + 'span';
-            span.className = 'span';
             sectionsListHTML.appendChild(sectionHTML);
         }
         setTimeout(()=> {
             searchPanel.style.display = 'block';
             searchPanel.style.opacity = '1';
-        },1);
+        });
 
-        const sections = document.getElementsByClassName('section');
-        [...sections].forEach(section => {
+        [...document.getElementsByClassName('section')].forEach(section => {
             section.addEventListener('click', displayProductTypes);
         });
             sectionsListHTML.style.flexWrap = 'wrap';
@@ -47,7 +45,7 @@ async function searchPanelDisplay() {
         searchPanel.style.opacity = '0';
         setTimeout(() => {
             searchPanel.style.display = 'none';
-        },1);
+        });
         sectionsListHTML.innerHTML = '';
         productTypeListHTML.innerHTML = '';
     }
@@ -58,19 +56,18 @@ async function displayProductTypes(event) {
     productTypeListHTML.innerHTML = '';
     let inputID = event.target.id,
         liID = inputID.replace(/-input/,'');
-    console.log(liID);
 
     sectionsListHTML.style.flexWrap = 'nowrap';
     sectionsListHTML.style.height = '100%';
     sectionsListHTML.style.flexBasis = '30%';
 
-    const spans = document.getElementsByClassName('span');
-    for(let span of spans) {
-        span.className = 'span grey';
-    }
+    // const spans = document.getElementsByClassName('span');
+    [...document.getElementsByClassName('span')].forEach(span => {
+        //span.className = 'span grey';
+    })
 
-    const span = document.getElementById(liID + 'span');
-    span.className = 'span act';
+    // const span = document.getElementById(liID + '-span');
+    // span.className = 'span act';
 
     const productTypesList = await getJSON(`http://127.0.0.1:8000/api/sections/${liID}/product-types/`, "GET", null);
 
@@ -91,7 +88,7 @@ async function getJSON(url, method, body) {
         headers : {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-       },}).then(res => res.json());
-    console.log(response);
-    return response
+       },}).then(res => res.json())//.then(res => console.log(res));
+     console.log(response);
+     return response
 }
