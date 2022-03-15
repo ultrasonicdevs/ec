@@ -1,6 +1,5 @@
-from mimetypes import init
 from urllib import response
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from pip import main
 from pymongo import MongoClient
 import json
@@ -52,10 +51,18 @@ class MongoWorker:
         encoder = JSONEncoder()
         for product_type in self.product_types_coll.find():
             response['product_types'].append({
-                '_id': encoder.default(product_type['_id']),
+                'id': encoder.default(product_type['_id']),
                 'name': product_type['name'],
             })
         return response
+
+    def get_product_type(self, type_id):
+        response = self.product_types_coll.find_one({'_id': ObjectId(type_id)})
+        if response:
+            response['_id'] = JSONEncoder().default(response['_id'])
+            return response
+        else:
+            return {'error': 'Error 404. Object do not exist or something got wrong'}
 
     def get_section_product_types(self, section_id):
         response = {
@@ -77,6 +84,35 @@ class MongoWorker:
         print(product_type)
         response['attributes'] = product_type['attributes']
         return response
+
+    def get_products_of_certain_type(self, type_id):
+        response = {
+            'products': []
+        }
+        encoder = JSONEncoder()
+        for product in self.products_coll.find({'type': type_id}):
+            product['_id'] = encoder.default(product['_id'])
+            response['products'].append(product)
+        print(response)
+        return response
+
+    def get_products(self):
+        response = {
+            'products': []
+        }
+        encoder = JSONEncoder()
+        for product in self.products_coll.find():
+            product['_id'] = encoder.default(product['_id'])
+            response['products'].append(product)
+        return response
+
+    def get_product(self, product_id):
+        response = self.products_coll.find_one({'_id': ObjectId(product_id)})
+        if response:
+            response['_id'] = JSONEncoder().default(response['_id'])
+            return response
+        else:
+            return {'error': 'Error 404. Object do not exist or something got wrong'}
 
 
 class JSONEncoder(json.JSONEncoder):
