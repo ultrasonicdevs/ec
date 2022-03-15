@@ -1,108 +1,89 @@
-const searchBtn = document.querySelector('.search-btn');
+const searchBtn = document.querySelector('#display-form'),
+    searchPanel = document.querySelector('.search-panel'),
+    sectionsListHTML = document.getElementById('section-list'),
+    ulProductTypes = document.getElementById('product-type-list');
 searchBtn.addEventListener('click', searchPanelDisplay);
 
+
 async function searchPanelDisplay() {
-    const searchPanel = document.querySelector('.search-panel'),
-        content = document.querySelector('.content'),
-        searchBtnImg = document.querySelector('#search-img'),
-
-        form = document.createElement('form'),
-        sectionsDiv = document.createElement('div'),
-        productTypesDiv = document.createElement('div'),
-        selectTitleS = document.createElement('h2'),
-        selectTitleP = document.createElement('h2'),
-        selectSection = document.createElement('select'),
-        selectProductType = document.createElement('select'),
-        optionS = document.createElement('option'),
-        optionP = document.createElement('option'),
-        submit = document.createElement('button');
-
-    form.className ='form';
-    sectionsDiv.className = 'sections';
-    productTypesDiv.className = 'categories';
-    selectTitleS.className = 'search-block-header';
-    selectTitleS.appendChild(document.createTextNode('Выберите раздел'));
-    selectTitleP.className = 'search-block-header';
-    selectTitleP.appendChild(document.createTextNode('Выберите категорию'));
-    selectSection.id = 'select-section';
-    selectProductType.id = 'select-category';
-    selectProductType.disabled = true;
-    submit.className = 'submit';
-    optionS.appendChild(document.createTextNode('Выберите раздел'));
-    optionS.hidden = true;
-    optionS.selected = true;
-    optionP.appendChild(document.createTextNode('Выберите категорию'));
-    optionP.hidden = true;
-    optionP.selected = true;
-    submit.appendChild(document.createTextNode('Подтвердить'));
-
-    form.appendChild(sectionsDiv);
-    form.appendChild(productTypesDiv);
-    sectionsDiv.appendChild(selectTitleS);
-    sectionsDiv.appendChild(selectSection);
-    selectSection.appendChild(optionS);
-    productTypesDiv.appendChild(selectTitleP);
-    productTypesDiv.appendChild(selectProductType);
-    selectProductType.appendChild(optionP);
-    form.appendChild(submit);
-
-    if (searchPanel.style.display === 'none') {
-        searchPanel.appendChild(form);
-        searchPanel.style.opacity = '0';
-        setTimeout(() => {
-            content.style.filter = 'blur(1rem)';
-            searchPanel.style.display = 'flex';
+    if (document.getElementById('form-btn').checked === false) {
+        const sectionList = await getJSON('http://127.0.0.1:8000/ec-admin/add-section/get-parent-sections/', "GET", null);
+        for (let section of sectionList.sections) {
+            let liSection = document.createElement('li');
+            liSection.className = 'section';
+            liSection.id = section._id;
+            liSection.appendChild(document.createTextNode(section.name));
+            sectionsListHTML.appendChild(liSection);
+        }
+        setTimeout(()=> {
+            searchPanel.style.display = 'block';
             searchPanel.style.opacity = '1';
-            searchBtnImg.src = 'static/user_side/img/cancel_menuBtn.svg';
         });
+
+        [...document.getElementsByClassName('section')].forEach(section => {
+            section.addEventListener('click', displayProductTypes);
+        });
+            sectionsListHTML.style.flexWrap = 'wrap';
+            sectionsListHTML.style.height = '24rem';
+            sectionsListHTML.style.flexBasis = '70%';
+
     }
     else {
         searchPanel.style.opacity = '0';
         setTimeout(() => {
             searchPanel.style.display = 'none';
-            content.style.filter = 'none';
-            searchBtnImg.src = 'static/user_side/img/search_menuBtn.svg';
         });
-        const delForm = document.querySelector('form');
-        delForm.remove()
-    }
-
-    const sectionListJSON = await getJSON('http://127.0.0.1:8000/ec-admin/add-section/get-parent-sections/', "GET", null),
-        sectionList = sectionListJSON.sections;
-    for (let section of sectionList) {
-        const option = document.createElement('option');
-        option.id = section._id;
-        option.appendChild(document.createTextNode(section.name))
-        selectSection.appendChild(option);
-    }
-
-    selectSection.addEventListener('change', selectProductTypeDisplay);
-
-    async function selectProductTypeDisplay() {
-        const index = selectSection.options.selectedIndex,
-            id = selectSection.options[index].id,
-            productTypesJSON = await getJSON(`http://127.0.0.1:8000/api/sections/${id}/product-types/`, "GET", null),
-            productTypes = productTypesJSON.product_types;
-
-        selectProductType.disabled = false;
-        selectProductType.innerHTML = '';
-
-        selectProductType.appendChild(optionP);
-        optionP.hidden = true;
-        optionP.selected = true;
-        for (let productType of productTypes) {
-            const option = document.createElement('option');
-            option.id = productType._id;
-            option.appendChild(document.createTextNode(productType.name))
-            selectProductType.appendChild(option);
-        }
+        sectionsListHTML.innerHTML = '';
+        ulProductTypes.innerHTML = '';
     }
 }
 
-async function getJSON(url, method, body) {
-    let response = await fetch(url, {method, body});
-    response = await response.json();
-    console.log(response);
 
-    return response
+async function displayProductTypes(event) {
+    ulProductTypes.innerHTML = '';
+    ulProductTypes.style.display = 'none';
+    ulProductTypes.style.opacity = '0';
+    let liID = event.target.id;
+
+    sectionsListHTML.style.flexWrap = 'nowrap';
+    sectionsListHTML.style.height = '100%';
+    sectionsListHTML.style.flexBasis = '30%';
+
+    [...document.getElementsByClassName('section')].forEach(section => {
+        if (section.className === 'section act') {
+            section.className = 'section grey';
+        }
+        else if (section.className === 'section') {
+            section.className += ' grey';
+        }
+    });
+
+    const sectionAct = document.getElementById(liID);
+    sectionAct.className = 'section act';
+
+    const productTypesList = await getJSON(`http://127.0.0.1:8000/api/sections/${liID}/product-types/`, "GET", null);
+
+    for (let productType of productTypesList.product_types) {
+        let liProductType = document.createElement('li');
+        liProductType.id = productType._id;
+        let link = document.createElement('a');
+        link.appendChild(document.createTextNode(productType.name));
+        liProductType.appendChild(link);
+        ulProductTypes.appendChild(liProductType);
+    }
+    ulProductTypes.style.display = 'block';
+    setTimeout(()=>{
+
+        ulProductTypes.style.opacity = '1';
+    }, 100);
+
+}
+
+
+async function getJSON(url, method, body) {
+    return await fetch(url, {method, body,
+        headers : {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       },}).then(res => res.json())
 }
