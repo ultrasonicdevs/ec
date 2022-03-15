@@ -114,48 +114,37 @@ header {
       align-items: flex-start;
       flex-direction: column;
       flex-wrap: wrap;
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
       height: 24rem;
       flex-basis: 70%; }
-    header .search-panel .submit {
-      background: #E5E5E5;
-      border: none;
-      padding: 0.75rem 4rem;
-      float: right;
-      margin-right: 3rem; }
+    header .search-panel #product-type-list {
+      transition: all 1s cubic-bezier(0.23, 1, 0.32, 1); }
     header .search-panel ul {
       margin: 8rem 0 0 3rem;
       position: relative;
       list-style: none;
-      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1); }
+      transition: all 0.3s linear; }
       header .search-panel ul li {
         font-family: "Inter", sans-serif;
         font-size: 1.5rem;
         font-weight: bold;
         text-decoration: none;
         padding-bottom: 2rem; }
-        header .search-panel ul li input[type=radio] {
-          display: none; }
-        header .search-panel ul li .grey {
-          color: #CCC; }
-        header .search-panel ul li .act {
+      header .search-panel ul .grey {
+        color: #CCC; }
+      header .search-panel ul .act {
+        transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        color: #000;
+        margin-left: 3rem; }
+        header .search-panel ul .act:before {
           transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-          color: #000; }
-          header .search-panel ul li .act:before {
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-            content: "";
-            position: absolute;
-            height: 0.5rem;
-            width: 2rem;
-            background: #000;
-            margin-top: 0.7rem;
-            display: none; }
-        header .search-panel ul li input[type=radio]:checked + label .act {
-          margin-left: 3rem; }
-        header .search-panel ul li input[type=radio]:checked + label .act:before {
-          display: block; }
-        header .search-panel ul li input[type=radio]:checked + .section-list {
-          height: 100%;
-          flex-wrap: nowrap; }
+          content: "";
+          position: absolute;
+          height: 0.25rem;
+          width: 2rem;
+          background: #000;
+          margin-top: 0.8rem;
+          margin-left: -3rem; }
 
 main {
   margin: 0 auto; }

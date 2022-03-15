@@ -124,56 +124,39 @@ header
 
     #section-list
       @include flex(flex-start, flex-start, column, wrap)
+      transition: all .3s cubic-bezier(0.23, 1, 0.32, 1)
       height: $section-height
       flex-basis: 70%
 
-    .submit
-
-      background: #E5E5E5
-      border: none
-      padding: .75rem 4rem
-      float: right
-      margin-right: 3rem
+    #product-type-list
+      transition: all 1s cubic-bezier(0.23, 1, 0.32, 1)
 
     ul
       margin: $main-margin+3rem 0 0 3rem
       position: relative
       list-style: none
-      transition: all .3s cubic-bezier(0.23, 1, 0.32, 1)
+      transition: all .3s linear
 
       li
         @include font(1.5rem, bold)
         padding-bottom: 2rem
+      .grey
+        color: #CCC
 
-        input[type=radio]
-          display: none
+      .act
+        transition: all .3s cubic-bezier(0.23, 1, 0.32, 1)
+        color: #000
+        margin-left: 3rem
 
-        .grey
-          color: #CCC
-
-        .act
+        &:before
           transition: all .3s cubic-bezier(0.23, 1, 0.32, 1)
-          color: #000
-          &:before
-            transition: all .3s cubic-bezier(0.23, 1, 0.32, 1)
-            content: ''
-            position: absolute
-            height: .5rem
-            width: 2rem
-            background: #000
-            margin-top: .7rem
-            display: none
-
-        input[type=radio]:checked + label .act
-          margin-left: 3rem
-
-        input[type=radio]:checked + label .act:before
-          display: block
-
-        input[type=radio]:checked + .section-list
-          height: 100%
-          flex-wrap: nowrap
-
+          content: ''
+          position: absolute
+          height: .25rem
+          width: 2rem
+          background: #000
+          margin-top: .8rem
+          margin-left: -3rem
 
 main
   margin: 0 auto
