@@ -1,4 +1,4 @@
-const searchBtn = document.querySelector('#display-form'),
+const searchBtn = document.querySelector('#form-btn'),
     searchPanel = document.querySelector('.search-panel'),
     sectionsListHTML = document.getElementById('section-list'),
     ulProductTypes = document.getElementById('product-type-list');
