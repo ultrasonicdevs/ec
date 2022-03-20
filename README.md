@@ -21,7 +21,7 @@ Linux:
 `source venv/bin/activate`  
 6. Установите необходимые зависимости:  
 `pip install -r requirements.txt`
-7. После окончания установки запустите тестовый сервер: 
+7. После окончания установки запустите тестовый сервер:  
 Windows:  
 `python easycompare/manage.py runserver 0.0.0.0:8000`  
 Linux:  
