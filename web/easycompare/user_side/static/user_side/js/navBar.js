@@ -4,10 +4,11 @@ const searchBtn = document.querySelector('#form-btn'),
     ulProductTypes = document.getElementById('product-type-list');
 searchBtn.addEventListener('click', searchPanelDisplay);
 
+let ip = location.host
 
 async function searchPanelDisplay() {
-    if (document.getElementById('form-btn').checked === false) {
-        const sectionList = await getJSON('http://127.0.0.1:8000/ec-admin/add-section/get-parent-sections/', "GET", null);
+    if (document.getElementById('form-btn').checked === true) {
+        const sectionList = await getJSON(`http://${ip}/ec-admin/add-section/get-parent-sections/`, "GET", null);
         for (let section of sectionList.sections) {
             let liSection = document.createElement('li');
             liSection.className = 'section';
@@ -61,7 +62,7 @@ async function displayProductTypes(event) {
     const sectionAct = document.getElementById(liID);
     sectionAct.className = 'section act';
 
-    const productTypesList = await getJSON(`http://127.0.0.1:8000/api/sections/${liID}/product-types/`, "GET", null);
+    const productTypesList = await getJSON(`http://${ip}/api/sections/${liID}/product-types/`, "GET", null);
 
     for (let productType of productTypesList.product_types) {
         let liProductType = document.createElement('li');

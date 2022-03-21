@@ -1,6 +1,11 @@
 {% extends 'user_side/base.html' %}
 {% load static %}
-
+{% block navbar_title %}EasyCompare{% endblock %}
+{% block navbar_buttons %}
+    <a href="#" class=""><img src="{% static 'user_side/img/profile_menuBtn.svg' %}" alt=""></a>
+    <input type="checkbox" id="form-btn" style="display: none">
+    <label for="form-btn"><span></span></label>
+{% endblock %}
 {% block optional_links %}
     <link rel="stylesheet" href="{% static 'user_side/css/product.css' %}">
 {% endblock %}
@@ -9,9 +14,9 @@
     <div class="content">
         <img src="{% static 'user_side/img/Frame 16.png' %}" alt="" class="product-image">
         <div class="description">
-            <h4 class="manufacturer">manufacturer</h4>
-            <h3 class="product-name">product-name</h3>
-            <h4 class="price">price</h4>
+            <h5 class="manufacturer">manufacturer</h5>
+            <h4 class="product-name">product-name</h4>
+            <h5 class="price">price</h5>
         </div>
     </div>
 {% endblock %}

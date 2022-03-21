@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700&display=swap");
+aside .selected-filters {
+  width: 100%;
+  background-color: #fff;
+  color: #A5A5A5;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none; }
+
+.parameter {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  margin: 3rem 0;
+  width: 100%; }
+  .parameter .value {
+    width: 100%;
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: nowrap; }
+
+input[type=number] {
+  border: none;
+  outline: none;
+  height: 1rem;
+  width: 35rem; }
+
+/*# sourceMappingURL=filter.css.map */

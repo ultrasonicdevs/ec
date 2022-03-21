@@ -1,0 +1,24 @@
+@import "mixinsVariables"
+
+aside
+  .selected-filters
+    width: 100%
+    background-color: #fff
+    color: #A5A5A5
+    @include font(.9rem, 500)
+
+.parameter
+  @include flex(flex-start, flex-start, column, nowrap)
+  margin: 3rem 0
+  width: 100%
+
+  .value
+    width: 100%
+    margin: .5rem 0
+    @include flex(space-between, flex-start, row, nowrap)
+
+input[type=number]
+  border: none
+  outline: none
+  height: 1rem
+  width: 35rem

@@ -1,166 +1,109 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;700&display=swap')
+@import "mixinsVariables"
 
-$nav-width: calc(75rem - 2rem)
-$nav-height: 4rem
-$section-height: 4rem * 6
+.nav-logo
+  @include font(1rem, regular)
+  margin-left: 1rem
+
+.nav-btns
+  width: 13rem
+  @include flex(space-around, center, row, nowrap)
+
+  a
+    width: $icon-size
+    height: $icon-size
+
+  label
+    width: $icon-size
+    height: $icon-size
+    @include flex(center, center, row, nowrap)
+
+    span
+      position: absolute
+      width: $icon-size
+      height: $icon-size / 12
+      background-color: #000
+      transition: all .5s cubic-bezier(0.23, 1, 0.32, 1)
+
+      &:before
+        content: ''
+        position: absolute
+        margin-top: -.5rem
+        right: 0
+        width: $icon-size
+        height: $icon-size / 12
+        background-color: #000
+        transition: all .5s cubic-bezier(0.23, 1, 0.32, 1)
+
+      &:after
+        content: ''
+        position: absolute
+        margin-top: .5rem
+        right: 0
+        width: $icon-size
+        height: $icon-size / 12
+        background-color: #000
+        transition: all .5s cubic-bezier(0.23, 1, 0.32, 1)
 
 
-$main-margin: $nav-height + 1rem
+  input[type=checkbox]:checked + label span
+    background: rgba(255, 255, 255, 0)
 
-$icon-size: 1.5rem
+  input[type=checkbox]:checked + label span:before
+    transform: rotate(405deg)
+    margin-top: 0
 
+  input[type=checkbox]:checked + label span:after
+    transform: rotate(-405deg)
+    margin-top: 0
 
-@mixin font($font-size, $font-weight)
-  font-family: 'Inter', sans-serif
-  font-size: $font-size
-  font-weight: $font-weight
-  text-decoration: none
-
-@mixin flex($justify-content, $align-items, $flex-direction, $flex-wrap)
-  display: flex
-  justify-content: $justify-content
-  align-items: $align-items
-  flex-direction: $flex-direction
-  flex-wrap: $flex-wrap
-
-*
-  margin: 0
-  padding: 0
-  box-sizing: border-box
-
-html
-  font-size: 16px
-
-a
-  @include font(1.5rem, bold)
-  color: #000
-
-header
-  @include flex(flex-start, center, column, nowrap)
+.search-panel
   width: 100%
-  height: $nav-height
-  z-index: 10
-  background-color: #fff
+  height: 100vh
+  margin: 0 auto
+  opacity: 0
   position: fixed
-  top: 0
+  transition: all .3s cubic-bezier(0.23, 1, 0.32, 1)
+  background-color: #fff
 
-  nav
-    width:  $nav-width
-    height: $nav-height
-    margin: 0 auto
-    z-index: 11
-
-    @include flex(space-between, center, row, nowrap)
-    border-bottom: 1px solid #000
-
-    .nav-logo
-      @include font(1rem, regular)
-      margin-left: 1rem
-
-    .nav-btns
-      width: 13rem
-      @include flex(space-around, center, row, nowrap)
-
-      a
-        width: $icon-size
-        height: $icon-size
-
-      label
-        width: $icon-size
-        height: $icon-size
-        display: flex
-        @include flex(center, center, row, nowrap)
-
-        span
-          position: absolute
-          width: $icon-size
-          height: $icon-size / 12
-          background-color: #000
-          transition: all .5s cubic-bezier(0.23, 1, 0.32, 1)
-
-          &:before
-            content: ''
-            position: absolute
-            margin-top: -.5rem
-            right: 0
-            width: $icon-size
-            height: $icon-size / 12
-            background-color: #000
-            transition: all .5s cubic-bezier(0.23, 1, 0.32, 1)
-
-          &:after
-            content: ''
-            position: absolute
-            margin-top: .5rem
-            right: 0
-            width: $icon-size
-            height: $icon-size / 12
-            background-color: #000
-            transition: all .5s cubic-bezier(0.23, 1, 0.32, 1)
-
-
-      input[type=checkbox]:checked + label span
-        background: rgba(255, 255, 255, 0)
-
-      input[type=checkbox]:checked + label span:before
-        transform: rotate(405deg)
-        margin-top: 0
-
-      input[type=checkbox]:checked + label span:after
-        transform: rotate(-405deg)
-        margin-top: 0
-
-  .search-panel
-    width: 100%
-    height: 100vh
-    margin: 0 auto
-    opacity: 0
-    position: fixed
-    transition: all .3s cubic-bezier(0.23, 1, 0.32, 1)
-    background-color: #fff
-
-    .uls
-      @include flex(flex-start, flex-start, row, nowrap)
-
-    #section-list
-      @include flex(flex-start, flex-start, column, wrap)
-      transition: all .3s cubic-bezier(0.23, 1, 0.32, 1)
-      height: $section-height
-      flex-basis: 70%
-
-    #product-type-list
-      transition: all 1s cubic-bezier(0.23, 1, 0.32, 1)
-
-    ul
-      margin: $main-margin+3rem 0 0 3rem
-      position: relative
-      list-style: none
-      transition: all .3s linear
-
-      li
-        @include font(1.5rem, bold)
-        padding-bottom: 2rem
-      .grey
-        color: #CCC
-
-      .act
-        transition: all .3s cubic-bezier(0.23, 1, 0.32, 1)
-        color: #000
-        margin-left: 3rem
-
-        &:before
-          transition: all .3s cubic-bezier(0.23, 1, 0.32, 1)
-          content: ''
-          position: absolute
-          height: .25rem
-          width: 2rem
-          background: #000
-          margin-top: .8rem
-          margin-left: -3rem
-
-main
+.uls
+  @include flex(flex-start, flex-start, row, nowrap)
+  width: $main-width
   margin: 0 auto
 
-  .content
-    margin: $main-margin 0 0 0
+
+#section-list
+  @include flex(flex-start, flex-start, column, wrap)
+  transition: all .3s cubic-bezier(0.23, 1, 0.32, 1)
+  height: $section-height
+  flex-basis: 70%
+
+#product-type-list
+  transition: all 1s cubic-bezier(0.23, 1, 0.32, 1)
+
+ul
+  margin: $main-margin+3rem 0 0 3rem
+  position: relative
+  list-style: none
+  transition: all .3s linear
+
+  li
+    @include font(1.5rem, bold)
+    padding-bottom: 2rem
+  .grey
+    color: #CCC
+
+  .act
     transition: all .3s cubic-bezier(0.23, 1, 0.32, 1)
+    color: #000
+    margin-left: 3rem
+
+    &:before
+      transition: all .3s cubic-bezier(0.23, 1, 0.32, 1)
+      content: ''
+      position: absolute
+      height: .25rem
+      width: 2rem
+      background: #000
+      margin-top: .8rem
+      margin-left: -3rem
+

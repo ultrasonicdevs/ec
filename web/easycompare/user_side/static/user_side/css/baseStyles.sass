@@ -1,0 +1,56 @@
+@import "mixinsVariables"
+
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+html
+  font-size: 16px
+  font-family: 'Inter', sans-serif
+
+header
+  @include flex(flex-start, center, column, nowrap)
+  width: 100%
+  height: $nav-height
+  z-index: 10
+  background-color: #fff
+  position: fixed
+  top: 0
+
+nav
+  width:  $nav-width
+  height: $nav-height
+  margin: 0 auto
+  z-index: 11
+  @include flex(space-between, center, row, nowrap)
+  border-bottom: 1px solid #000
+
+main
+  margin: $main-margin auto 0 auto
+  width: $main-width
+
+aside
+  width: 14.5rem
+
+h3
+  @include font(1.75rem, 600)
+
+h4
+  @include font(1.25rem, 600)
+
+h5
+  @include font(1rem, 400)
+  color: #B0B0B0
+
+button
+  width: 11.5rem
+  height: 2.5rem
+  border: none
+  border-radius: .125rem
+  background-color: #E5E5E5
+  @include font(.9rem, 600)
+
+a
+  @include font(1.5rem, 600)
+  color: #000
