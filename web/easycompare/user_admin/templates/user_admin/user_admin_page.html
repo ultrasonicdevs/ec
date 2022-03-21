@@ -1,0 +1,48 @@
+{% extends 'user_admin/base.html' %}
+{% load static %}
+
+{% block title %}EasyCompare Admin{% endblock %}
+
+{% block logo %}EasyCompare Admin{% endblock %}
+
+{% block nav_buttons %}
+    <li class="nav__button_container">
+        <button class="nav__button profile_page_btn">
+            <img src="{% static 'user_admin/img/profile_menuBtn.svg' %}" alt="">
+        </button>
+    </li>
+    <li class="nav__button_container">
+        <button class="nav__button burger_menu_btn" style="transform: rotate(45ged)">
+            +
+        </button>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <section class="product__container">
+        <div class="product__container_title">
+            <h2>Разделы</h2>
+            <button class="add-new-type-btn">Добавить новый тип</button>
+        </div>
+        <nav class="product__container_nav"></nav>
+        <div class="edit_btn_container">
+            <button class="edit-btn btn">Редактировать</button>
+        </div>
+    </section>
+
+    <section class="popup__container">
+        <div class="popup__container_inner">
+            <input id="type-name" placeholder="Новый тип товара">
+            <button class="close-btn"><img src="{% static 'user_admin/img/cancel_menuBtn.svg' %}" alt=""></button>
+            <div class="popup__container_inner-btns">
+                <button class="save-btn btn">Сохранить</button>
+                <button class="add-filter-btn">Добавить фильтр</button>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'user_admin/js/user_admin.js' %}"></script>
+{% endblock %}

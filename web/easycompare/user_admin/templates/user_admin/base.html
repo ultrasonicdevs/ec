@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+
+    {% block links %}{% endblock %}
+
+    <link rel="stylesheet" href="{% static 'user_admin/css/user_admin.css' %}">
+
+</head>
+<body>
+
+<header>
+
+    <div class="header__inner">
+        <div class="header__logo">{% block logo %}{% endblock %}</div>
+        <nav class="header__nav">
+            <ul>
+                {% block nav_buttons %}
+                {% endblock %}
+            </ul>
+        </nav>
+    </div>
+
+</header>
+
+<main class="content">
+
+    {% block content %}{% endblock %}
+    
+</main>
+
+{% block scripts %}{% endblock %}
+
+</body>
+</html>

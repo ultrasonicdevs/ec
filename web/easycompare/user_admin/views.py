@@ -7,4 +7,4 @@ from django.views import View
 class UserAdminView(View):
     @staticmethod
     def get(request):
-        return render(request, 'user_side/base.html', {'title': 'EasyCompare Admin'})
+        return render(request, 'user_admin/user_admin_page.html')
