@@ -4,74 +4,9 @@ function render () {
     addEventToEditPageBtn();
 }
 
-function addEventToProductContainer () {
-    const navContainer = document.querySelector('.product__container_nav');
-    navContainer.addEventListener('click', event => {
-        if (event.target.nodeName !== 'P') return;
-        const navElementContainer = event.target.parentNode;
-        if (navElementContainer.classList.contains('active')) {
-            navContainer.classList.remove('active');
-            closeMenus();
-            clearProductTypes(navElementContainer);
-        } else {
-            closeMenus(navElementContainer);
-            openMenu(navElementContainer);
-            addProductTypes(navElementContainer);
-            clearAllProductTypes(navElementContainer);
-            navContainer.classList.add('active');
-        }
-    })
-}
+render()
 
-function addEventToEditPageBtn () {
-    const editBtn = document.querySelector('.edit-btn');
-    editBtn.addEventListener('click', () => {
-        const productContainerTitle = document.querySelector('.product__container_title');
-        if (!productContainerTitle.classList.contains('edit')) {
-            productContainerTitle.classList.add('edit');
-            editBtn.textContent = 'Сохранить изменения';
-            addEventToAddNewTypeButton ();
-        } else {
-            productContainerTitle.classList.remove('edit');
-            editBtn.textContent = 'Редактировать';
-        }
-    })
-}
-
-function addEventToAddNewTypeButton () {
-    const addNewTypeButton = document.querySelector('.add-new-type-btn');
-    addNewTypeButton.addEventListener('click', openPopup)
-}
-
-function openPopup () {
-    document.querySelector('.popup__container').classList.add('open');
-    document.querySelector('.close-btn').addEventListener('click', closePopup);
-}
-
-function closePopup () {
-    document.querySelector('.popup__container').classList.remove('open');
-}
-
-function openMenu (target) {
-    const navElementContainers = document.querySelectorAll('.nav__element_container');
-    navElementContainers.forEach(menu => {
-        if (menu === target) {
-            menu.style.color = '#000';
-            menu.classList.add('active');
-            menu.querySelector('.sub-menu').classList.add('active');
-        } else menu.style.color = '#CCC';
-    });
-}
-
-function closeMenus (target = null) {
-    const menus = document.querySelectorAll('.nav__element_container');
-    menus.forEach(menu => {
-        if (menu === target) return;
-        menu.querySelector('.sub-menu').classList.remove('active');
-        menu.classList.remove('active');
-        menu.style.color = '#000';
-    })
-}
+// ===============================================================
 
 async function createSections () {
     const ip = location.host;
@@ -136,8 +71,84 @@ function clearAllProductTypes (target) {
     })
 }
 
+function openMenu (target) {
+    const navElementContainers = document.querySelectorAll('.nav__element_container');
+    navElementContainers.forEach(menu => {
+        if (menu === target) {
+            menu.style.color = '#000';
+            menu.classList.add('active');
+            menu.querySelector('.sub-menu').classList.add('active');
+        } else menu.style.color = '#CCC';
+    });
+}
+
+function closeMenus (target = null) {
+    const menus = document.querySelectorAll('.nav__element_container');
+    menus.forEach(menu => {
+        if (menu === target) return;
+        menu.querySelector('.sub-menu').classList.remove('active');
+        menu.classList.remove('active');
+        menu.style.color = '#000';
+    })
+}
+
 async function getJSON(url, method, body) {
     return await fetch(url, {method, body}).then(data => data.json());
 }
 
-render()
+// ===============================================================
+
+function addEventToProductContainer () {
+    const navContainer = document.querySelector('.product__container_nav');
+    navContainer.addEventListener('click', event => {
+        if (event.target.nodeName !== 'P') return;
+        const navElementContainer = event.target.parentNode;
+        if (navElementContainer.classList.contains('active')) {
+            navContainer.classList.remove('active');
+            closeMenus();
+            clearProductTypes(navElementContainer);
+        } else {
+            closeMenus(navElementContainer);
+            openMenu(navElementContainer);
+            addProductTypes(navElementContainer);
+            clearAllProductTypes(navElementContainer);
+            navContainer.classList.add('active');
+        }
+    })
+}
+
+function addEventToEditPageBtn () {
+    const editBtn = document.querySelector('.edit-btn');
+    editBtn.addEventListener('click', () => {
+        const productContainerTitle = document.querySelector('.product__container_title');
+        if (!productContainerTitle.classList.contains('edit')) {
+            productContainerTitle.classList.add('edit');
+            editBtn.textContent = 'Сохранить изменения';
+            addEventToAddNewTypeButton ();
+        } else {
+            productContainerTitle.classList.remove('edit');
+            editBtn.textContent = 'Редактировать';
+        }
+    })
+}
+
+function addEventToAddNewTypeButton () {
+    const addNewTypeButton = document.querySelector('.add-new-type-btn');
+    addNewTypeButton.addEventListener('click', openPopup)
+}
+
+function openPopup () {
+    document.querySelector('.popup__container').classList.add('open');
+    document.querySelector('.close-btn').addEventListener('click', closePopup);
+    document.querySelector('.save-btn').addEventListener('click', saveNewType);
+}
+
+function closePopup () {
+    document.querySelector('.popup__container').classList.remove('open');
+}
+
+function saveNewType () {
+    const typeName = document.querySelector('#type-name').value;
+    // ToDo : Взятие фильтров
+}
+
