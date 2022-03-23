@@ -9,13 +9,13 @@
     "build": "npm run build:mjs && npm run build:js && npm run build:styles",
     "build:js": "npm run build:js:write && npm run build:js:compress && npm run build:js:compress:mjs",
     "build:js:write": "rollup -c rollup.config.js",
-    "build:js:compress": "uglifyjs ../../js/nouislider.js --compress --mangle --output dist/nouislider.min.js",
-    "build:js:compress:mjs": "uglifyjs dist/nouislider.mjs --compress --mangle --output dist/nouislider.min.mjs",
+    "build:js:compress": "uglifyjs ../../js/nouislider.js --compress --mangle --output dista/nouislider.min.js",
+    "build:js:compress:mjs": "uglifyjs dista/nouislider.mjs --compress --mangle --output dista/nouislider.min.mjs",
     "build:types": "tsc --emitDeclarationOnly",
-    "build:mjs": "tsc --module ES6 && mv ../../js/nouislider.js dist/nouislider.mjs",
+    "build:mjs": "tsc --module ES6 && mv ../../js/nouislider.js dista/nouislider.mjs",
     "build:styles": "npm run build:styles:write && npm run build:styles:compress",
-    "build:styles:write": "lessc src/nouislider.less dist/nouislider.css",
-    "build:styles:compress": "lessc src/nouislider.less dist/nouislider.min.css --clean-css",
+    "build:styles:write": "lessc src/nouislider.less dista/nouislider.css",
+    "build:styles:compress": "lessc src/nouislider.less dista/nouislider.min.css --clean-css",
     "prepublishOnly": "npm run build",
     "format": "prettier src/nouislider.ts --write --config .prettierrc",
     "lint": "eslint src/nouislider.ts",
@@ -39,7 +39,7 @@
   },
   "files": [
     "src",
-    "dist"
+    "dista"
   ],
   "dependencies": {}
 }

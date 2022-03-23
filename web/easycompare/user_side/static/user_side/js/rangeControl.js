@@ -12,14 +12,12 @@ const rangeSliderInit = () => {
       },
       step: 1,
     });
-
   range.noUiSlider.on('update', function (values, handle) {
     inputs[handle].value = parseInt(values[handle]);
   });
   inputMin.addEventListener('change', function () {
     range.noUiSlider.set([this.value, null]);
   });
-
   inputMax.addEventListener('change', function () {
     range.noUiSlider.set([null, this.value]);
   });

@@ -4,7 +4,7 @@
 import noUiSlider from 'nouislider';
 // Or the namespace:
 import * as noUiSlider from 'nouislider';
-import 'nouislider/dist/nouislider.css';
+import 'nouislider/dista/nouislider.css';
 
 // Alternatively, you can include both files:
 &lt;link href="nouislider.css" rel="stylesheet"&gt;
@@ -12,5 +12,5 @@ import 'nouislider/dist/nouislider.css';
 
 // You can also use the ES6 module distribution
 &lt;script type="module"&gt;
-import noUiSlider from 'nouislider/dist/nouislider.mjs';
+import noUiSlider from 'nouislider/dista/nouislider.mjs';
 &lt;/script&gt;

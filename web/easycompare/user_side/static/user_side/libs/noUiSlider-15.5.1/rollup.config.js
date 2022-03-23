@@ -4,7 +4,7 @@ export default {
     input: 'src/nouislider.ts',
     output: [
         {
-            file: 'dist/nouislider.js',
+            file: 'dista/nouislider.js',
             format: 'umd',
             name: 'noUiSlider',
             exports: 'named'
