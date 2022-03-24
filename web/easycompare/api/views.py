@@ -4,7 +4,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from ec_admin.mongoworker import MongoWorker
 
-
+#TODO: Make all CBV
 def index(request):
     return HttpResponse('Zatychka')
 
