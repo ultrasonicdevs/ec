@@ -10,7 +10,7 @@ SECRET_KEY = 'django-insecure-zaxb%94cv+w)s=7_j%8b*nxw#xb#!&wrvu-xdo)to*dixu47i*
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 ALLOWED_HOSTS.append(socket.gethostbyname(socket.gethostname()))
 
 INSTALLED_APPS = [
