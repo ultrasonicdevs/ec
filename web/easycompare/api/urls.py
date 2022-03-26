@@ -13,4 +13,5 @@ urlpatterns = [
     path('product-types/<str:type_id>/products/', views.products_of_certain_type, name='products-of-certain-type'),
     path('products/', views.products, name='products'),
     path('products/<str:product_id>/', views.product_detail, name='product_detail'),
+    path('images/', views.images, name='images'),
 ]

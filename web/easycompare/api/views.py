@@ -47,3 +47,9 @@ def product_detail(request, product_id):
     worker = MongoWorker()
     if request.is_ajax and request.method == "GET":
         return JsonResponse(worker.get_product(product_id))
+
+def images(request):
+    worker = MongoWorker()
+    if request.is_ajax and request.method == "POST":
+        print(request.FILES)
+        return JsonResponse({'status': 'ok', 'message': 'successfully added to db'}, status=200)
