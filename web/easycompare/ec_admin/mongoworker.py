@@ -4,6 +4,8 @@ from pip import main
 from pymongo import MongoClient
 import json
 from bson import ObjectId
+from django.core.files.storage import default_storage
+
 
 class MongoWorker:
     client = MongoClient('localhost', 27017)
@@ -113,6 +115,11 @@ class MongoWorker:
             return response
         else:
             return {'error': 'Error 404. Object do not exist or something got wrong'}
+
+    def save_image_and_get_url(self, image):
+        image_name = default_storage.save(image.name, image)
+        image_url = default_storage.url(image_name)
+        return image_url
 
 
 class JSONEncoder(json.JSONEncoder):

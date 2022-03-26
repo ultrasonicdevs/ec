@@ -52,4 +52,5 @@ def images(request):
     worker = MongoWorker()
     if request.is_ajax and request.method == "POST":
         print(request.FILES)
-        return JsonResponse({'status': 'ok', 'message': 'successfully added to db'}, status=200)
+        preview_image_url = worker.save_image_and_get_url(request.FILES['preview'])
+        return JsonResponse({'image_url': preview_image_url})

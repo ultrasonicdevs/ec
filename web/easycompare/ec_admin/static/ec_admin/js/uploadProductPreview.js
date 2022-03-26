@@ -21,7 +21,10 @@ function uploadFile(e) {
         let requestCompleted = (xhr.readyState === DONE) && (xhr.status === SUCCESS);
         if (requestCompleted) {
             responseJson = JSON.parse(xhr.response);
-            alert(responseJson.message);
+            alert(responseJson.image_url);
+            image = document.createElement('img');
+            image.src = responseJson.image_url;
+            document.getElementById('preview-image-container').appendChild(image);
         }
     };
 
