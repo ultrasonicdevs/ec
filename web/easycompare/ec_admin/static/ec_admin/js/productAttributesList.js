@@ -59,13 +59,15 @@ function renderProductAttributesUl(e) {
 function submitProduct(e) {
     e.preventDefault()
     const attributeInputsHtmlCollection = productAttributesUl.getElementsByTagName('input');
+    const previewImageUrl = document.getElementsByTagName('img')[0].getAttribute('src');
     let attributeInputsArray = Array.from(attributeInputsHtmlCollection);
     let productType = productTypeSelect.value;
     let productName = productNameInput.value;
     let productJson = {
         'name': productName,
         'type': productType,
-        'attributes': []
+        'preview_url': previewImageUrl,
+        'attributes': [],
     }
 
     attributeInputsArray.forEach(attributeInput => {
