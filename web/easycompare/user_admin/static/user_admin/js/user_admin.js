@@ -124,31 +124,11 @@ function addEventToEditPageBtn () {
         if (!productContainerTitle.classList.contains('edit')) {
             productContainerTitle.classList.add('edit');
             editBtn.textContent = 'Сохранить изменения';
-            addEventToAddNewTypeButton ();
+            document.querySelector('.delete-section-btn').style.display = 'block';
         } else {
             productContainerTitle.classList.remove('edit');
+            document.querySelector('.delete-section-btn').style.display = 'none';
             editBtn.textContent = 'Редактировать';
         }
     })
 }
-
-function addEventToAddNewTypeButton () {
-    const addNewTypeButton = document.querySelector('.add-new-type-btn');
-    addNewTypeButton.addEventListener('click', openPopup)
-}
-
-function openPopup () {
-    document.querySelector('.popup__container').classList.add('open');
-    document.querySelector('.close-btn').addEventListener('click', closePopup);
-    document.querySelector('.save-btn').addEventListener('click', saveNewType);
-}
-
-function closePopup () {
-    document.querySelector('.popup__container').classList.remove('open');
-}
-
-function saveNewType () {
-    const typeName = document.querySelector('#type-name').value;
-    // ToDo : Взятие фильтров
-}
-
