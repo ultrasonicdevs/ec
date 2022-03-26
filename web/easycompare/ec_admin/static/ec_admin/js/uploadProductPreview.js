@@ -1,6 +1,10 @@
 const productPreviewInput = document.getElementById('preview');
 const previewImageDiv = document.getElementById('preview-image-container');
 
+window.onload = function () {
+    productPreviewInput.value = '';
+}
+
 productPreviewInput.addEventListener('change', uploadFile);
 
 function uploadFile(e) {
@@ -48,6 +52,8 @@ function uploadFile(e) {
             alert('Image URL: ' + responseJson.image_url, 'Image NAME: ' + responseJson.image_name);
             image = document.createElement('img');
             image.src = responseJson.image_url;
+            image.width = 300;
+            image.height = 300;
             image.dataset.imageName = responseJson.image_name;
             previewImageDiv.appendChild(image);
         }
