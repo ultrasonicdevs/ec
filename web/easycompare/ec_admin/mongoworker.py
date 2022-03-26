@@ -116,10 +116,14 @@ class MongoWorker:
         else:
             return {'error': 'Error 404. Object do not exist or something got wrong'}
 
-    def save_image_and_get_url(self, image):
+    def save_image_and_get_url_and_name(self, image):
         image_name = default_storage.save(image.name, image)
         image_url = default_storage.url(image_name)
-        return image_url
+        return image_url, image_name
+
+    def delete_image_by_name(self, image_name):
+        default_storage.delete(image_name)
+        return image_name
 
 
 class JSONEncoder(json.JSONEncoder):
