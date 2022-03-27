@@ -7,6 +7,7 @@ main {
   flex-wrap: nowrap; }
   main #products {
     width: 60.5rem;
+    margin-left: 2rem;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -21,6 +22,8 @@ main {
       width: 18rem;
       height: 21rem; }
       main #products .container .product-image {
+        width: 15.625rem;
+        height: 15.625rem;
         border-radius: 1.25rem; }
       main #products .container .description {
         margin-left: 0.75rem; }

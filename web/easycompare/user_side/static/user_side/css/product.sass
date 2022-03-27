@@ -5,6 +5,7 @@ main
 
   #products
     width: $main-width - $aside-width
+    margin-left: 2rem
     @include flex(flex-start, flex-start, row, wrap)
 
     .container
@@ -13,6 +14,9 @@ main
       height: 21rem
 
       .product-image
+        width: 15.625rem
+        height: 15.625rem
+
         border-radius: 1.25rem
 
       .description
