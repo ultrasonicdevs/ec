@@ -1,11 +1,11 @@
-class productCard {
-
+class productCard extends Block{
     async displayCards() {
         const typeID = document.URL.replace(`${location.protocol}//${location.host}/`, ''),
-            get = await new Block().getJSON(`${location.protocol}//${location.host}/api/product-types/${typeID}`, "GET", null),
-            productsJSON = await new Block().getJSON(`${location.protocol}//${location.host}/api/product-types/${typeID}products/`, "GET", null);
-        document.title = `${get.name} | Easy Compare`;
-        const productsContainer = document.querySelector('#products');
+            typeInfo = await new Block().getJSON(`${location.protocol}//${location.host}/api/product-types/${typeID}`, "GET", null),
+            productsJSON = await new Block().getJSON(`${location.protocol}//${location.host}/api/product-types/${typeID}products/`, "GET", null),
+            productsContainer = document.querySelector('#products');
+        document.title = `${typeInfo.name} | Easy Compare`;
+
         productsJSON.products.forEach(product => {
             console.log(product.preview_url)
             const link = document.createElement('a'),

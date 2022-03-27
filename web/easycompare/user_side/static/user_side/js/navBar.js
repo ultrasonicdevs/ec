@@ -88,3 +88,8 @@ const searchBtn = document.querySelector('#form-btn'),
     sectionsListHTML = document.getElementById('section-list'),
     ulProductTypes = document.getElementById('product-type-list');
 searchBtn.addEventListener('click', new navBar().sectionsDisplay);
+
+window.addEventListener('load', function () {
+    const checkbox = document.querySelector('#form-btn');
+    checkbox.checked = false;
+})
