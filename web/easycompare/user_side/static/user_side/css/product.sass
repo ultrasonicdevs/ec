@@ -1,15 +1,7 @@
-*
-  margin: 0
-  padding: 0
-  box-sizing: border-box
-
-html
-  font-size: 16px
+@import "mixinsVariables"
 
 .content
-  display: flex
-  flex-direction: column
-  justify-content: space-between
+  @include flex(space-between, flex-start, column, nowrap)
   width: 18rem
   height: 21rem
 
@@ -18,15 +10,6 @@ html
 
 .description
   margin-left: .75rem
-
-.manufacturer
-  font-weight: 400
-  font-size: 1rem
-  color: #B0B0B0
-
-.product-name
-  font-size: 1.25rem
-  font-weight: 600
 
 .price
   font-weight: 400

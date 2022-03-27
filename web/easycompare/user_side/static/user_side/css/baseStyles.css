@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+html {
+  font-size: 16px;
+  font-family: "Inter", sans-serif; }
+
+header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 4rem;
+  z-index: 10;
+  background-color: #fff;
+  position: fixed;
+  top: 0; }
+
+nav {
+  width: 73rem;
+  height: 4rem;
+  margin: 0 auto;
+  z-index: 11;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  border-bottom: 1px solid #000; }
+
+main {
+  margin: 5rem auto 0 auto;
+  width: 75rem; }
+
+aside {
+  width: 14.5rem; }
+
+h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  text-decoration: none; }
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-decoration: none; }
+
+h5 {
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: none;
+  color: #B0B0B0; }
+
+button {
+  width: 11.5rem;
+  height: 2.5rem;
+  border: none;
+  border-radius: 0.125rem;
+  background-color: #E5E5E5;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none; }
+
+a {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #000; }
+
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
+
+input[type=number] {
+  -moz-appearance: textfield; }
+
+input[type=number]:hover, input[type="number"]:focus {
+  -moz-appearance: none; }
+
+input[type=number]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
+
+input[type=number] {
+  appearance: none; }
+
+/*# sourceMappingURL=baseStyles.css.map */

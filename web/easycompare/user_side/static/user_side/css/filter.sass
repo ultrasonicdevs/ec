@@ -1,0 +1,50 @@
+@import "mixinsVariables"
+
+aside
+  .selected-filters
+    width: 100%
+    background-color: #fff
+    color: #A5A5A5
+    @include font(.9rem, 500)
+
+.parameter
+  @include flex(flex-start, flex-start, column, nowrap)
+  margin: 3rem 0
+  width: 100%
+
+  .value
+    width: 100%
+    margin: .5rem 0
+    @include flex(space-between, flex-start, row, nowrap)
+
+  label
+    @include flex(space-between, flex-start, row, nowrap)
+    width: 70%
+    margin: 0 auto
+input[type=number]
+  border: none
+  outline: none
+  height: 1rem
+  width: 4rem
+  text-align: center
+  border-bottom: .0625rem solid #B0B0B0
+
+#slider-round
+  width: 80%
+  height: .25rem
+  margin: 0 auto 1rem auto
+
+#slider-round .noUi-connect
+  background: #000000
+
+#slider-round .noUi-handle
+  height: .75rem
+  width: .75rem
+  top: -.3rem
+  right: -.5rem
+  border-radius: 50%
+  border: none
+  box-shadow: none
+  background-color: #000000
+  &:before, &:after
+    display: none
