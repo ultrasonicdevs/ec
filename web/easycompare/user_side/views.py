@@ -14,7 +14,7 @@ class ProductCardView(View):
         return render(request, 'user_side/product_card.html', {'title': 'Шаблон карточки'})
 
 
-class FilterPanel(View):
+class ProductsView(View):
     @staticmethod
-    def get(request):
-        return render(request, 'user_side/filter_patterns.html', {'title': 'Шаблоны фильтров'})
+    def get(request, type_id):
+        return render(request, 'user_side/products.html', {'title': 'Product type name'})
