@@ -31,7 +31,7 @@ main
   width: $main-width
 
 aside
-  width: 14.5rem
+  width: $aside-width
 
 h3
   @include font(1.75rem, 600)
@@ -55,6 +55,15 @@ a
   @include font(1.5rem, 600)
   color: #000
 
+input[type=number]
+  appearance: none
+  border: none
+  outline: none
+  height: 1rem
+  width: 4rem
+  text-align: center
+  border-bottom: .0625rem solid #B0B0B0
+
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button
   -webkit-appearance: none
   margin: 0
@@ -69,5 +78,3 @@ input[type=number]::-webkit-outer-spin-button, input[type="number"]::-webkit-inn
   margin: 0
 
 
-input[type=number]
-  appearance: none

@@ -16,23 +16,29 @@
 
 <header>
     <nav>
-        <div class="nav-logo">{% block navbar_title %}{% endblock %}</div>
-        <div class="nav-btns">{% block navbar_buttons %}{% endblock %}</div>
+        <div class="nav-logo">Easy Compare</div>
+        <div class="nav-btns">
+            <a href="#" class=""><img src="{% static 'user_side/img/profile_menuBtn.svg' %}" alt=""></a>
+            <input type="checkbox" id="form-btn" style="display: none">
+            <label for="form-btn"><span></span></label>
+        </div>
     </nav>
     <section class="search-panel" style="display: none">
         <div class="uls">
             <ul id="section-list"></ul>
             <ul id="product-type-list"></ul>
         </div>
-{#        <button class="submit" type="button" >Подтвердить</button>#}
+{#        <button class="submit" type="button">Подтвердить</button>#}
     </section>
 </header>
 
 <main class="main">
     {% block content %}{% endblock %}
+
 </main>
 
 {% block scripts %}{% endblock %}
+<script defer src="{% static 'user_side/js/block.js' %}"></script>
 <script defer src="{% static 'user_side/js/navBar.js' %}"></script>
 </body>
 </html>

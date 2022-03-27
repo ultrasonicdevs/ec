@@ -1,15 +1,22 @@
 @import "mixinsVariables"
 
-.content
-  @include flex(space-between, flex-start, column, nowrap)
-  width: 18rem
-  height: 21rem
+main
+  @include flex(space-around, flex-start, row, nowrap)
 
-.product-image
-  border-radius: 1.25rem
+  #products
+    width: $main-width - $aside-width
+    @include flex(flex-start, flex-start, row, wrap)
 
-.description
-  margin-left: .75rem
+    .container
+      @include flex(space-between, flex-start, column, nowrap)
+      width: 18rem
+      height: 21rem
 
-.price
-  font-weight: 400
+      .product-image
+        border-radius: 1.25rem
+
+      .description
+        margin-left: .75rem
+
+        .price
+          font-weight: 400

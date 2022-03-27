@@ -1,15 +1,4 @@
-class navBar {
-    async getJSON(url, method, body) {
-        return await fetch(url, {
-            method, body,
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-        }).then(res => res.json())
-    }
-
-
+class navBar extends Block {
     //TODO: write changeProductTypes method
     changeProductType() {
 
@@ -20,7 +9,7 @@ class navBar {
         ulProductTypes.innerHTML = '';
         ulProductTypes.style.display = 'none';
         ulProductTypes.style.opacity = '0';
-        let liID = event.target.id;
+        let typeID = event.target.id;
 
         sectionsListHTML.style.flexWrap = 'nowrap';
         sectionsListHTML.style.height = '100%';
@@ -34,14 +23,15 @@ class navBar {
             }
         });
 
-        const sectionAct = document.getElementById(liID);
+        const sectionAct = document.getElementById(typeID);
         sectionAct.className = 'section act';
-        const productTypesList = await new navBar().getJSON(`${location.protocol}//${location.host}/api/sections/${liID}/product-types/`, "GET", null);
+        const productTypesList = await new navBar().getJSON(`${location.protocol}//${location.host}/api/sections/${typeID}/product-types/`, "GET", null);
 
         for (let productType of productTypesList.product_types) {
             let liProductType = document.createElement('li');
             liProductType.id = productType._id;
             let link = document.createElement('a');
+            link.href = `${location.protocol}//${location.host}/${liProductType.id}/`;
             link.appendChild(document.createTextNode(productType.name));
             liProductType.appendChild(link);
             ulProductTypes.appendChild(liProductType);
