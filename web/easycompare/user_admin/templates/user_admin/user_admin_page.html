@@ -1,0 +1,29 @@
+{% extends 'user_admin/base.html' %}
+{% load static %}
+
+{% block title %}EasyCompare Admin{% endblock %}
+
+{% block logo %}EasyCompare Admin{% endblock %}
+
+{% block nav_buttons %}
+    <li class="nav__button_container">
+        <button class="nav__button profile_page_btn">
+            <img src="{% static 'user_admin/img/profile_menuBtn.svg' %}" alt="">
+        </button>
+    </li>
+    <li class="nav__button_container">
+        <button class="nav__button burger_menu_btn">
+            <img src="{% static 'user_admin/img/burger_menuBtn.svg' %}" alt="">
+        </button>
+    </li>
+{% endblock %}
+
+{% block content %}
+  {% include 'user_admin/products.html' %}
+  {% include 'user_admin/popup.html' %}
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'user_admin/js/user_admin.js' %}"></script>
+    <script src="{% static 'user_admin/js/popup.js' %}"></script>
+{% endblock %}

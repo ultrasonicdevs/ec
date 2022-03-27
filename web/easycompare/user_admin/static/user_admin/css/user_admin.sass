@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700&display=swap')
+
+@mixin font
+    font-family: 'Inter', sans-serif
+
+
+=gridRepeat($property)
+    grid-template-columns: $property
+    -ms-grid-columns: $property
+
+$iconHeight: 2em
+$iconWidth: 2em
+$transition: .5s ease
+$headerHeight: 4rem
+$contentTopMargin: $headerHeight + 2rem
+
+*
+    @include font
+    margin: 0
+    padding: 0
+    border: 0
+    box-sizing: border-box
+
+    ul
+        list-style: none
+
+    button
+        background-color: inherit
+        cursor: pointer
+
+body
+    position: fixed
+    width: 100%
+    height: 100%
+    padding-bottom: 5vw
+
+body::-webkit-scrollbar
+    width: 0
+
+
+@mixin center
+    max-width: 1200px
+    width: 100%
+    margin: 0 auto
+    padding: .7rem 1rem
+    
+@mixin flexContainer($justify-content, $align-items, $flex-direction, $flex-wrap)
+    display: flex
+    justify-content: $justify-content
+    align-items: $align-items
+    flex-direction: $flex-direction
+    flex-wrap: $flex-wrap
+
+@mixin btnSettings
+    background-color: #E5E5E5
+    padding: .5rem 1rem
+    cursor: pointer
+
+header
+    position: fixed
+    top: 0
+    width: 100%
+    height: $headerHeight
+
+    .header__inner
+        @include center
+        @include flexContainer(space-between, center, row, nowrap)
+        border-bottom: 1px solid #000
+
+        .header__logo
+            font-weight: 700
+
+        .header__nav ul
+            @include flexContainer(start, center, row, nowrap)
+
+            .nav__button
+                margin-left: 5vw
+                cursor: pointer
+                height: $iconHeight
+                width: $iconWidth
+
+.content
+    @include center
+    margin-top: $contentTopMargin
+
+.product__container
+    .product__container_title
+        position: relative
+        font-size: calc(.5 * 7rem)
+        font-weight: 600
+        
+        h2
+            font-size: inherit
+
+        &::before, .add-new-type-btn
+            position: absolute
+            font-size: .3em
+            font-weight: 500
+            color: #A5A5A5
+            opacity: 0
+            visibility: hidden
+            transition: $transition
+
+        &::before
+            content: 'Режим редактирования'
+            top: 120%
+            left: -10%
+
+        .add-new-type-btn
+            right: 0
+            top: -20%
+            max-width: 100px
+    
+    .product__container_title.edit
+        &::before, .add-new-type-btn
+            opacity: 1
+            visibility: visible
+        &::before
+            left: 0
+        .add-new-type-btn
+            top: 0
+
+    .product__container_nav
+        display: grid
+        
+        .nav__inner_container
+            margin-top: .5rem
+
+        .nav__element_container
+            font-weight: 700
+            cursor: pointer
+            margin-top: .5rem
+
+            &:first-child
+                margin-top: 0
+
+            .nav__element
+                position: relative
+                max-width: 10rem
+                transition: $transition
+
+                &::before
+                    content: ''
+                    position: absolute
+                    left: 0
+                    top: 50%
+                    transform: translate(0, -50%)
+                    width: 1.5rem
+                    height: .2rem
+                    background-color: #000
+                    opacity: 0
+                    visibility: hidden
+
+                .sub-menu
+                    position: absolute
+                    left: 20rem
+                    top: 0
+                    opacity: 0
+                    transition: $transition
+                    font-size: .9em
+                    font-weight: 500
+
+                .sub-menu.active
+                    left: calc(15rem + 10vw)
+                    opacity: 1
+                    z-index: 10
+
+
+        .nav__element_container.active
+            .nav__element
+                padding-left: 2.5rem
+
+                &::before
+                    opacity: 1
+                    visibility: visible
+                    animation: expandBefore $transition
+
+    .product__container_nav.active
+        @include flexContainer($justify-content: center, $align-items: flex-start, $flex-direction: column, $flex-wrap: nowrap)
+            
+    .edit_btn_container
+        display: flex
+        justify-content: flex-end
+        .edit_btn_container_inner
+            display: flex
+            flex-direction: column
+            align-items: flex-start
+
+            .edit-btn
+                @include btnSettings
+                margin-top: 7vh
+
+            .delete-section-btn
+                display: none
+                margin-top: 2vh
+                color: red
+
+// ==========================
+
+@keyframes expandBefore
+    0%
+        width: 0
+    100%
+        width: 1.5rem
+
+// ==========================
+
+@media screen and (min-width: 1441px)
+    .product__container_nav
+        margin-top: 4rem
+        +gridRepeat(repeat(2, 1fr))
+
+        .nav__element_container
+            font-size: calc(.5 * 2.5vw)
+
+@media screen and (min-width: 1025px) and (max-width: 1440px)
+    .product__container_nav
+        margin-top: 4rem
+        +gridRepeat(repeat(3, 1fr))
+
+        .nav__element_container
+            font-size: calc(.5 * 3vw)
+
+@media screen and (min-width: 769px) and (max-width: 1024px)
+    .product__container_nav
+        margin-top: 3rem
+        +gridRepeat(repeat(3, 1fr))
+
+        .nav__element_container
+            font-size: calc(.5 * 3.5vw)
+
+@media screen and (min-width: 426px) and (max-width: 768px)
+    .product__container_nav
+        margin-top: 3rem
+        +gridRepeat(repeat(2, 1fr))
+
+        .nav__element_container
+            font-size: calc(.5 * 4.5vw)
+
+@media screen and (max-width: 426px)
+    .product__container_nav
+        margin-top: 3rem
+        +gridRepeat(1fr)
+
+        .nav__element_container
+            font-size: calc(.5 * 6vw)
+
+            .sub-menu.active
+                left: 15rem

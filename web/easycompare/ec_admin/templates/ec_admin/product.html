@@ -2,9 +2,14 @@
 {% load static %}
 
 {% block content %}
-<form>
+<form enctype="multipart/form-data">
     <fieldset>
         <legend>Добавить товар</legend>
+        <div class="form-group">
+            <label for="preview">Загрузить превью товара:</label>
+            <input type="file" class="form-control-file" id="preview">
+            <div id="preview-image-container"></div>
+        </div>
         <div class="form-group">
             <label for="product-name">Название товара:</label>
             <input type="text" id="product-name" class="form-control">
@@ -35,4 +40,5 @@
 
 {% block script %}
 <script type="text/javascript" src="{% static 'ec_admin/js/productAttributesList.js' %}"></script>
+<script type="text/javascript" src="{% static 'ec_admin/js/uploadProductPreview.js' %}"></script>
 {% endblock %}
