@@ -38,4 +38,6 @@ function openPopup () {
     document.querySelector('.filter-name').value = '';
     document.querySelector('.filter-value').value = '';
   }
+
+  // function save()
 }

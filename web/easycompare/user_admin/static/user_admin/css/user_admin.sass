@@ -126,17 +126,41 @@ header
         .nav__inner_container
             margin-top: .5rem
 
-        .nav__element_container
+        .section__container.active
+            .section-name
+                padding-left: 2.5rem
+
+                &::before
+                    opacity: 1
+                    visibility: visible
+                    animation: expandBefore $transition
+
+            .section-delete-btn
+
+
+        .section__container
             font-weight: 700
             cursor: pointer
             margin-top: .5rem
+            position: relative
+
+            .section-delete-btn
+                display: none
+                z-index: 100
+                position: absolute
+                top: 0
+                left: calc(100% + 1.5em)
+                background-color: red
+                width: 1em
+                height: 1em
+
 
             &:first-child
                 margin-top: 0
 
-            .nav__element
+            .section-name
                 position: relative
-                max-width: 10rem
+                max-width: max-content
                 transition: $transition
 
                 &::before
@@ -151,7 +175,7 @@ header
                     opacity: 0
                     visibility: hidden
 
-                .sub-menu
+                .section-sub-menu
                     position: absolute
                     left: 20rem
                     top: 0
@@ -160,20 +184,10 @@ header
                     font-size: .9em
                     font-weight: 500
 
-                .sub-menu.active
+                .section-sub-menu.active
                     left: calc(15rem + 10vw)
                     opacity: 1
                     z-index: 10
-
-
-        .nav__element_container.active
-            .nav__element
-                padding-left: 2.5rem
-
-                &::before
-                    opacity: 1
-                    visibility: visible
-                    animation: expandBefore $transition
 
     .product__container_nav.active
         @include flexContainer($justify-content: center, $align-items: flex-start, $flex-direction: column, $flex-wrap: nowrap)
@@ -190,7 +204,8 @@ header
                 @include btnSettings
                 margin-top: 7vh
 
-            .delete-section-btn
+            .sections-delete-btn
+                font-weight: 600
                 display: none
                 margin-top: 2vh
                 color: red
@@ -210,7 +225,7 @@ header
         margin-top: 4rem
         +gridRepeat(repeat(2, 1fr))
 
-        .nav__element_container
+        .section__container
             font-size: calc(.5 * 2.5vw)
 
 @media screen and (min-width: 1025px) and (max-width: 1440px)
@@ -218,7 +233,7 @@ header
         margin-top: 4rem
         +gridRepeat(repeat(3, 1fr))
 
-        .nav__element_container
+        .section__container
             font-size: calc(.5 * 3vw)
 
 @media screen and (min-width: 769px) and (max-width: 1024px)
@@ -226,7 +241,7 @@ header
         margin-top: 3rem
         +gridRepeat(repeat(3, 1fr))
 
-        .nav__element_container
+        .section__container
             font-size: calc(.5 * 3.5vw)
 
 @media screen and (min-width: 426px) and (max-width: 768px)
@@ -234,7 +249,7 @@ header
         margin-top: 3rem
         +gridRepeat(repeat(2, 1fr))
 
-        .nav__element_container
+        .section__container
             font-size: calc(.5 * 4.5vw)
 
 @media screen and (max-width: 426px)
@@ -242,8 +257,8 @@ header
         margin-top: 3rem
         +gridRepeat(1fr)
 
-        .nav__element_container
+        .section__container
             font-size: calc(.5 * 6vw)
 
-            .sub-menu.active
+            .section-sub-menu.active
                 left: 15rem
