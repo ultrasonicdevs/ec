@@ -1,15 +1,17 @@
 class Filter extends Block {
     checkPrice(inputs, productJSON) {
         let productsArray = [];
-        productJSON.forEach(product =>{
+        productJSON.products.forEach(product =>{
             product.attributes.forEach(attribute => {
                 if (attribute.verbose_name === 'price') {
-                    if (Number(attribute.value) > inputs[0] && Number(attribute.value) < inputs[1]){
+                    console.log(inputs)
+                    if (Number(attribute.value) >= inputs[0] && Number(attribute.value) <= inputs[1]){
                         productsArray.push(product);
                     }
                 }
             });
         });
+        console.log({'products': productsArray});
         new Filter().displayCards({'products': productsArray});
     }
 
@@ -33,14 +35,13 @@ class Filter extends Block {
         });
         range.noUiSlider.on('update', function (values, handle) {
             inputs[handle].value = parseInt(values[handle]);
+            new Filter().checkPrice([Number(inputMin.value), Number(inputMax.value)], productsJSON);
         });
         inputMin.addEventListener('change', function () {
             range.noUiSlider.set([this.value, null]);
-            new Filter().checkPrice(productsJSON);
         });
         inputMax.addEventListener('change', function () {
             range.noUiSlider.set([null, this.value]);
-            new Filter().checkPrice(productsJSON);
         });
     }
 
@@ -51,12 +52,20 @@ class Filter extends Block {
             productsJSON = await new Filter().getJSON(`${location.protocol}//${location.host}/api/product-types/${typeID}products/`, "GET", null);
         document.title = `${typeInfo.name} | Easy Compare`;
         console.log(productsJSON);
-        new Filter().displayCards(productsJSON);
+        let priceList = []
+        productsJSON.products.forEach(product => {
+           product.attributes.forEach(attribute => {
+               if (attribute.verbose_name === 'price') {
+                    priceList.push(Number(attribute.value));
+                }
+           })
+        });
+        new Filter().rangeSliderInit(priceList, productsJSON);
     }
 
 
     displayCards(productsJSON) {
-        let priceList = [];
+        // let priceList = [];
         const productsContainer = document.querySelector('#products');
         productsContainer.innerHTML = ''
         productsJSON.products.forEach(product => {
@@ -91,15 +100,14 @@ class Filter extends Block {
             product.attributes.forEach(attribute => {
                 if (attribute.verbose_name === 'price') {
                     price.appendChild(document.createTextNode(attribute.value));
-                    priceList.push(Number(attribute.value));
+                    // priceList.push(Number(attribute.value));
                 }
                 if (attribute.verbose_name === 'manufacturer') {
                     manufacturer.appendChild(document.createTextNode(attribute.value));
                 }
             });
         });
-        console.log(priceList);
-        new Filter().rangeSliderInit(priceList, productsJSON);
+        // console.log(priceList);
     }
 }
 
