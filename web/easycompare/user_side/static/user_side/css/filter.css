@@ -7,7 +7,7 @@ aside .selected-filters {
   font-weight: 500;
   text-decoration: none; }
 
-.parameter {
+.characteristic {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -15,7 +15,7 @@ aside .selected-filters {
   flex-wrap: nowrap;
   margin: 3rem 0;
   width: 100%; }
-  .parameter .value {
+  .characteristic .value {
     width: 100%;
     margin: 0.5rem 0;
     display: flex;
@@ -23,7 +23,7 @@ aside .selected-filters {
     align-items: flex-start;
     flex-direction: row;
     flex-wrap: nowrap; }
-  .parameter label {
+  .characteristic label {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;

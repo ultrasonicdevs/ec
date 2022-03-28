@@ -1,17 +1,58 @@
 class Filter extends Block {
+    displayCards(productsJSON) {
+        const productsContainer = document.querySelector('#products');
+        productsContainer.innerHTML = ''
+        productsJSON.products.forEach(product => {
+            const link = document.createElement('a'),
+                cardContainer = document.createElement('div'),
+                image = document.createElement('img'),
+                description = document.createElement('div'),
+                manufacturer = document.createElement('h5'),
+                name = document.createElement('h4'),
+                price = document.createElement('h5');
+
+            link.href = `${document.URL}${product._id}`;
+            cardContainer.className = 'container';
+            image.className = 'product-image';
+            image.src = product.preview_url;
+            description.className = 'description';
+            manufacturer.className = 'manufacturer';
+            // manufacturer.appendChild(document.createTextNode(product.manufacturer));
+            name.className = 'product-name';
+            name.appendChild(document.createTextNode(product.name));
+            price.className = 'price';
+            // price.appendChild(document.createTextNode(product.price));
+            cardContainer.appendChild(image);
+            cardContainer.appendChild(description);
+            description.appendChild(manufacturer);
+            description.appendChild(name);
+            description.appendChild(price);
+            link.appendChild(cardContainer)
+            productsContainer.appendChild(link);
+
+            product.attributes.forEach(attribute => {
+                if (attribute.verbose_name === 'price') {
+                    price.appendChild(document.createTextNode(attribute.value));
+                }
+                if (attribute.verbose_name === 'manufacturer') {
+                    manufacturer.appendChild(document.createTextNode(attribute.value));
+                }
+            });
+        });
+    }
+
+
     checkPrice(inputs, productJSON) {
         let productsArray = [];
         productJSON.products.forEach(product =>{
             product.attributes.forEach(attribute => {
                 if (attribute.verbose_name === 'price') {
-                    console.log(inputs)
                     if (Number(attribute.value) >= inputs[0] && Number(attribute.value) <= inputs[1]){
                         productsArray.push(product);
                     }
                 }
             });
         });
-        console.log({'products': productsArray});
         new Filter().displayCards({'products': productsArray});
     }
 
@@ -50,64 +91,74 @@ class Filter extends Block {
         const typeID = document.URL.replace(`${location.protocol}//${location.host}/`, ''),
             typeInfo = await new Filter().getJSON(`${location.protocol}//${location.host}/api/product-types/${typeID}`, "GET", null),
             productsJSON = await new Filter().getJSON(`${location.protocol}//${location.host}/api/product-types/${typeID}products/`, "GET", null);
+
+        const container = document.querySelector('#characteristics');
+
         document.title = `${typeInfo.name} | Easy Compare`;
         console.log(productsJSON);
-        let priceList = []
-        productsJSON.products.forEach(product => {
-           product.attributes.forEach(attribute => {
-               if (attribute.verbose_name === 'price') {
-                    priceList.push(Number(attribute.value));
-                }
-           })
+        console.log(typeInfo);
+
+        // generate product attributes
+        typeInfo.attributes.forEach(attribute => {
+            const attr = document.createElement('div'),
+                title = document.createElement('h4'),
+                values = document.createElement('div');
+
+            attr.className = 'characteristic';
+            attr.appendChild(title);
+            title.style.margin = '1rem 0';
+            container.appendChild(attr);
+            title.appendChild(document.createTextNode(attribute.verbose_name));
+
+            if (attribute.verbose_name !== 'price') {
+                const value = document.createElement('h5'),
+                    count = document.createElement('h5');
+                    attr.appendChild(values);
+                    values.className = 'values';
+
+                values.appendChild(value);
+                values.appendChild(count);
+            //    TODO: generate products attributes values & counts
+            }
+            else {
+                const slider = document.createElement('div'),
+                    label = document.createElement('label'),
+                    inputMin = document.createElement('input'),
+                    h5 = document.createElement('h5'),
+                    inputMax = document.createElement('input');
+
+                slider.id = 'slider-round';
+                label.htmlFor = 'price';
+                h5.appendChild(document.createTextNode('-'));
+                inputMin.name = 'min-price';
+                inputMin.type = 'number';
+                inputMin.placeholder = inputMin.name;
+                inputMin.id = 'min';
+
+                inputMax.name = 'max-price';
+                inputMax.type = 'number';
+                inputMax.placeholder = inputMin.name;
+                inputMax.id = 'max';
+
+                attr.appendChild(slider);
+                attr.appendChild(label);
+                label.appendChild(inputMin);
+                label.appendChild(h5);
+                label.appendChild(inputMax);
+            }
         });
-        new Filter().rangeSliderInit(priceList, productsJSON);
-    }
 
-
-    displayCards(productsJSON) {
-        // let priceList = [];
-        const productsContainer = document.querySelector('#products');
-        productsContainer.innerHTML = ''
+        // get prises for price filter
+        let priceList = [];
         productsJSON.products.forEach(product => {
-            console.log(product.preview_url)
-            const link = document.createElement('a'),
-                cardContainer = document.createElement('div'),
-                image = document.createElement('img'),
-                description = document.createElement('div'),
-                manufacturer = document.createElement('h5'),
-                name = document.createElement('h4'),
-                price = document.createElement('h5');
-
-            link.href = `${document.URL}${product._id}`;
-            cardContainer.className = 'container';
-            image.className = 'product-image';
-            image.src = product.preview_url;
-            description.className = 'description';
-            manufacturer.className = 'manufacturer';
-            // manufacturer.appendChild(document.createTextNode(product.manufacturer))
-            name.className = 'product-name';
-            name.appendChild(document.createTextNode(product.name));
-            price.className = 'price';
-            // price.appendChild(document.createTextNode(product.price));
-            cardContainer.appendChild(image);
-            cardContainer.appendChild(description);
-            description.appendChild(manufacturer);
-            description.appendChild(name);
-            description.appendChild(price);
-            link.appendChild(cardContainer)
-            productsContainer.appendChild(link);
-
+            // priceList.push(product.price);
             product.attributes.forEach(attribute => {
                 if (attribute.verbose_name === 'price') {
-                    price.appendChild(document.createTextNode(attribute.value));
-                    // priceList.push(Number(attribute.value));
-                }
-                if (attribute.verbose_name === 'manufacturer') {
-                    manufacturer.appendChild(document.createTextNode(attribute.value));
+                    priceList.push(Number(attribute.value));
                 }
             });
         });
-        // console.log(priceList);
+        new Filter().rangeSliderInit(priceList, productsJSON);
     }
 }
 
