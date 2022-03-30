@@ -14,6 +14,21 @@ aside .selected-filters {
   flex-direction: column;
   flex-wrap: nowrap;
   width: 100%; }
+  .characteristic ul {
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding: 0; }
+    .characteristic ul li {
+      margin: 0.2rem;
+      padding: 0;
+      font-size: 1rem;
+      font-weight: 400;
+      text-decoration: none;
+      color: #B0B0B0; }
   .characteristic .value {
     width: 100%;
     margin: 0.5rem 0;

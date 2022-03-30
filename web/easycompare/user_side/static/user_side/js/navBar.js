@@ -92,4 +92,4 @@ searchBtn.addEventListener('click', new navBar().sectionsDisplay);
 window.addEventListener('load', function () {
     const checkbox = document.querySelector('#form-btn');
     checkbox.checked = false;
-})
+});

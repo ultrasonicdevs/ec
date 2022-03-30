@@ -1,4 +1,8 @@
 class Filter extends Block {
+    constructor(filtersInfo) {
+        super();
+        this.filtersInfo = filtersInfo;
+    }
     displayCards(productsJSON) {
         const productsContainer = document.querySelector('#products');
         productsContainer.innerHTML = '';
@@ -86,7 +90,6 @@ class Filter extends Block {
         });
     }
 
-
     async getProducts() {
         const typeID = document.URL.replace(`${location.protocol}//${location.host}/`, ''),
             typeInfo = await new Filter().getJSON(`${location.protocol}//${location.host}/api/product-types/${typeID}`, "GET", null),
@@ -117,32 +120,40 @@ class Filter extends Block {
             attributes.push(attributeElem);
         });
 
-        let filtersInfo = {
+        this.filtersInfo = {
             'response': attributes
         };
-        console.log(filtersInfo);
+        console.log(this.filtersInfo);
 
 
-                // generate product attributes
+        // generate product attributes
         typeInfo.attributes.forEach(attribute => {
             const attr = document.createElement('div'),
                 title = document.createElement('h4'),
-                values = document.createElement('div');
+                values = document.createElement('ul');
 
             attr.className = 'characteristic';
             attr.appendChild(title);
+            attr.appendChild(values)
             title.style.padding = '.5rem 0 0 0';
             container.appendChild(attr);
             title.appendChild(document.createTextNode(attribute.verbose_name));
 
             if (attribute.verbose_name !== 'price') {
-                const value = document.createElement('h5'),
-                    count = document.createElement('h5');
-                    attr.appendChild(values);
-                    values.className = 'values';
+                title.addEventListener('click', function (event) {
+                    
+                    filtersInfo.response.forEach(attribute => {
+                    if (event.target.innerText === attribute.filter_group_name) {
+                        for (let value of attribute.attributes){
+                            const li = document.createElement('li');
+                            li.appendChild(document.createTextNode(value));
+                            values.appendChild(li);
+               }
 
-                values.appendChild(value);
-                values.appendChild(count);
+               console.log(attribute.filter_group_name, attribute.attributes);
+           }
+        });
+                });
             // TODO: generate products attributes values & counts
             }
             else {
