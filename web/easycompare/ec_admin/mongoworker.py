@@ -136,7 +136,7 @@ class JSONEncoder(json.JSONEncoder):
 def main():
     w = MongoWorker()
     w.get_sections()
-    print(w.get_section('6215397de5dcaa359fc84295'))
+    # print(w.get_section('6215397de5dcaa359fc84295'))
 
 if __name__ == '__main__':
     main()

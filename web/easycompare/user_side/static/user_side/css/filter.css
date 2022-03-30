@@ -13,7 +13,6 @@ aside .selected-filters {
   align-items: flex-start;
   flex-direction: column;
   flex-wrap: nowrap;
-  margin: 3rem 0;
   width: 100%; }
   .characteristic .value {
     width: 100%;

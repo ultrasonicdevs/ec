@@ -22,7 +22,7 @@ header {
   top: 0; }
 
 nav {
-  width: 73rem;
+  width: 77rem;
   height: 4rem;
   margin: 0 auto;
   z-index: 11;
@@ -34,7 +34,7 @@ nav {
   border-bottom: 1px solid #000; }
 
 main {
-  margin: 5rem auto 0 auto;
+  margin: 7rem auto 0 auto;
   width: 75rem; }
 
 aside {

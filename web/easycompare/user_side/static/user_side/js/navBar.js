@@ -52,7 +52,7 @@ class navBar extends Block {
 
     async sectionsDisplay() {
         if (document.getElementById('form-btn').checked === true) {
-            const sectionList = await new navBar().getJSON(`${location.protocol}//${location.host}/ec-admin/add-section/get-parent-sections/`, "GET", null);
+            const sectionList = await new navBar().getJSON(`${location.protocol}//${location.host}/api/sections/`, "GET", null);
             for (let section of sectionList.sections) {
                 let liSection = document.createElement('li');
                 liSection.className = 'section';

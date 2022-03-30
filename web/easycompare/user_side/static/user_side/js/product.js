@@ -1,7 +1,7 @@
 class Filter extends Block {
     displayCards(productsJSON) {
         const productsContainer = document.querySelector('#products');
-        productsContainer.innerHTML = ''
+        productsContainer.innerHTML = '';
         productsJSON.products.forEach(product => {
             const link = document.createElement('a'),
                 cardContainer = document.createElement('div'),
@@ -98,7 +98,32 @@ class Filter extends Block {
         console.log(productsJSON);
         console.log(typeInfo);
 
-        // generate product attributes
+
+        let attributes = [];
+        typeInfo.attributes.forEach(attribute => {
+            let attributeElem = {}
+            let values = [];
+            productsJSON.products.forEach(product => {
+                for (let attributeIndex in product.attributes) {
+                    if (attribute.verbose_name === product.attributes[attributeIndex].verbose_name) {
+                        values.push(product.attributes[attributeIndex].value);
+                    }
+                    attributeElem = {
+                        'filter_group_name': attribute.verbose_name,
+                        'attributes': [...new Set(values)]
+                    };
+                }
+            });
+            attributes.push(attributeElem);
+        });
+
+        let filtersInfo = {
+            'response': attributes
+        };
+        console.log(filtersInfo);
+
+
+                // generate product attributes
         typeInfo.attributes.forEach(attribute => {
             const attr = document.createElement('div'),
                 title = document.createElement('h4'),
@@ -106,7 +131,7 @@ class Filter extends Block {
 
             attr.className = 'characteristic';
             attr.appendChild(title);
-            title.style.margin = '1rem 0';
+            title.style.padding = '.5rem 0 0 0';
             container.appendChild(attr);
             title.appendChild(document.createTextNode(attribute.verbose_name));
 
@@ -118,7 +143,7 @@ class Filter extends Block {
 
                 values.appendChild(value);
                 values.appendChild(count);
-            //    TODO: generate products attributes values & counts
+            // TODO: generate products attributes values & counts
             }
             else {
                 const slider = document.createElement('div'),
@@ -128,6 +153,7 @@ class Filter extends Block {
                     inputMax = document.createElement('input');
 
                 slider.id = 'slider-round';
+                slider.style.marginTop = '2rem';
                 label.htmlFor = 'price';
                 h5.appendChild(document.createTextNode('-'));
                 inputMin.name = 'min-price';
@@ -150,6 +176,7 @@ class Filter extends Block {
 
         // get prises for price filter
         let priceList = [];
+
         productsJSON.products.forEach(product => {
             // priceList.push(product.price);
             product.attributes.forEach(attribute => {
