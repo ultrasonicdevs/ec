@@ -3,52 +3,53 @@
 <section class="popup__background">
   <div class="popup__container">
     <div class="popup__container_inner">
-      <input class="type-name" placeholder="Новый тип товара"></input>
-      <button class="close-btn close-popup-btn"><img src="{% static 'user_admin/img/cancel_menuBtn.svg' %}" alt=""></button>
+      <form id="productForm">
+        <input class="type-name" placeholder="Новый тип товара"></input>
+        <button class="close-btn close-popup-btn"><img src="{% static 'user_admin/img/cancel_menuBtn.svg' %}" alt=""></button>
 
-      <section class="filter__container">
-        <input class="filter-name" placeholder="Название фильтра"></input>
-        <button class="close-btn close-filter-btn"><img src="{% static 'user_admin/img/cancel_menuBtn.svg' %}" alt=""></button>
+        <section class="filter__container">
+          <input class="filter-name" placeholder="Название фильтра"></input>
+          <button class="close-btn close-filter-btn"><img src="{% static 'user_admin/img/cancel_menuBtn.svg' %}" alt=""></button>
 
-        <section class="filter__settings">
-          <h2>Настройка фильтра</h2>
+          <section class="filter__settings">
+            <h2>Настройка фильтра</h2>
 
-          <div class="filter-value-type__container">
-            <h3>Тип значения</h3>
-
-            <div class="filter-value-type">
-              <input class="radio-input" type="radio" id="number" name="type-value" value="newsletter" checked>
-              <label class="radio-label" for="number">Число</label>
+            <div class="filter-value-type__container">
+              <h3>Тип значения</h3>
+  
+              <div class="filter-value-type">
+                <input class="radio-input" type="radio" id="number" name="type-value" value="newsletter" checked>
+                <label class="radio-label" for="number">Число</label>
+              </div>
+  
+              <div class="filter-value-type">
+                <input class="radio-input" type="radio" id="string" name="type-value" value="newsletter">
+                <label class="radio-label" for="string">Строка</label>
+              </div>
+  
             </div>
-
-            <div class="filter-value-type">
-              <input class="radio-input" type="radio" id="string" name="type-value" value="newsletter">
-              <label class="radio-label" for="string">Строка</label>
+  
+            <div class="filter-value__container">
+              <h3>Значение фильтра</h3>
+              
+              <input type="text" class="filter-value">
+              <section class="examples-filter-values__container">
+                <!-- Подгрузка названий -->
+                <span>привет</span>
+                <span>пока</span>
+                <span>зачем</span>
+                <span>затем</span>
+              </section>
             </div>
-
-          </div>
-
-          <div class="filter-value__container">
-            <h3>Значение фильтра</h3>
-            
-            <input type="text" class="filter-value">
-            <section class="examples-filter-values__container">
-              <!-- Подгрузка названий -->
-              <span>привет</span>
-              <span>пока</span>
-              <span>зачем</span>
-              <span>затем</span>
-            </section>
-          </div>
+          </section>
 
         </section>
 
-      </section>
-
-      <div class="popup__buttons">
-        <button class="save-btn" disabled>Сохранить</button>
-        <button class="add-filter-btn">Добавить фильтр</button>
-      </div>
+        <div class="popup__buttons">
+          <button class="save-btn" disabled>Сохранить</button>
+          <button class="add-filter-btn">Добавить фильтр</button>
+        </div>
+      </form>
       
     </div>
   </div>

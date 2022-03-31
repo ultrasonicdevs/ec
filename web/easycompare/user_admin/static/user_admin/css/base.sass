@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700&display=swap')
+
+@mixin font
+    font-family: 'Inter', sans-serif
+
+$iconHeight: 2em
+$iconWidth: 2em
+$headerHeight: 4rem
+$contentTopMargin: $headerHeight 
+
+*
+    @include font
+    margin: 0
+    padding: 0
+    border: 0
+    box-sizing: border-box
+
+    ul
+        list-style: none
+
+    button
+        background-color: inherit
+        cursor: pointer
+
+body
+    position: fixed
+    width: 100%
+    height: 100%
+    padding-bottom: 5vw
+
+body::-webkit-scrollbar
+    width: 0
+
+
+@mixin center
+    max-width: 1200px
+    width: 100%
+    margin: 0 auto
+    padding: .7rem 1rem
+    
+@mixin flexContainer($justify-content, $align-items, $flex-direction, $flex-wrap)
+    display: flex
+    justify-content: $justify-content
+    align-items: $align-items
+    flex-direction: $flex-direction
+    flex-wrap: $flex-wrap
+
+header
+    position: fixed
+    top: 0
+    width: 100%
+    height: $headerHeight
+
+    .header__inner
+        @include center
+        @include flexContainer(space-between, center, row, nowrap)
+        border-bottom: 1px solid #000
+
+        .header__logo
+            font-weight: 700
+
+        .header__nav ul
+            @include flexContainer(start, center, row, nowrap)
+
+            .nav__button
+                margin-left: 5vw
+                cursor: pointer
+                height: $iconHeight
+                width: $iconWidth
+
+main
+    @include center
+    margin-top: $contentTopMargin

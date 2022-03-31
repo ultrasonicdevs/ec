@@ -19,12 +19,18 @@
 {% endblock %}
 
 {% block content %}
-  {% include 'user_admin/products.html' %}
+  {% include 'user_admin/sections.html' %}
   {% include 'user_admin/popup.html' %}
 {% endblock %}
 
 {% block scripts %}
-    <script src="{% static 'user_admin/js/user_admin.js' %}"></script>
+    <!-- <script src="{% static 'user_admin/js/user_admin.js' %}"></script> -->
     <script src="{% static 'user_admin/js/popup.js' %}"></script>
-    <script src="{% static 'user_admin/js/generateSections.js' %}"></script>
+    <!-- <script src="{% static 'user_admin/js/generateSections.js' %}"></script> -->
+
+    <script src="{% static 'user_admin/js/Block.js' %}"></script>
+    <script src="{% static 'user_admin/js/Section.js' %}"></script>
+    <script src="{% static 'user_admin/js/Product.js' %}"></script>
+    <script src="{% static 'user_admin/js/Generator.js' %}"></script>
+    <script src="{% static 'user_admin/js/sectionsPage.js' %}"></script>
 {% endblock %}

@@ -17,19 +17,25 @@ function openPopup () {
     });
   }
 
-  function openFilterField () {
+  function openFilterField (e) {
+    e.preventDefault();
     document.querySelector('.filter__container').classList.add('open');
     closeFilterContainer ();
   }
 
   function closeFilterContainer () {
     document.querySelector('.close-filter-btn').addEventListener('click', e => {
+      e.preventDefault();
       e.target.closest('.filter__container').classList.remove('open');
-    })
+    });
   }
 
-  function closePopup () {
+  function closePopup (e) {
+    e.preventDefault();
     document.querySelector('.popup__background').classList.remove('open');
+    document.querySelector('.type-name').removeEventListener('input', (e) => document.querySelector('.save-btn').disabled = !checkInputValueLength(e.target));
+    document.querySelector('.add-filter-btn').removeEventListener('click', openFilterField);
+    document.querySelector('.close-popup-btn').removeEventListener('click', closePopup);
     clearFields();
   }
   
@@ -37,7 +43,10 @@ function openPopup () {
     document.querySelector('.type-name').value = '';
     document.querySelector('.filter-name').value = '';
     document.querySelector('.filter-value').value = '';
+    saveProduct ();
   }
-
-  // function save()
+  // Сохранение товара
+  function saveProduct () {
+    const productForm = document.forms.productForm;
+  }
 }
