@@ -1,10 +1,4 @@
 class navBar extends Block {
-    //TODO: write changeProductTypes method
-    changeProductType() {
-
-    }
-
-
     async productTypesDisplay(event) {
         ulProductTypes.innerHTML = '';
         ulProductTypes.style.display = 'none';
@@ -27,7 +21,7 @@ class navBar extends Block {
         sectionAct.className = 'section act';
         const productTypesList = await new navBar().getJSON(`${location.protocol}//${location.host}/api/sections/${typeID}/product-types/`, "GET", null);
 
-        for (let productType of productTypesList.product_types) {
+        for (let productType of productTypesList.response) {
             let liProductType = document.createElement('li');
             liProductType.id = productType._id;
             let link = document.createElement('a');
@@ -44,16 +38,10 @@ class navBar extends Block {
     }
 
 
-    //TODO: write changeSections method
-    changeSections() {
-
-    }
-
-
     async sectionsDisplay() {
         if (document.getElementById('form-btn').checked === true) {
             const sectionList = await new navBar().getJSON(`${location.protocol}//${location.host}/api/sections/`, "GET", null);
-            for (let section of sectionList.sections) {
+            for (let section of sectionList.response) {
                 let liSection = document.createElement('li');
                 liSection.className = 'section';
                 liSection.id = section._id;
