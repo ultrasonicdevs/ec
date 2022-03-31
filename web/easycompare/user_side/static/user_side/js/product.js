@@ -102,26 +102,26 @@ class Filter extends Block {
         console.log(typeInfo);
 
 
-        let attributes = [];
+        let responseList = [];
         typeInfo.attributes.forEach(attribute => {
-            let attributeElem = {}
-            let values = [];
+            let filterGroup = {},
+                filterGroupAttributes = [];
             productsJSON.products.forEach(product => {
                 for (let attributeIndex in product.attributes) {
                     if (attribute.verbose_name === product.attributes[attributeIndex].verbose_name) {
-                        values.push(product.attributes[attributeIndex].value);
+                        filterGroupAttributes.push(product.attributes[attributeIndex].value);
                     }
-                    attributeElem = {
+                    filterGroup = {
                         'filter_group_name': attribute.verbose_name,
-                        'attributes': [...new Set(values)]
+                        'attributes': [...new Set(filterGroupAttributes)]
                     };
                 }
             });
-            attributes.push(attributeElem);
+            responseList.push(filterGroup);
         });
 
         this.filtersInfo = {
-            'response': attributes
+            'response': responseList
         };
         console.log(this.filtersInfo);
 
@@ -141,20 +141,20 @@ class Filter extends Block {
 
             if (attribute.verbose_name !== 'price') {
                 title.addEventListener('click', function (event) {
-                    
                     filtersInfo.response.forEach(attribute => {
-                    if (event.target.innerText === attribute.filter_group_name) {
-                        for (let value of attribute.attributes){
-                            const li = document.createElement('li');
-                            li.appendChild(document.createTextNode(value));
-                            values.appendChild(li);
-               }
+                        if (event.target.innerText === attribute.filter_group_name) {
+                            for (let value of attribute.attributes) {
+                                const li = document.createElement('li');
+                                li.appendChild(document.createTextNode(value));
+                                values.appendChild(li);
+                                li.addEventListener('click', function () {
+                                });
+                            }
 
-               console.log(attribute.filter_group_name, attribute.attributes);
-           }
-        });
+                            console.log(attribute.filter_group_name, attribute.attributes);
+                        }
+                    });
                 });
-            // TODO: generate products attributes values & counts
             }
             else {
                 const slider = document.createElement('div'),
