@@ -1,4 +1,6 @@
 const productNameInput = document.getElementById('product-name');
+const productPriceInput = document.getElementById('product-price');
+const productManufacturerInput = document.getElementById('product-manufacturer');
 const productTypeSelect = document.getElementById('product-type');
 const productAttributesUl = document.getElementById('product-attributes');
 const submitProductButton = document.getElementById('submit-product');
@@ -63,9 +65,13 @@ function submitProduct(e) {
     let attributeInputsArray = Array.from(attributeInputsHtmlCollection);
     let productType = productTypeSelect.value;
     let productName = productNameInput.value;
+    let productManufacturer = productManufacturerInput.value;
+    let productPrice = productPriceInput.value;
     let productJson = {
         'name': productName,
         'type': productType,
+        'price': productPrice,
+        'manufacturer': productManufacturer,
         'preview_url': previewImageUrl,
         'attributes': [],
     }

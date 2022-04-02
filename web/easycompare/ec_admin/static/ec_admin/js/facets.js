@@ -53,6 +53,8 @@ function createProductCards(e){
                 const productName = document.createElement('h1');
     
                 productPreview.src = product.preview_url;
+                productPreview.width = 250;
+                productPreview.height = 250;
                 productName.innerHTML = product.name;
 
                 productCard.appendChild(productPreview);
