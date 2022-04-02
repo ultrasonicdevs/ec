@@ -47,7 +47,7 @@ function createProductCards(e){
         let requestCompleted = (xhr.readyState === DONE) && (xhr.status === SUCCESS);
         if (requestCompleted) {
             console.log(JSON.parse(xhr.response));
-            JSON.parse(xhr.response).products.forEach(product => {
+            JSON.parse(xhr.response).response.forEach(product => {
                 const productCard = document.createElement('div');
                 const productPreview = document.createElement('img');
                 const productName = document.createElement('h1');

@@ -17,7 +17,7 @@ def product(request):
     worker = MongoWorker()
     context = {
         'active_nav': 'add_product',
-        'types': worker.get_product_types()['product_types']
+        'types': worker.get_product_types()['response']
         }
     return render(request, 'ec_admin/product.html', context)
 

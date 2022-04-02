@@ -22,7 +22,7 @@ function sendSectionJsonToServer(e) {
         let requestCompleted = (xhr.readyState === DONE) && (xhr.status === SUCCESS);
         if (requestCompleted) {
             responseJson = JSON.parse(xhr.response);
-            alert(responseJson.message);
+            alert(responseJson.response);
         }
     };
 
@@ -65,10 +65,10 @@ function createParentSectionsSelect(){
         let requestCompleted = (xhr.readyState === DONE) && (xhr.status === SUCCESS);
         if (requestCompleted) {
             responseJson = JSON.parse(xhr.response);
-            responseJson.sections.forEach(section => {
+            responseJson.response.forEach(section => {
                 const parentSectionOption = document.createElement('option');
                 parentSectionOption.innerText = section.name;
-                parentSectionOption.value = section._id;
+                parentSectionOption.value = section.id;
                 productTypeSelect.appendChild(parentSectionOption);
             });
         }

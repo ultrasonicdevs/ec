@@ -26,7 +26,7 @@ function renderProductAttributesUl(e) {
         if (requestCompleted) {
             document.getElementById('product-attributes').innerHTML = '';
             responseJson = JSON.parse(xhr.response);
-            responseJson.attributes.forEach(attribute => {
+            responseJson.response.forEach(attribute => {
                 const attributeDiv = document.createElement('div');
                 attributeDiv.classList = ['form-group', 'row'];
 
