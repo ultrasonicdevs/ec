@@ -49,6 +49,11 @@ def product_type_detail(request, type_id):
     elif request.is_ajax and request.method == "DELETE":
         return JsonResponse(worker.delete_product_type(type_id))
 
+def product_type_filters(request, type_id):
+    worker = MongoWorker()
+    if request.is_ajax and request.method == "GET":
+        return JsonResponse(worker.get_product_type_filters(type_id))
+
 def product_detail(request, product_id):
     worker = MongoWorker()
     if request.is_ajax and request.method == "GET":

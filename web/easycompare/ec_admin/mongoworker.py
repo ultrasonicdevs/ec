@@ -42,6 +42,30 @@ class MongoWorker:
                 'response': 'section doesnt exist. wrong id?',
             }
 
+    def get_product_type_filters(self, type_id):
+        query = self.products_coll.aggregate([
+        {
+            '$match': { 'type': str(type_id)}
+        },
+
+        {
+            '$unwind': '$attributes'
+        },
+
+        {
+            '$group': { '_id': '$attributes.verbose_name', 'attributes': { '$addToSet': '$attributes.value' } }
+        },
+
+        {
+            '$project': {'_id': 0, 'filter_group_name': '$_id', 'attributes': 1}
+        },
+        ])
+
+        return {
+                'status': 'ok',
+                'response': list(query),
+            }
+
     def get_sections(self):
         sections_list = []
         sections_coll = MongoWorker.db['sections']
