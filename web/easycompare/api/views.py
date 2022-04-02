@@ -16,6 +16,8 @@ def sections(request):
     elif request.is_ajax and request.method == "POST":
         section_json = json.loads(request.body)
         return JsonResponse(worker.insert_section(section_json))
+    elif request.is_ajax and request.method == "DELETE":
+        return JsonResponse(worker.delete_all_sections())
 
 def section_detail(request, section_id):
     worker = MongoWorker()
