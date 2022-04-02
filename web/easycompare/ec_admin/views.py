@@ -68,4 +68,9 @@ def get_parent_sections(request):
         return JsonResponse(worker.get_sections())
 
 def facets(request):
-    return render(request, 'ec_admin/facets.html', {'active_nav': 'facets'})
+    worker = MongoWorker()
+    context = {
+        'active_nav': 'facets',
+        'types': worker.get_product_types()['response']
+        }
+    return render(request, 'ec_admin/facets.html', context)

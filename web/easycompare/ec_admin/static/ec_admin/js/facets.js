@@ -4,27 +4,67 @@ const filterGroupsUl = document.getElementById('filter-groups');
 const submitFiltersBtn = document.getElementById('submit-filters');
 
 document.addEventListener('DOMContentLoaded', createProductCards);
-productTypeSelect.addEventListener('click', createFilterPanel);
-submitFiltersBtn.addEventListener('click', createProductCards);
+productTypeSelect.addEventListener('change', createFilterPanel);
+submitFiltersBtn.addEventListener('click', showFaceted);
+
+function showFaceted(e){
+    var checkboxes = Array.from(document.querySelectorAll('input[type=checkbox]:checked'));
+    let filterGroupNames = [...new Set(checkboxes.map(checkbox => checkbox.dataset.groupName))];
+    console.log(filterGroupNames);
+    let selectedFilters = []
+    filterGroupNames.forEach((filterGroupName, fgnIndex) => {
+        selectedFilters.push({
+            'filter_group_name': filterGroupName,
+            'attributes': [],
+        })
+        
+        checkboxes.forEach(checkbox => {
+            if (filterGroupName == checkbox.dataset.groupName) {
+                selectedFilters[fgnIndex].attributes.push(checkbox.value);
+            }
+        })
+    })
+    console.log(selectedFilters);
+}
 
 function createFilterPanel(e){
     const csrftoken = getCookieByName('csrftoken');
 
     let xhr = new XMLHttpRequest();
-    let url = 'get-filters';
+    let url = `${location.protocol}/api/product-types/${productTypeSelect.value}/filters/`;
 
     xhr.open('GET', url, true);
 
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('X-CSRFToken', csrftoken);
-    xhr.setRequestHeader('Product-Type-Id', productTypeSelectItem.value)
     
     xhr.onload = function () {
         const DONE = 4;
         const SUCCESS = 200;
         let requestCompleted = (xhr.readyState === DONE) && (xhr.status === SUCCESS);
         if (requestCompleted) {
-
+            filterGroupsUl.innerHTML = '';
+            responseJson = JSON.parse(xhr.response);
+            responseJson.response.forEach(filterGroup => {
+                const filterGroupFieldset = document.createElement('fieldset');
+                const filterGroupFiltersDiv = document.createElement('div');
+                const filterGroupName = document.createElement('legend');
+                filterGroupName.innerHTML = filterGroup.filter_group_name;
+                filterGroupsUl.appendChild(filterGroupFieldset);
+                filterGroupFieldset.appendChild(filterGroupName);
+                filterGroupFieldset.appendChild(filterGroupFiltersDiv);
+                filterGroup.attributes.forEach(attribute => {
+                    const filterLabel = document.createElement('label');
+                    const filter = document.createElement('input');
+                    filter.type = 'checkbox';
+                    filter.name = filterGroupName.innerHTML;
+                    filter.value = attribute;
+                    filter.dataset.groupName = filterGroupName.innerHTML;
+                    filterLabel.innerHTML = attribute;
+                    filterGroupFiltersDiv.appendChild(filterLabel);
+                    filterLabel.appendChild(filter);
+                })
+            })
         }
     };
     xhr.send();
