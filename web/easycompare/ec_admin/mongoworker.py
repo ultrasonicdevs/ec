@@ -164,8 +164,162 @@ class MongoWorker:
         }
 
     def delete_image_by_name(self, image_name):
+        if default_storage.exists(image_name):
         default_storage.delete(image_name)
-        return image_name
+            return {
+                'status': 'ok',
+                'response': 'deleted ' + str(image_name) + ' image',
+            }
+        else:
+            return {
+                'status': 'error',
+                'response': 'image with name ' + str(image_name) + ' do not exist',
+            }
+
+    def delete_all_sections(self):
+        documents_amount = self.sections_coll.estimated_document_count()
+        if documents_amount == 0:
+            return {
+                'status': 'error',
+                'response': 'sections collection is already empty',
+            }
+
+        query = self.sections_coll.delete_many({})
+
+        if query.deleted_count == documents_amount and self.delete_all_products()['status'] == 'ok' \
+            and self.delete_all_product_types()['status'] == 'ok':
+            return {
+                'status': 'ok',
+                'response': 'successfully deleted ' + str(documents_amount) + ' product types',
+            }
+        else:
+            return {
+                'status': 'error',
+                'response': 'product types amount before deletion didnt match deleted products count',
+            }
+
+    def delete_product_type(self, type_id):
+        query = self.product_types_coll.delete_one({
+            '_id': ObjectId(type_id)
+        })
+
+        if query.deleted_count == 1 and self.delete_products_of_certain_type(type_id)['status'] == 'ok':
+            return {
+                'status': 'ok',
+                'response': 'deleted ' + type_id + ' product type and all of its products',
+            }
+        else:
+            return {
+                'status': 'error',
+                'response': 'product type already deleted or it doesnt have any products',
+            }
+
+
+    def delete_all_product_types(self):
+        documents_amount = self.product_types_coll.estimated_document_count()
+        if documents_amount == 0:
+            return {
+                'status': 'error',
+                'response': 'product_types collection is already empty',
+            }
+
+        query = self.product_types_coll.delete_many({})
+
+        if query.deleted_count == documents_amount and self.delete_all_products()['status'] == 'ok':
+            return {
+                'status': 'ok',
+                'response': 'successfully deleted ' + str(documents_amount) + ' product types',
+            }
+        else:
+            return {
+                'status': 'error',
+                'response': 'product types amount before deletion didnt match deleted products count',
+            }
+
+    def delete_all_products(self):
+        documents_amount = self.products_coll.estimated_document_count()
+        if documents_amount == 0:
+            return {
+                'status': 'error',
+                'response': 'products collection is already empty',
+            }
+        
+        query = self.products_coll.delete_many({})
+
+        if query.deleted_count == documents_amount:
+            return {
+                'status': 'ok',
+                'response': 'successfully deleted ' + str(documents_amount) + ' products',
+            }
+        else:
+            return {
+                'status': 'error',
+                'response': 'products amount before deletion didnt match deleted products count',
+            }
+
+    def delete_product_by_id(self, product_id):
+        query = self.products_coll.delete_one({
+            '_id': ObjectId(product_id),
+        })
+
+        if query.deleted_count == 1:
+            return {
+                'status': 'ok',
+                'response': 'successfully deleted product with id ' + str(product_id),
+            }
+        else:
+            return {
+                'status': 'error',
+                'response': 'product is not deleted. maybe wrong id?',
+            }
+
+    def delete_products_of_certain_type(self, type_id):
+        query = self.products_coll.delete_many({
+            'type': type_id,
+        })
+
+        if query.deleted_count:
+            return {
+                'status': 'ok',
+                'response': 'successfully deleted ' + str(query.deleted_count) + ' documents',
+            }
+        else:
+            return {
+                'status': 'error',
+                'response': 'wrong type id or all documents are already deleted',
+            }
+
+    def delete_all_product_types_inside_section(self, section_id):
+        query = self.product_types_coll.delete_many({
+            'section': section_id,
+        })
+
+        if query.deleted_count:
+            return {
+                'status': 'ok',
+                'response': 'successfully deleted ' + str(query.deleted_count) + ' documents',
+            }
+        else:
+            return {
+                'status': 'error',
+                'response': 'wrong section id or all documents are already deleted',
+            }
+
+    def delete_section(self, section_id):
+        query = self.sections_coll.delete_one({
+            '_id': ObjectId(section_id),
+        })
+
+        if query.deleted_count == 1:
+            return {
+                'status': 'ok',
+                'response': 'successfully deleted section with id ' + str(section_id),
+            }
+        else:
+            return {
+                'status': 'error',
+                'response': 'section is not deleted. maybe wrong id?',
+            }
 
 
 class JSONEncoder(json.JSONEncoder):
