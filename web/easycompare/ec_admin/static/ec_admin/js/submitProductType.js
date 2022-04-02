@@ -60,7 +60,7 @@ function createTypeSectionsSelect(){
     const csrftoken = getCookieByName('csrftoken');
 
     let xhr = new XMLHttpRequest();
-    let url = 'get-parent-sections/';
+    let url =`${location.protocol}/api/sections/`;
 
     xhr.open('GET', url, true);
 
@@ -73,10 +73,10 @@ function createTypeSectionsSelect(){
         let requestCompleted = (xhr.readyState === DONE) && (xhr.status === SUCCESS);
         if (requestCompleted) {
             responseJson = JSON.parse(xhr.response);
-            responseJson.sections.forEach(section => {
+            responseJson.response.forEach(section => {
                 const typeSectionOption = document.createElement('option');
                 typeSectionOption.innerText = section.name;
-                typeSectionOption.value = section._id;
+                typeSectionOption.value = section.id;
                 typeSectionSelect.appendChild(typeSectionOption);
             });
         }
