@@ -1,4 +1,5 @@
 from concurrent.futures.thread import _worker
+import json
 from typing import Type
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
@@ -12,6 +13,9 @@ def sections(request):
     worker = MongoWorker()
     if request.is_ajax and request.method == "GET":
         return JsonResponse(worker.get_sections())
+    elif request.is_ajax and request.method == "POST":
+        section_json = json.loads(request.body)
+        return JsonResponse(worker.insert_section(section_json))
 
 def section_detail(request, section_id):
     worker = MongoWorker()
@@ -27,6 +31,9 @@ def product_types(request):
     worker = MongoWorker()
     if request.is_ajax and request.method == "GET":
         return JsonResponse(worker.get_product_types())
+    elif request.is_ajax and request.method == "POST":
+        product_type_json = json.loads(request.body)
+        return JsonResponse(worker.insert_product_type(product_type_json))
 
 def product_type_detail(request, type_id):
     worker = MongoWorker()
