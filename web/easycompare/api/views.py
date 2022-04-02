@@ -16,16 +16,6 @@ def sections(request):
     elif request.is_ajax and request.method == "DELETE":
         return JsonResponse(worker.delete_all_sections())
 
-def section_detail(request, section_id):
-    worker = MongoWorker()
-    if request.is_ajax and request.method == "GET":
-        return JsonResponse(worker.get_section(section_id))
-
-def section_product_types(request, section_id):
-    worker = MongoWorker()
-    if request.is_ajax and request.method == "GET":
-        return JsonResponse(worker.get_section_product_types(section_id))
-
 def product_types(request):
     worker = MongoWorker()
     if request.is_ajax and request.method == "GET":
@@ -33,26 +23,52 @@ def product_types(request):
     elif request.is_ajax and request.method == "POST":
         product_type_json = json.loads(request.body)
         return JsonResponse(worker.insert_product_type(product_type_json))
-
-def product_type_detail(request, type_id):
-    worker = MongoWorker()
-    if request.is_ajax and request.method == "GET":
-        return JsonResponse(worker.get_product_type(type_id))
-
-def products_of_certain_type(request, type_id):
-    worker = MongoWorker()
-    if request.is_ajax and request.method == "GET":
-        return JsonResponse(worker.get_products_of_certain_type(type_id))
+    elif request.is_ajax and request.method == "DELETE":
+        return JsonResponse(worker.delete_all_product_types())
 
 def products(request):
     worker = MongoWorker()
     if request.is_ajax and request.method == "GET":
         return JsonResponse(worker.get_products())
+    elif request.is_ajax and request.method == "POST":
+        return JsonResponse(worker.insert_product(json.loads(request.body)))
+    elif request.is_ajax and request.method == "DELETE":
+        return JsonResponse(worker.delete_all_products())
+
+def section_detail(request, section_id):
+    worker = MongoWorker()
+    if request.is_ajax and request.method == "GET":
+        return JsonResponse(worker.get_section(section_id))
+    elif request.is_ajax and request.method == "DELETE":
+        return JsonResponse(worker.delete_section(section_id))
+
+def product_type_detail(request, type_id):
+    worker = MongoWorker()
+    if request.is_ajax and request.method == "GET":
+        return JsonResponse(worker.get_product_type(type_id))
+    elif request.is_ajax and request.method == "DELETE":
+        return JsonResponse(worker.delete_product_type(type_id))
 
 def product_detail(request, product_id):
     worker = MongoWorker()
     if request.is_ajax and request.method == "GET":
         return JsonResponse(worker.get_product(product_id))
+    elif request.is_ajax and request.method == "DELETE":
+        return JsonResponse(worker.delete_product_by_id(product_id))
+
+def section_product_types(request, section_id):
+    worker = MongoWorker()
+    if request.is_ajax and request.method == "GET":
+        return JsonResponse(worker.get_section_product_types(section_id))
+    elif request.is_ajax and request.method == "DELETE":
+        return JsonResponse(worker.delete_all_product_types_inside_section(section_id))
+
+def products_of_certain_type(request, type_id):
+    worker = MongoWorker()
+    if request.is_ajax and request.method == "GET":
+        return JsonResponse(worker.get_products_of_certain_type(type_id))
+    elif request.is_ajax and request.method == "DELETE":
+        return JsonResponse(worker.delete_products_of_certain_type(type_id))
 
 def images(request):
     worker = MongoWorker()
