@@ -1,8 +1,5 @@
-from concurrent.futures.thread import _worker
 import json
-from typing import Type
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
 from ec_admin.mongoworker import MongoWorker
 
 #TODO: Make all CBV
