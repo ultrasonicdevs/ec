@@ -42,6 +42,30 @@ class MongoWorker:
                 'response': 'section doesnt exist. wrong id?',
             }
 
+    def get_product_type_filters(self, type_id):
+        query = self.products_coll.aggregate([
+        {
+            '$match': { 'type': str(type_id)}
+        },
+
+        {
+            '$unwind': '$attributes'
+        },
+
+        {
+            '$group': { '_id': '$attributes.verbose_name', 'attributes': { '$addToSet': '$attributes.value' } }
+        },
+
+        {
+            '$project': {'_id': 0, 'filter_group_name': '$_id', 'attributes': 1}
+        },
+        ])
+
+        return {
+                'status': 'ok',
+                'response': list(query),
+            }
+
     def get_sections(self):
         sections_list = []
         sections_coll = MongoWorker.db['sections']
@@ -68,7 +92,7 @@ class MongoWorker:
     def get_product_types(self):
         product_types_list = []
         encoder = JSONEncoder()
-        for product_type in self.product_coll.find():
+        for product_type in self.product_types_coll.find():
             product_types_list.append({
                 'id': encoder.default(product_type['_id']),
                 'name': product_type['name'],
@@ -165,7 +189,7 @@ class MongoWorker:
 
     def delete_image_by_name(self, image_name):
         if default_storage.exists(image_name):
-        default_storage.delete(image_name)
+            default_storage.delete(image_name)
             return {
                 'status': 'ok',
                 'response': 'deleted ' + str(image_name) + ' image',
@@ -331,8 +355,7 @@ class JSONEncoder(json.JSONEncoder):
 
 def main():
     w = MongoWorker()
-    w.get_sections()
-    print(w.get_section('6215397de5dcaa359fc84295'))
+    print(w.get_product_type_filters('6248bae987c7ece685828c25'))
 
 if __name__ == '__main__':
     main()

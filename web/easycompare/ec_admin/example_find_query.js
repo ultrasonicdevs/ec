@@ -10,3 +10,21 @@ $and: [
   ]},
 ]
 })
+
+db.products.aggregate([
+  {
+    '$match': { 'type': '6248bae987c7ece685828c25'}
+  },
+
+  {
+    '$unwind': '$attributes'
+  },
+
+  {
+    '$group': { '_id': '$attributes.verbose_name', 'attributes': { '$addToSet': '$attributes.value' } }
+  },
+
+  {
+    '$project': {'_id': 0, 'filter_group_name': '$_id', 'attributes': 1}
+  }
+]).pretty()
