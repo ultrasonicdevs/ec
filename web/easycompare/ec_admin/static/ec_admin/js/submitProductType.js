@@ -60,7 +60,7 @@ function createTypeSectionsSelect(){
     const csrftoken = getCookieByName('csrftoken');
 
     let xhr = new XMLHttpRequest();
-    let url = 'get-parent-sections/';
+    let url =`${location.protocol}/api/sections/`;
 
     xhr.open('GET', url, true);
 

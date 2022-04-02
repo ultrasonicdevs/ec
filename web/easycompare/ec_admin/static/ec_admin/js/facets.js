@@ -34,7 +34,7 @@ function createProductCards(e){
     const csrftoken = getCookieByName('csrftoken');
 
     let xhr = new XMLHttpRequest();
-    let url = 'http://localhost:8000/api/products/';
+    let url = `${location.protocol}/api/products/`;
 
     xhr.open('GET', url, true);
 

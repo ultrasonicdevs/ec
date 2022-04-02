@@ -9,7 +9,7 @@ function sendSectionJsonToServer(e) {
     const csrftoken = getCookieByName('csrftoken');
 
     let xhr = new XMLHttpRequest();
-    let url = 'processing/';
+    let url = `${location.protocol}/api/sections/`;
 
     xhr.open('POST', url, true);
 
@@ -52,7 +52,7 @@ function createParentSectionsSelect(){
     const csrftoken = getCookieByName('csrftoken');
 
     let xhr = new XMLHttpRequest();
-    let url = 'get-parent-sections/';
+    let url = `${location.protocol}/api/sections/`;
 
     xhr.open('GET', url, true);
 
