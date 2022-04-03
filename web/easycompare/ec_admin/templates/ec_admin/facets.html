@@ -17,7 +17,8 @@
                             {% endfor %}
                         </select>
                     </div>
-                    <ul id="filter-groups">   
+                    <ul id="filter-groups"> 
+                        {% csrf_token %} 
                         <fieldset>      
                             <legend>What is Your Favorite Pet?</legend>      
                             <input type="checkbox" name="favorite_pet" value="Cats">Cats<br>      

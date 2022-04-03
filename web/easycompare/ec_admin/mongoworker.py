@@ -345,6 +345,39 @@ class MongoWorker:
                 'response': 'section is not deleted. maybe wrong id?',
             }
 
+    def get_filtered_products(self, selected_filters_json, product_type):
+        exp = {
+            '$and': [
+                {
+                    'type': product_type
+                },
+            ]
+        }
+        print(selected_filters_json)
+        for filter_group, index in zip(selected_filters_json, range(1, len(selected_filters_json) + 1)):
+            exp['$and'].append({
+                '$or': [],
+            })
+            for selected_filter in filter_group['attributes']:
+                exp['$and'][index]['$or'].append({
+                    'attributes': {
+                        '$elemMatch':{
+                            'verbose_name': filter_group['filter_group_name'],
+                            'value': selected_filter,
+                        }
+                    }
+                })
+        print(exp)
+        query = self.products_coll.find(exp)
+        response = []
+        for document in query:
+            document['_id'] = JSONEncoder().default(document['_id'])
+            response.append(document)
+        return {
+            'status': 'ok',
+            'response': response,
+        }
+
 
 class JSONEncoder(json.JSONEncoder):
     def default(self, item):
@@ -355,7 +388,7 @@ class JSONEncoder(json.JSONEncoder):
 
 def main():
     w = MongoWorker()
-    print(w.get_product_type_filters('6248bae987c7ece685828c25'))
+    
 
 if __name__ == '__main__':
     main()

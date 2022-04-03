@@ -1,6 +1,7 @@
 import json
 from django.http import HttpResponse, JsonResponse
 from ec_admin.mongoworker import MongoWorker
+import urllib.parse
 
 #TODO: Make all CBV
 def index(request):
@@ -85,3 +86,10 @@ def images(request):
         return JsonResponse({'image_url': preview_url, 'image_name': preview_name})
     elif request.is_ajax and request.method == "DELETE":
         return JsonResponse(worker.delete_image_by_name(request.body.decode('utf-8')))
+
+def product_type_get_filtered(request, type_id):
+    worker = MongoWorker()
+    if request.is_ajax and request.method == "GET":
+        product_type = request.headers['Product-Type']
+        selected_filters_json = json.loads(urllib.parse.unquote_plus(request.headers['Selected-Filters']))
+        return JsonResponse(worker.get_filtered_products(selected_filters_json, type_id), safe=False)
