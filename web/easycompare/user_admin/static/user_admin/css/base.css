@@ -24,10 +24,6 @@ body {
   padding-bottom: 5vw;
 }
 
-body::-webkit-scrollbar {
-  width: 0;
-}
-
 header {
   position: fixed;
   top: 0;

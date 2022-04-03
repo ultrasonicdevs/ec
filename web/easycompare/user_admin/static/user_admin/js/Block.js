@@ -1,6 +1,6 @@
 class Block {
   constructor (options) {
-    this.id = options.id;
+    this.id = options._id;
     this.name = options.name;
   }
 

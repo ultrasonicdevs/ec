@@ -232,23 +232,6 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
 }
 
-.popup__background .popup__container .popup__container_inner .filter__container .filter__settings .filter-value__container .examples-filter-values__container {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1fr 1fr;
-      grid-template-columns: 1fr 1fr;
-  font-size: .5em;
-  font-weight: 500;
-}
-
-.popup__background .popup__container .popup__container_inner .filter__container .filter__settings .filter-value__container .examples-filter-values__container span {
-  margin-top: 1em;
-  cursor: pointer;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-}
-
 @-webkit-keyframes openFilter {
   0% {
     transfrom: scale(0.5);

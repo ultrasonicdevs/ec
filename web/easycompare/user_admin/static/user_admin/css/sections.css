@@ -46,8 +46,6 @@ h2 {
   position: relative;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 1fr 1fr;
-      grid-template-columns: 1fr 1fr 1fr;
   font-size: 1.1rem;
   margin-top: 2rem;
 }
@@ -61,13 +59,44 @@ h2 {
   display: none;
 }
 
+.section__container_outer .sections .sections__container-of-several-elements .section__container.product-menu-opened {
+  padding-left: 2.5rem;
+}
+
+.section__container_outer .sections .sections__container-of-several-elements .section__container.product-menu-opened::before {
+  opacity: 1;
+  visibility: visible;
+  -webkit-animation: expandBefore 0.5s ease;
+          animation: expandBefore 0.5s ease;
+}
+
 .section__container_outer .sections .sections__container-of-several-elements .section__container.product-menu-opened .products-menu {
   left: calc(100% + 2rem);
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
 }
 
 .section__container_outer .sections .sections__container-of-several-elements .section__container {
   position: relative;
   margin-top: 1rem;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+
+.section__container_outer .sections .sections__container-of-several-elements .section__container::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+  width: 1.5rem;
+  height: .2rem;
+  background-color: #000;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .section__container_outer .sections .sections__container-of-several-elements .section__container .section-name {
@@ -82,6 +111,8 @@ h2 {
   top: 0;
   font-size: .9em;
   font-weight: 500;
+  opacity: 0;
+  visibility: hidden;
   -webkit-transition: 0.5s ease;
   transition: 0.5s ease;
 }
@@ -211,6 +242,20 @@ h2 {
   }
   100% {
     width: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .section__container_outer section.sections {
+    -ms-grid-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .section__container_outer section.sections {
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
   }
 }
 /*# sourceMappingURL=sections.css.map */

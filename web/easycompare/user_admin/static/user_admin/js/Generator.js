@@ -1,8 +1,12 @@
 class Generator {
 
+  constructor () {
+    this.host = location.host;
+  }
+
   generateSections (sectionsData) {
     const sectionsContainer = document.querySelector('.sections');
-    console.log(sectionsData);
+    
     let i = 0;
     while (i < sectionsData.length) {
       const sectionsContainerOfSixElems = document.createElement('ul'),
@@ -28,23 +32,23 @@ class Generator {
   }
 
   async generateProducts (section) {
-    console.log(section);
-    const productsArray = [
-      {id: 1, name: 'product_1'},
-      {id: 2, name: 'product_2'},
-    ];
+    const productsArray = await this.getJSON(`http://${this.host}/api/sections/${section.id}/product-types/`).then(res => res.product_types);
 
     const productMenu = section.querySelector('.products-menu');
 
     productsArray.forEach(product => {
-      const {id, name} = product;
+      const {_id, name} = product;
 
       new Product ({
-        id,
+        _id,
         name,
         parent: productMenu,
       });
     })
+  }
+
+  async getJSON (url, method, body = null) {
+    return await fetch(url, {method, body}).then(response => response.json());
   }
 
 }

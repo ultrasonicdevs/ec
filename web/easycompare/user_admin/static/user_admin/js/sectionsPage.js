@@ -19,26 +19,45 @@ class Page {
     sectionsContainers.forEach(sectionContainer => 
       sectionContainer.addEventListener('click', (e) => {
         const currentSectionContainer = e.target.parentNode;
+        // Условие нажатия по названию раздела
         if (e.target.classList.contains('section-name')) {
           // Очистка всех меню товаров
           Array.from(document.querySelectorAll('.products-menu'))
             .forEach(productsMenu => productsMenu.innerHTML = '');
 
+          // Изменение цвета для всех разделов на неактивный
+          Array.from(document.querySelectorAll('.section__container'))
+            .forEach(sectionContainer => sectionContainer.style.color = '#CCC');
+            
+          currentSectionContainer.style.color = '#000';
+          
           if (currentSectionContainer.classList.contains('product-menu-opened')) {
-            document.querySelector('.sections').classList.remove('flex');
-            currentSectionContainer.classList.remove('product-menu-opened');
+            this.closeProductMenu ();
           } else {
-            document.querySelector('.sections').classList.add('flex');
-            // Удаление метки открытого меню товара со всех контейнеров разделов
-            Array.from(document.querySelectorAll('.section__container'))
-              .forEach(sectionContainer => sectionContainer.classList.remove('product-menu-opened'));
-
-            currentSectionContainer.classList.add('product-menu-opened');
-            this.generator.generateProducts(currentSectionContainer);
+            this.openProductMenu (currentSectionContainer);
           };
         }
       })
     );
+  }
+
+  openProductMenu (currentSectionContainer) {
+    document.querySelector('.sections').classList.add('flex');
+    // Удаление метки открытого меню товара со всех контейнеров разделов
+    Array.from(document.querySelectorAll('.section__container'))
+      .forEach(sectionContainer => sectionContainer.classList.remove('product-menu-opened'));
+
+    currentSectionContainer.classList.add('product-menu-opened');
+    this.generator.generateProducts(currentSectionContainer);
+  }
+
+  closeProductMenu () {
+    // Возврат черного цвета для всех разделов
+    Array.from(document.querySelectorAll('.section__container'))
+      .forEach(sectionContainer => sectionContainer.style.color = '#000');
+
+    document.querySelector('.sections').classList.remove('flex');
+    Array.from(document.querySelectorAll('.product-menu-opened')).forEach(sectionContainer => sectionContainer.classList.remove('product-menu-opened'));
   }
 
   addEventToEditBtn () {
@@ -52,7 +71,6 @@ class Page {
         document.querySelector('.activate-delete-mode-btn').classList.remove('edit-mode');
         document.querySelector('.add-new-type-btn').classList.remove('edit-mode');
         document.querySelector('#editing-tooltip').classList.remove('edit-mode');
-        
       } else {
         editBtn.textContent = 'Сохранить изменения';
         editBtn.classList.add('edit-mode');
@@ -66,14 +84,15 @@ class Page {
   addEventToActivateDeleteModeBtn () {
     const activateDeleteModeBtn = document.querySelector('.activate-delete-mode-btn');
     activateDeleteModeBtn.addEventListener('click', () => {
+      this.closeProductMenu ();
       if (activateDeleteModeBtn.classList.contains('remove-mode')) {
         activateDeleteModeBtn.classList.remove('remove-mode');
         Array.from(document.querySelectorAll('.delete-section-btn'))
-        .forEach(deleteSectionBtn => deleteSectionBtn.classList.remove('remove-mode'))
+        .forEach(deleteSectionBtn => deleteSectionBtn.classList.remove('remove-mode'));
       } else {
         activateDeleteModeBtn.classList.add('remove-mode');
         Array.from(document.querySelectorAll('.delete-section-btn'))
-        .forEach(deleteSectionBtn => deleteSectionBtn.classList.add('remove-mode'))
+        .forEach(deleteSectionBtn => deleteSectionBtn.classList.add('remove-mode'));
       }
     })
   }

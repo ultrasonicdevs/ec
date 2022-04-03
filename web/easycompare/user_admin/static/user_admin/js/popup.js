@@ -5,16 +5,8 @@ function openPopup () {
   document.querySelector('.add-filter-btn').addEventListener('click', openFilterField);
   document.querySelector('.close-popup-btn').addEventListener('click', closePopup);
   
-  addEventForTextFromExamples ();
-
   function checkInputValueLength (currentInput) {
     return currentInput.value.length === 0 ? false : true;
-  }
-
-  function addEventForTextFromExamples () {
-    document.querySelector('.examples-filter-values__container').addEventListener('click', e => {
-      if (e.target.tagName === 'SPAN') document.querySelector('.filter-value').value = e.target.textContent;
-    });
   }
 
   function openFilterField (e) {

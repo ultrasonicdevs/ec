@@ -46,7 +46,6 @@ h2
   .sections
     position: relative
     display: grid
-    grid-template-columns: 1fr 1fr 1fr
     font-size: 1.1rem;
     margin-top: 2rem
 
@@ -60,13 +59,34 @@ h2
 
     .sections__container-of-several-elements
       .section__container.product-menu-opened
+        padding-left: 2.5rem
+
+        &::before
+          opacity: 1
+          visibility: visible
+          animation: expandBefore $transition
+
         .products-menu
           left: calc(100% + 2rem)
+          @include animationVisible
 
       .section__container
         position: relative
         margin-top: 1rem
+        transition: $transition
         
+        &::before
+          content: ''
+          position: absolute
+          left: 0
+          top: 50%
+          transform: translate(0, -50%)
+          width: 1.5rem
+          height: .2rem
+          background-color: #000
+          opacity: 0
+          visibility: hidden
+
         .section-name
           cursor: pointer
           font-size: .9em
@@ -78,7 +98,7 @@ h2
           top: 0
           font-size: .9em
           font-weight: 500
-          transition: $transition
+          @include animationHidden
 
         .delete-section-btn.remove-mode
           @include animationVisible
@@ -156,3 +176,13 @@ h2
     width: 0
   100%
     width: 1.5rem
+
+@media screen and (min-width: 1025px)
+  .section__container_outer
+    section.sections
+      grid-template-columns: 1fr 1fr 1fr
+
+@media screen and (max-width: 1024px)
+  .section__container_outer
+    section.sections
+      grid-template-columns: 1fr 1fr
