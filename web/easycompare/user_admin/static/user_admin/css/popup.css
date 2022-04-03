@@ -104,6 +104,11 @@ h1, h2, h3, h4, h5, h6 {
   color: #A5A5A5;
 }
 
+.popup__background .popup__container .popup__container_inner .popup__buttons .save-btn:disabled {
+  color: #A5A5A5;
+  background-color: #F5F5F5;
+}
+
 .popup__background .popup__container .popup__container_inner .popup__buttons .save-btn {
   background-color: #E5E5E5;
   color: #000;

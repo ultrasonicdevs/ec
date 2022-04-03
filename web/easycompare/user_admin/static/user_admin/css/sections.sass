@@ -38,6 +38,21 @@ h2
 .section__container_outer
   position: relative
 
+  .sections-name
+    position: relative
+
+    #editing-tooltip.edit-mode
+      left: 0
+      @include animationVisible
+
+    #editing-tooltip
+      position: absolute
+      left: -2rem
+      top: 110%
+      font-size: 1rem
+      color: #A5A5A5
+      @include animationHidden
+
   .sections.flex
     display: flex
     flex-direction: column
@@ -48,14 +63,6 @@ h2
     display: grid
     font-size: 1.1rem;
     margin-top: 2rem
-
-    #editing-tooltip
-      position: absolute
-      left: calc(1em * (1 / .6)
-      top: 0
-      font-size: .6em
-      color: #A5A5A5
-      display: none
 
     .sections__container-of-several-elements
       .section__container.product-menu-opened
@@ -96,9 +103,15 @@ h2
           position: absolute
           left: 70%
           top: 0
-          font-size: .9em
+          // font-size: .9em
           font-weight: 500
           @include animationHidden
+
+          li
+            margin-bottom: 1rem
+            
+            .product-name
+              font-size: 16px
 
         .delete-section-btn.remove-mode
           @include animationVisible
@@ -139,6 +152,7 @@ h2
 .editing-buttons__container_wrapper
   display: flex
   justify-content: flex-end
+  margin-top: 1.5rem
     
   .editing-buttons__container
     display: flex
@@ -170,6 +184,7 @@ h2
       width: 100%
       margin-top: 1.5em
       font-size: 1em
+      color: #A5A5A5
 
 @keyframes expandBefore
   0%
