@@ -34,7 +34,7 @@ function createProductCards(e){
     const csrftoken = getCookieByName('csrftoken');
 
     let xhr = new XMLHttpRequest();
-    let url = 'http://localhost:8000/api/products/';
+    let url = `${location.protocol}/api/products/`;
 
     xhr.open('GET', url, true);
 
@@ -47,7 +47,7 @@ function createProductCards(e){
         let requestCompleted = (xhr.readyState === DONE) && (xhr.status === SUCCESS);
         if (requestCompleted) {
             console.log(JSON.parse(xhr.response));
-            JSON.parse(xhr.response).products.forEach(product => {
+            JSON.parse(xhr.response).response.forEach(product => {
                 const productCard = document.createElement('div');
                 const productPreview = document.createElement('img');
                 const productName = document.createElement('h1');

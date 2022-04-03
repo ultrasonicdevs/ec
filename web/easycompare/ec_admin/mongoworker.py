@@ -16,114 +16,334 @@ class MongoWorker:
 
     def insert_product_type(self, product_type_json):
         self.product_types_coll.insert_one(product_type_json)
+        return {
+                'status': 'ok',
+                'response': 'inserted ' + product_type_json['name'] + ' product type',
+            }
     
     def insert_section(self, section_json):
         self.sections_coll.insert_one(section_json)
+        return {
+                'status': 'ok',
+                'response': 'inserted ' + section_json['name'] + ' section',
+            }
 
     def get_section(self, section_id):
-        response = self.sections_coll.find_one({'_id': ObjectId(section_id)})
-        if response:
-            response['_id'] = JSONEncoder().default(response['_id'])
-            return response
+        query = self.sections_coll.find_one({'_id': ObjectId(section_id)})
+        if query:
+            query['_id'] = JSONEncoder().default(query['_id'])
+            return {
+                'status': 'ok',
+                'response': query,
+            }
         else:
-            return {'error': 'Error 404. Object do not exist or something got wrong'}
+            return {
+                'status': 'error',
+                'response': 'section doesnt exist. wrong id?',
+            }
+
+    def get_product_type_filters(self, type_id):
+        query = self.products_coll.aggregate([
+        {
+            '$match': { 'type': str(type_id)}
+        },
+
+        {
+            '$unwind': '$attributes'
+        },
+
+        {
+            '$group': { '_id': '$attributes.verbose_name', 'attributes': { '$addToSet': '$attributes.value' } }
+        },
+
+        {
+            '$project': {'_id': 0, 'filter_group_name': '$_id', 'attributes': 1}
+        },
+        ])
+
+        return {
+                'status': 'ok',
+                'response': list(query),
+            }
 
     def get_sections(self):
-        response = {
-            'sections': []
-        }
+        sections_list = []
         sections_coll = MongoWorker.db['sections']
         encoder = JSONEncoder()
         for section in sections_coll.find():
             print(section)
-            response['sections'].append({
-                '_id': encoder.default(section['_id']),
+            sections_list.append({
+                'id': encoder.default(section['_id']),
                 'name': section['name'],
             })
-        print(response)
-        return response
+        print(sections_list)
+        return {
+                'status': 'ok',
+                'response': sections_list,
+            }
 
     def insert_product(self, product_json): 
         self.products_coll.insert_one(product_json)
+        return {
+                'status': 'ok',
+                'response': 'inserted product ' + product_json['name'],
+            }
     
     def get_product_types(self):
-        response = {
-            'product_types': []
-        }
+        product_types_list = []
         encoder = JSONEncoder()
         for product_type in self.product_types_coll.find():
-            response['product_types'].append({
+            product_types_list.append({
                 'id': encoder.default(product_type['_id']),
                 'name': product_type['name'],
             })
-        return response
+        return {
+                'status': 'ok',
+                'response': product_types_list,
+            }
 
     def get_product_type(self, type_id):
-        response = self.product_types_coll.find_one({'_id': ObjectId(type_id)})
-        if response:
-            response['_id'] = JSONEncoder().default(response['_id'])
-            return response
+        query = self.products_coll.find_one({'_id': ObjectId(type_id)})
+        if query:
+            query['_id'] = JSONEncoder().default(query['_id'])
+            return {
+                'status': 'ok',
+                'response': query,
+            }
         else:
-            return {'error': 'Error 404. Object do not exist or something got wrong'}
+            return {
+                'status': 'error',
+                'response': query,
+            }
 
     def get_section_product_types(self, section_id):
-        response = {
-            'product_types': []
-        }
+        product_types_list = []
         encoder = JSONEncoder()
         for product_type in self.product_types_coll.find({'section': section_id}):
-            response['product_types'].append({
-                '_id': encoder.default(product_type['_id']),
+            product_types_list.append({
+                'id': encoder.default(product_type['_id']),
                 'name': product_type['name'],
             })
-        return response
+        return {
+                'status': 'ok',
+                'response': product_types_list,
+            }
 
     def get_product_type_attributes(self, product_type_id):
-        response = {
-            'attributes': []
-        }
+        attributes_list = []
         product_type = self.product_types_coll.find_one({'_id': ObjectId(product_type_id)})
         print(product_type)
-        response['attributes'] = product_type['attributes']
-        return response
+        attributes_list = product_type['attributes']
+        return {
+                'status': 'ok',
+                'response': attributes_list,
+            }
 
     def get_products_of_certain_type(self, type_id):
-        response = {
-            'products': []
-        }
+        products_list = []
         encoder = JSONEncoder()
         for product in self.products_coll.find({'type': type_id}):
             product['_id'] = encoder.default(product['_id'])
-            response['products'].append(product)
-        print(response)
-        return response
+            products_list.append(product)
+        print(products_list)
+        return {
+                'status': 'ok',
+                'response': products_list,
+            }
 
     def get_products(self):
-        response = {
-            'products': []
-        }
+        products_list = []
         encoder = JSONEncoder()
         for product in self.products_coll.find():
             product['_id'] = encoder.default(product['_id'])
-            response['products'].append(product)
-        return response
+            products_list.append(product)
+        return {
+                'status': 'ok',
+                'response': products_list,
+            }
 
     def get_product(self, product_id):
         response = self.products_coll.find_one({'_id': ObjectId(product_id)})
         if response:
             response['_id'] = JSONEncoder().default(response['_id'])
-            return response
+            return {
+                'status': 'ok',
+                'response': response,
+            }
         else:
-            return {'error': 'Error 404. Object do not exist or something got wrong'}
+            return {
+                'status': 'error',
+                'response': response,
+            }
 
     def save_image_and_get_url_and_name(self, image):
         image_name = default_storage.save(image.name, image)
         image_url = default_storage.url(image_name)
-        return image_url, image_name
+        return {
+            'status': 'ok',
+            'response': {
+                'image_name': image_name,
+                'image_url': image_url,
+            }
+        }
 
     def delete_image_by_name(self, image_name):
-        default_storage.delete(image_name)
-        return image_name
+        if default_storage.exists(image_name):
+            default_storage.delete(image_name)
+            return {
+                'status': 'ok',
+                'response': 'deleted ' + str(image_name) + ' image',
+            }
+        else:
+            return {
+                'status': 'error',
+                'response': 'image with name ' + str(image_name) + ' do not exist',
+            }
+
+    def delete_all_sections(self):
+        documents_amount = self.sections_coll.estimated_document_count()
+        if documents_amount == 0:
+            return {
+                'status': 'error',
+                'response': 'sections collection is already empty',
+            }
+
+        query = self.sections_coll.delete_many({})
+
+        if query.deleted_count == documents_amount and self.delete_all_products()['status'] == 'ok' \
+            and self.delete_all_product_types()['status'] == 'ok':
+            return {
+                'status': 'ok',
+                'response': 'successfully deleted ' + str(documents_amount) + ' product types',
+            }
+        else:
+            return {
+                'status': 'error',
+                'response': 'product types amount before deletion didnt match deleted products count',
+            }
+
+    def delete_product_type(self, type_id):
+        query = self.product_types_coll.delete_one({
+            '_id': ObjectId(type_id)
+        })
+
+        if query.deleted_count == 1 and self.delete_products_of_certain_type(type_id)['status'] == 'ok':
+            return {
+                'status': 'ok',
+                'response': 'deleted ' + type_id + ' product type and all of its products',
+            }
+        else:
+            return {
+                'status': 'error',
+                'response': 'product type already deleted or it doesnt have any products',
+            }
+
+
+    def delete_all_product_types(self):
+        documents_amount = self.product_types_coll.estimated_document_count()
+        if documents_amount == 0:
+            return {
+                'status': 'error',
+                'response': 'product_types collection is already empty',
+            }
+
+        query = self.product_types_coll.delete_many({})
+
+        if query.deleted_count == documents_amount and self.delete_all_products()['status'] == 'ok':
+            return {
+                'status': 'ok',
+                'response': 'successfully deleted ' + str(documents_amount) + ' product types',
+            }
+        else:
+            return {
+                'status': 'error',
+                'response': 'product types amount before deletion didnt match deleted products count',
+            }
+
+    def delete_all_products(self):
+        documents_amount = self.products_coll.estimated_document_count()
+        if documents_amount == 0:
+            return {
+                'status': 'error',
+                'response': 'products collection is already empty',
+            }
+        
+        query = self.products_coll.delete_many({})
+
+        if query.deleted_count == documents_amount:
+            return {
+                'status': 'ok',
+                'response': 'successfully deleted ' + str(documents_amount) + ' products',
+            }
+        else:
+            return {
+                'status': 'error',
+                'response': 'products amount before deletion didnt match deleted products count',
+            }
+
+    def delete_product_by_id(self, product_id):
+        query = self.products_coll.delete_one({
+            '_id': ObjectId(product_id),
+        })
+
+        if query.deleted_count == 1:
+            return {
+                'status': 'ok',
+                'response': 'successfully deleted product with id ' + str(product_id),
+            }
+        else:
+            return {
+                'status': 'error',
+                'response': 'product is not deleted. maybe wrong id?',
+            }
+
+    def delete_products_of_certain_type(self, type_id):
+        query = self.products_coll.delete_many({
+            'type': type_id,
+        })
+
+        if query.deleted_count:
+            return {
+                'status': 'ok',
+                'response': 'successfully deleted ' + str(query.deleted_count) + ' documents',
+            }
+        else:
+            return {
+                'status': 'error',
+                'response': 'wrong type id or all documents are already deleted',
+            }
+
+    def delete_all_product_types_inside_section(self, section_id):
+        query = self.product_types_coll.delete_many({
+            'section': section_id,
+        })
+
+        if query.deleted_count:
+            return {
+                'status': 'ok',
+                'response': 'successfully deleted ' + str(query.deleted_count) + ' documents',
+            }
+        else:
+            return {
+                'status': 'error',
+                'response': 'wrong section id or all documents are already deleted',
+            }
+
+    def delete_section(self, section_id):
+        query = self.sections_coll.delete_one({
+            '_id': ObjectId(section_id),
+        })
+
+        if query.deleted_count == 1:
+            return {
+                'status': 'ok',
+                'response': 'successfully deleted section with id ' + str(section_id),
+            }
+        else:
+            return {
+                'status': 'error',
+                'response': 'section is not deleted. maybe wrong id?',
+            }
 
 
 class JSONEncoder(json.JSONEncoder):
@@ -135,8 +355,7 @@ class JSONEncoder(json.JSONEncoder):
 
 def main():
     w = MongoWorker()
-    w.get_sections()
-    print(w.get_section('6215397de5dcaa359fc84295'))
+    print(w.get_product_type_filters('6248bae987c7ece685828c25'))
 
 if __name__ == '__main__':
     main()
