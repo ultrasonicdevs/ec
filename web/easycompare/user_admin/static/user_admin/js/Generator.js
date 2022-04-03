@@ -32,7 +32,7 @@ class Generator {
   }
 
   async generateProducts (section) {
-    const productsArray = await this.getJSON(`http://${this.host}/api/sections/${section.id}/product-types/`).then(res => res.product_types);
+    const productsArray = await this.getJSON(`http://${this.host}/api/sections/${section.id}/product-types/`).then(res => res.response);
 
     const productMenu = section.querySelector('.products-menu');
 

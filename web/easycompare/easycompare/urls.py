@@ -10,7 +10,7 @@ urlpatterns = [
     path('django-admin/', admin.site.urls),
     path('ec-admin/', include('ec_admin.urls')),
     path('api/', include('api.urls')),
-    path('user_admin/', include('user_admin.urls')),
+    path('user-admin/', include('user_admin.urls')),
     path('', include('user_side.urls')),
 ]
 

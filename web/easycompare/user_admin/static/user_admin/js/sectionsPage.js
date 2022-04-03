@@ -5,7 +5,7 @@ class Page {
   }
 
   async renderPage () {
-    const sectionsData = await this.getJSON(`http://${this.host}/api/sections/`).then(res => res.sections);
+    const sectionsData = await this.getJSON(`http://${this.host}/api/sections/`).then(res => res.response);
 
     // Генерация разделов
     this.generator.generateSections(sectionsData);
