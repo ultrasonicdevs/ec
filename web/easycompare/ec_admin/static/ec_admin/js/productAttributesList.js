@@ -70,10 +70,19 @@ function submitProduct(e) {
     let productJson = {
         'name': productName,
         'type': productType,
-        'price': productPrice,
-        'manufacturer': productManufacturer,
         'preview_url': previewImageUrl,
-        'attributes': [],
+        'attributes': [
+            {
+                'type': 'Текст',
+                'verbose_name': 'Цена',
+                'value': productPrice,
+            },
+            {
+                'type': 'Текст',
+                'verbose_name': 'Производитель',
+                'value': productManufacturer,
+            },
+        ],
     }
 
     attributeInputsArray.forEach(attributeInput => {
