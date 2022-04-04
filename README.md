@@ -27,6 +27,4 @@ Windows:
 Linux:  
 `python3 easycompare/manage.py runserver 0.0.0.0:8000`  
 8. Перейдите на один из следующих адресов:  
-`http://localhost:8000/`  
 `http://localhost:8000/ec-admin/`  
-`http://localhost:8000/user_admin/`   

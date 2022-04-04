@@ -9,7 +9,7 @@ function sendSectionJsonToServer(e) {
     const csrftoken = getCookieByName('csrftoken');
 
     let xhr = new XMLHttpRequest();
-    let url = `${location.protocol}/api/sections/`;
+    let url = 'processing/';
 
     xhr.open('POST', url, true);
 
@@ -22,7 +22,7 @@ function sendSectionJsonToServer(e) {
         let requestCompleted = (xhr.readyState === DONE) && (xhr.status === SUCCESS);
         if (requestCompleted) {
             responseJson = JSON.parse(xhr.response);
-            alert(responseJson.response);
+            alert(responseJson.message);
         }
     };
 
@@ -52,7 +52,7 @@ function createParentSectionsSelect(){
     const csrftoken = getCookieByName('csrftoken');
 
     let xhr = new XMLHttpRequest();
-    let url = `${location.protocol}/api/sections/`;
+    let url = 'get-parent-sections/';
 
     xhr.open('GET', url, true);
 
@@ -65,10 +65,10 @@ function createParentSectionsSelect(){
         let requestCompleted = (xhr.readyState === DONE) && (xhr.status === SUCCESS);
         if (requestCompleted) {
             responseJson = JSON.parse(xhr.response);
-            responseJson.response.forEach(section => {
+            responseJson.sections.forEach(section => {
                 const parentSectionOption = document.createElement('option');
                 parentSectionOption.innerText = section.name;
-                parentSectionOption.value = section.id;
+                parentSectionOption.value = section._id;
                 productTypeSelect.appendChild(parentSectionOption);
             });
         }
