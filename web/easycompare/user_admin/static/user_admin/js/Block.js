@@ -4,13 +4,13 @@ class Block {
     this.name = options.name;
   }
 
-  async getJSON (url, method, body = null) {
+  async sendRequest (url, method, body = null) {
     return await fetch(url, {
       method,
       body,
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Accept': 'application/json',
       },
     }).then(data => data.json());
   }

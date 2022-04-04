@@ -20,23 +20,22 @@ class Page {
       sectionContainer.addEventListener('click', (e) => {
         const currentSectionContainer = e.target.parentNode;
         // Условие нажатия по названию раздела
-        if (e.target.classList.contains('section-name')) {
-          // Очистка всех меню товаров
-          Array.from(document.querySelectorAll('.products-menu'))
-            .forEach(productsMenu => productsMenu.innerHTML = '');
+        if (!e.target.classList.contains('section-name')) return;
+        // Очистка всех меню товаров
+        Array.from(document.querySelectorAll('.products-menu'))
+          .forEach(productsMenu => productsMenu.innerHTML = '');
 
-          // Изменение цвета для всех разделов на неактивный
-          Array.from(document.querySelectorAll('.section__container'))
-            .forEach(sectionContainer => sectionContainer.style.color = '#CCC');
-            
-          currentSectionContainer.style.color = '#000';
+        // Изменение цвета для всех разделов на неактивный
+        Array.from(document.querySelectorAll('.section__container'))
+          .forEach(sectionContainer => sectionContainer.style.color = '#CCC');
           
-          if (currentSectionContainer.classList.contains('product-menu-opened')) {
-            this.closeProductMenu ();
-          } else {
-            this.openProductMenu (currentSectionContainer);
-          };
-        }
+        currentSectionContainer.style.color = '#000';
+        
+        if (currentSectionContainer.classList.contains('product-menu-opened')) {
+          this.closeProductMenu ();
+        } else {
+          this.openProductMenu (currentSectionContainer);
+        };
       })
     );
   }
