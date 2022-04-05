@@ -48,7 +48,7 @@ class Filter extends Block {
 
     checkPrice(inputs, productJSON) {
         let productsArray = [];
-        productJSON.products.forEach(product =>{
+        productJSON.forEach(product =>{
             product.attributes.forEach(attribute => {
                 if (attribute.verbose_name === 'price') {
                     if (Number(attribute.value) >= inputs[0] && Number(attribute.value) <= inputs[1]){
@@ -94,7 +94,7 @@ class Filter extends Block {
         const typeID = document.URL.replace(`${location.protocol}//${location.host}/`, ''),
             typeInfo = await new Filter().getJSON(`${location.protocol}//${location.host}/api/product-types/${typeID}`, "GET", null),
             productsJSON = await new Filter().getJSON(`${location.protocol}//${location.host}/api/product-types/${typeID}products/`, "GET", null);
-
+        console.log(typeInfo);
         const container = document.querySelector('#characteristics');
 
         document.title = `${typeInfo.name} | Easy Compare`;
@@ -106,7 +106,7 @@ class Filter extends Block {
         typeInfo.attributes.forEach(attribute => {
             let filterGroup = {},
                 filterGroupAttributes = [];
-            productsJSON.products.forEach(product => {
+            productsJSON.forEach(product => {
                 for (let attributeIndex in product.attributes) {
                     if (attribute.verbose_name === product.attributes[attributeIndex].verbose_name) {
                         filterGroupAttributes.push(product.attributes[attributeIndex].value);
@@ -141,7 +141,7 @@ class Filter extends Block {
 
             if (attribute.verbose_name !== 'price') {
                 title.addEventListener('click', function (event) {
-                    filtersInfo.response.forEach(attribute => {
+                    filtersInfo.forEach(attribute => {
                         if (event.target.innerText === attribute.filter_group_name) {
                             for (let value of attribute.attributes) {
                                 const li = document.createElement('li');
@@ -188,7 +188,7 @@ class Filter extends Block {
         // get prises for price filter
         let priceList = [];
 
-        productsJSON.products.forEach(product => {
+        productsJSON.forEach(product => {
             // priceList.push(product.price);
             product.attributes.forEach(attribute => {
                 if (attribute.verbose_name === 'price') {

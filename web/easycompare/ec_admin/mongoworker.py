@@ -103,7 +103,7 @@ class MongoWorker:
             }
 
     def get_product_type(self, type_id):
-        query = self.products_coll.find_one({'_id': ObjectId(type_id)})
+        query = self.product_types_coll.find_one({'_id': ObjectId(type_id)})
         if query:
             query['_id'] = JSONEncoder().default(query['_id'])
             return {
@@ -388,6 +388,7 @@ class JSONEncoder(json.JSONEncoder):
 
 def main():
     w = MongoWorker()
+    print(w.delete_all_product_types())
 
 
 if __name__ == '__main__':

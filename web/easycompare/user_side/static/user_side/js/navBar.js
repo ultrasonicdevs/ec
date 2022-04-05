@@ -10,7 +10,7 @@ class navBar extends Block {
         ulProductTypes.style.display = 'none';
         ulProductTypes.style.opacity = '0';
         let typeID = event.target.id;
-
+        console.log(typeID);
         sectionsListHTML.style.flexWrap = 'nowrap';
         sectionsListHTML.style.height = '100%';
         sectionsListHTML.style.flexBasis = '30%';
@@ -26,10 +26,10 @@ class navBar extends Block {
         const sectionAct = document.getElementById(typeID);
         sectionAct.className = 'section act';
         const productTypesList = await new navBar().getJSON(`${location.protocol}//${location.host}/api/sections/${typeID}/product-types/`, "GET", null);
-
-        for (let productType of productTypesList.product_types) {
+        console.log(productTypesList);
+        for (let productType of productTypesList) {
             let liProductType = document.createElement('li');
-            liProductType.id = productType._id;
+            liProductType.id = productType.id;
             let link = document.createElement('a');
             link.href = `${location.protocol}//${location.host}/${liProductType.id}/`;
             link.appendChild(document.createTextNode(productType.name));
@@ -53,10 +53,11 @@ class navBar extends Block {
     async sectionsDisplay() {
         if (document.getElementById('form-btn').checked === true) {
             const sectionList = await new navBar().getJSON(`${location.protocol}//${location.host}/api/sections/`, "GET", null);
-            for (let section of sectionList.sections) {
+            console.log(sectionList)
+            for (let section of sectionList) {
                 let liSection = document.createElement('li');
                 liSection.className = 'section';
-                liSection.id = section._id;
+                liSection.id = section.id;
                 liSection.appendChild(document.createTextNode(section.name));
                 sectionsListHTML.appendChild(liSection);
             }
