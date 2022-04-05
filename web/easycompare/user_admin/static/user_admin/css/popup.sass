@@ -55,7 +55,7 @@ h1, h2, h3, h4, h5, h6
     transition: $transition
     .popup__container_inner
       position: relative
-      .type-name
+      .product-type-name
         max-width: 70%
         font-weight: 500
       .close-btn
@@ -70,7 +70,7 @@ h1, h2, h3, h4, h5, h6
           height: calc(2em + 1vh)
           width: calc(2em + 1vw)
 
-      .popup__buttons
+      .popup-edit-buttons__container
         display: flex
         align-items: center
         button
@@ -179,13 +179,13 @@ h1, h2, h3, h4, h5, h6
     transform: scale(1)
 
 @media screen and (min-width: 1024px)
-  .type-name
+  .product-type-name
     font-size: 1em
 
 @media screen and (max-width: 1024px)
-  .type-name
+  .product-type-name
     font-size: .8em
 
 @media screen and (max-width: 768px)
-  .type-name
+  .product-type-name
     font-size: .5em
