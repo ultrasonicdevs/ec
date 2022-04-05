@@ -35,10 +35,10 @@ class Filter extends Block {
             productsContainer.appendChild(link);
 
             product.attributes.forEach(attribute => {
-                if (attribute.verbose_name === 'price') {
+                if (attribute.verbose_name === 'Цена') {
                     price.appendChild(document.createTextNode(attribute.value));
                 }
-                if (attribute.verbose_name === 'manufacturer') {
+                if (attribute.verbose_name === 'Производитель') {
                     manufacturer.appendChild(document.createTextNode(attribute.value));
                 }
             });
@@ -50,7 +50,7 @@ class Filter extends Block {
         let productsArray = [];
         productJSON.forEach(product =>{
             product.attributes.forEach(attribute => {
-                if (attribute.verbose_name === 'price') {
+                if (attribute.verbose_name === 'Цена') {
                     if (Number(attribute.value) >= inputs[0] && Number(attribute.value) <= inputs[1]){
                         productsArray.push(product);
                     }
@@ -70,7 +70,7 @@ class Filter extends Block {
             inputMax = document.getElementById('max');
         const inputs = [inputMin, inputMax];
         noUiSlider.create(range, {
-            start: [startValue, endValue],
+            start: [inputMin, inputMax],
             connect: true,
             range: {
                 'min': startValue,
@@ -139,9 +139,9 @@ class Filter extends Block {
             container.appendChild(attr);
             title.appendChild(document.createTextNode(attribute.verbose_name));
 
-            if (attribute.verbose_name !== 'price') {
+            if (attribute.verbose_name !== 'Цена') {
                 title.addEventListener('click', function (event) {
-                    filtersInfo.forEach(attribute => {
+                    filtersInfo.response.forEach(attribute => {
                         if (event.target.innerText === attribute.filter_group_name) {
                             for (let value of attribute.attributes) {
                                 const li = document.createElement('li');
@@ -191,11 +191,12 @@ class Filter extends Block {
         productsJSON.forEach(product => {
             // priceList.push(product.price);
             product.attributes.forEach(attribute => {
-                if (attribute.verbose_name === 'price') {
+                if (attribute.verbose_name === 'Цена') {
                     priceList.push(Number(attribute.value));
                 }
             });
         });
+        console.log(priceList, productsJSON)
         new Filter().rangeSliderInit(priceList, productsJSON);
     }
 }
