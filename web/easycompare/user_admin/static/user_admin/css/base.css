@@ -1,0 +1,93 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700&display=swap");
+* {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+* ul {
+  list-style: none;
+}
+
+* button {
+  background-color: inherit;
+  cursor: pointer;
+}
+
+body {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 5vw;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 4rem;
+}
+
+header .header__inner {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: .7rem 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  border-bottom: 1px solid #000;
+}
+
+header .header__inner .header__logo {
+  font-weight: 700;
+}
+
+header .header__inner .header__nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+}
+
+header .header__inner .header__nav ul .nav__button {
+  margin-left: 5vw;
+  cursor: pointer;
+  height: 2em;
+  width: 2em;
+}
+
+main {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: .7rem 1rem;
+  margin-top: 4rem;
+}
+/*# sourceMappingURL=base.css.map */

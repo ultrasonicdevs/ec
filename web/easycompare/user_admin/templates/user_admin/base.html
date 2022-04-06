@@ -8,8 +8,9 @@
 
     {% block links %}{% endblock %}
 
-    <link rel="stylesheet" href="{% static 'user_admin/css/user_admin.css' %}">
+    <link rel="stylesheet" href="{% static 'user_admin/css/base.css' %}">
     <link rel="stylesheet" href="{% static 'user_admin/css/popup.css' %}">
+    <link rel="stylesheet" href="{% static 'user_admin/css/sections.css' %}">
 
 </head>
 <body>
@@ -28,7 +29,7 @@
 
 </header>
 
-<main class="content">
+<main>
 
     {% block content %}{% endblock %}
     

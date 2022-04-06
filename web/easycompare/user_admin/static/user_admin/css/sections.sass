@@ -1,0 +1,203 @@
+@import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900);
+
+@mixin animationHidden
+  opacity: 0
+  visibility: hidden
+  transition: $transition
+
+@mixin animationVisible
+  opacity: 1
+  visibility: visible
+  transition: $transition
+
+
+$transition: .5s ease
+
+*
+  border: 0
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+  font-family: 'Inter'
+
+ul
+  list-style: none
+  
+button
+  background-color: inherit
+  cursor: pointer
+
+h2
+  font-size: 3.5rem
+
+.content
+  max-width: 1200px
+  width: 100%
+  margin: 0 auto
+
+.section__container_outer
+  position: relative
+
+  .sections-name
+    position: relative
+
+    #editing-tooltip.edit-mode
+      left: 0
+      @include animationVisible
+
+    #editing-tooltip
+      position: absolute
+      left: -2rem
+      top: 110%
+      font-size: 1rem
+      color: #A5A5A5
+      @include animationHidden
+
+  .sections.flex
+    display: flex
+    flex-direction: column
+    max-width: 40%
+
+  .sections
+    position: relative
+    display: grid
+    font-size: 1.1rem;
+    margin-top: 2rem
+
+    .sections__container-of-several-elements
+      .section__container.product-menu-opened
+        padding-left: 2.5rem
+
+        &::before
+          opacity: 1
+          visibility: visible
+          animation: expandBefore $transition
+
+        .products-menu
+          left: calc(100% + 2rem)
+          @include animationVisible
+
+      .section__container
+        position: relative
+        margin-top: 1rem
+        transition: $transition
+        
+        &::before
+          content: ''
+          position: absolute
+          left: 0
+          top: 50%
+          transform: translate(0, -50%)
+          width: 1.5rem
+          height: .2rem
+          background-color: #000
+          opacity: 0
+          visibility: hidden
+
+        .section-name
+          cursor: pointer
+          font-size: .9em
+          font-weight: 700
+
+        .products-menu
+          position: absolute
+          left: 70%
+          top: 0
+          // font-size: .9em
+          font-weight: 500
+          @include animationHidden
+
+          li
+            margin-bottom: 1rem
+            
+            .product-name
+              font-size: 16px
+
+        .delete-section-btn.remove-mode
+          @include animationVisible
+          
+        .delete-section-btn
+          width: 1.3em
+          height: 1.3em
+          position: absolute
+          top: 0
+          right: 20%
+          @include animationHidden
+
+          // Крестик
+          .delete-section-btn-relative
+            position: relative
+            width: inherit
+            height: inherit
+
+            span
+              display: block
+              height: 100%
+              width: .1em
+              background-color: #000
+              position: absolute
+              left: 50%
+              top: 0
+              transition: $transition
+
+              &::hover + .delete-section-btn-45, &::hover + .delete-section-btn-135
+                background-color: red
+
+            .delete-section-btn-45
+              transform: rotate(45deg)
+
+            .delete-section-btn-135
+              transform: rotate(135deg)
+
+.editing-buttons__container_wrapper
+  display: flex
+  justify-content: flex-end
+  margin-top: 1.5rem
+    
+  .editing-buttons__container
+    display: flex
+    flex-direction: column
+    align-items: flex-start
+
+    .edit-btn
+      background-color: #E5E5E5
+      padding: .5rem 1rem
+      font-size: 1em
+      
+    .activate-delete-mode-btn.edit-mode, .add-new-type-btn.edit-mode
+      @include animationVisible
+    
+    .activate-delete-mode-btn, .add-new-type-btn
+      @include animationHidden
+
+    .activate-delete-mode-btn
+      font-weight: 600
+      margin-top: 1.5em
+      color: red
+      font-size: 1em
+
+    .add-new-type-btn
+      position: absolute
+      right: 0
+      top: 0
+      max-width: 8rem
+      width: 100%
+      margin-top: 1.5em
+      font-size: 1em
+      color: #A5A5A5
+
+@keyframes expandBefore
+  0%
+    width: 0
+  100%
+    width: 1.5rem
+
+@media screen and (min-width: 1025px)
+  .section__container_outer
+    section.sections
+      grid-template-columns: 1fr 1fr 1fr
+
+@media screen and (max-width: 1024px)
+  .section__container_outer
+    section.sections
+      grid-template-columns: 1fr 1fr

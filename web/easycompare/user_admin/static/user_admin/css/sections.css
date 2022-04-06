@@ -1,0 +1,285 @@
+@import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900);
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Inter';
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  background-color: inherit;
+  cursor: pointer;
+}
+
+h2 {
+  font-size: 3.5rem;
+}
+
+.content {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.section__container_outer {
+  position: relative;
+}
+
+.section__container_outer .sections-name {
+  position: relative;
+}
+
+.section__container_outer .sections-name #editing-tooltip.edit-mode {
+  left: 0;
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+
+.section__container_outer .sections-name #editing-tooltip {
+  position: absolute;
+  left: -2rem;
+  top: 110%;
+  font-size: 1rem;
+  color: #A5A5A5;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+
+.section__container_outer .sections.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  max-width: 40%;
+}
+
+.section__container_outer .sections {
+  position: relative;
+  display: -ms-grid;
+  display: grid;
+  font-size: 1.1rem;
+  margin-top: 2rem;
+}
+
+.section__container_outer .sections .sections__container-of-several-elements .section__container.product-menu-opened {
+  padding-left: 2.5rem;
+}
+
+.section__container_outer .sections .sections__container-of-several-elements .section__container.product-menu-opened::before {
+  opacity: 1;
+  visibility: visible;
+  -webkit-animation: expandBefore 0.5s ease;
+          animation: expandBefore 0.5s ease;
+}
+
+.section__container_outer .sections .sections__container-of-several-elements .section__container.product-menu-opened .products-menu {
+  left: calc(100% + 2rem);
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+
+.section__container_outer .sections .sections__container-of-several-elements .section__container {
+  position: relative;
+  margin-top: 1rem;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+
+.section__container_outer .sections .sections__container-of-several-elements .section__container::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+  width: 1.5rem;
+  height: .2rem;
+  background-color: #000;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.section__container_outer .sections .sections__container-of-several-elements .section__container .section-name {
+  cursor: pointer;
+  font-size: .9em;
+  font-weight: 700;
+}
+
+.section__container_outer .sections .sections__container-of-several-elements .section__container .products-menu {
+  position: absolute;
+  left: 70%;
+  top: 0;
+  font-weight: 500;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+
+.section__container_outer .sections .sections__container-of-several-elements .section__container .products-menu li {
+  margin-bottom: 1rem;
+}
+
+.section__container_outer .sections .sections__container-of-several-elements .section__container .products-menu li .product-name {
+  font-size: 16px;
+}
+
+.section__container_outer .sections .sections__container-of-several-elements .section__container .delete-section-btn.remove-mode {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+
+.section__container_outer .sections .sections__container-of-several-elements .section__container .delete-section-btn {
+  width: 1.3em;
+  height: 1.3em;
+  position: absolute;
+  top: 0;
+  right: 20%;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+
+.section__container_outer .sections .sections__container-of-several-elements .section__container .delete-section-btn .delete-section-btn-relative {
+  position: relative;
+  width: inherit;
+  height: inherit;
+}
+
+.section__container_outer .sections .sections__container-of-several-elements .section__container .delete-section-btn .delete-section-btn-relative span {
+  display: block;
+  height: 100%;
+  width: .1em;
+  background-color: #000;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+
+.section__container_outer .sections .sections__container-of-several-elements .section__container .delete-section-btn .delete-section-btn-relative span::hover + .delete-section-btn-45, .section__container_outer .sections .sections__container-of-several-elements .section__container .delete-section-btn .delete-section-btn-relative span::hover + .delete-section-btn-135 {
+  background-color: red;
+}
+
+.section__container_outer .sections .sections__container-of-several-elements .section__container .delete-section-btn .delete-section-btn-relative .delete-section-btn-45 {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.section__container_outer .sections .sections__container-of-several-elements .section__container .delete-section-btn .delete-section-btn-relative .delete-section-btn-135 {
+  -webkit-transform: rotate(135deg);
+          transform: rotate(135deg);
+}
+
+.editing-buttons__container_wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+.editing-buttons__container_wrapper .editing-buttons__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.editing-buttons__container_wrapper .editing-buttons__container .edit-btn {
+  background-color: #E5E5E5;
+  padding: .5rem 1rem;
+  font-size: 1em;
+}
+
+.editing-buttons__container_wrapper .editing-buttons__container .activate-delete-mode-btn.edit-mode, .editing-buttons__container_wrapper .editing-buttons__container .add-new-type-btn.edit-mode {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+
+.editing-buttons__container_wrapper .editing-buttons__container .activate-delete-mode-btn, .editing-buttons__container_wrapper .editing-buttons__container .add-new-type-btn {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+
+.editing-buttons__container_wrapper .editing-buttons__container .activate-delete-mode-btn {
+  font-weight: 600;
+  margin-top: 1.5em;
+  color: red;
+  font-size: 1em;
+}
+
+.editing-buttons__container_wrapper .editing-buttons__container .add-new-type-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  max-width: 8rem;
+  width: 100%;
+  margin-top: 1.5em;
+  font-size: 1em;
+  color: #A5A5A5;
+}
+
+@-webkit-keyframes expandBefore {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 1.5rem;
+  }
+}
+
+@keyframes expandBefore {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .section__container_outer section.sections {
+    -ms-grid-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .section__container_outer section.sections {
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+  }
+}
+/*# sourceMappingURL=sections.css.map */
