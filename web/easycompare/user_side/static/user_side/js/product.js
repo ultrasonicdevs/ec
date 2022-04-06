@@ -1,8 +1,4 @@
 class Filter extends Block {
-    constructor(filtersInfo) {
-        super();
-        this.filtersInfo = filtersInfo;
-    }
     displayCards(productsJSON) {
         const productsContainer = document.querySelector('#products');
         productsContainer.innerHTML = '';
@@ -65,12 +61,12 @@ class Filter extends Block {
         let startValue = Math.min.apply(null, input),
             endValue = Math.max.apply(null, input);
 
-        const range = document.getElementById('slider-round'),
+        const range = document.querySelector('#slider-round'),
             inputMin = document.getElementById('min'),
             inputMax = document.getElementById('max');
         const inputs = [inputMin, inputMax];
         noUiSlider.create(range, {
-            start: [inputMin, inputMax],
+            start: [startValue, endValue],
             connect: true,
             range: {
                 'min': startValue,
@@ -90,73 +86,29 @@ class Filter extends Block {
         });
     }
 
+
     async getProducts() {
         const typeID = document.URL.replace(`${location.protocol}//${location.host}/`, ''),
-            typeInfo = await new Filter().getJSON(`${location.protocol}//${location.host}/api/product-types/${typeID}`, "GET", null),
+            typeInfo = await new Filter().getJSON(`${location.protocol}//${location.host}/api/product-types/${typeID}filters/`, "GET", null),
             productsJSON = await new Filter().getJSON(`${location.protocol}//${location.host}/api/product-types/${typeID}products/`, "GET", null);
-        console.log(typeInfo);
+
+
+        // console.log(typeInfo);
         const container = document.querySelector('#characteristics');
 
         document.title = `${typeInfo.name} | Easy Compare`;
-        console.log(productsJSON);
-        console.log(typeInfo);
-
-
-        let responseList = [];
-        typeInfo.attributes.forEach(attribute => {
-            let filterGroup = {},
-                filterGroupAttributes = [];
-            productsJSON.forEach(product => {
-                for (let attributeIndex in product.attributes) {
-                    if (attribute.verbose_name === product.attributes[attributeIndex].verbose_name) {
-                        filterGroupAttributes.push(product.attributes[attributeIndex].value);
-                    }
-                    filterGroup = {
-                        'filter_group_name': attribute.verbose_name,
-                        'attributes': [...new Set(filterGroupAttributes)]
-                    };
-                }
-            });
-            responseList.push(filterGroup);
-        });
-
-        this.filtersInfo = {
-            'response': responseList
-        };
-        console.log(this.filtersInfo);
-
 
         // generate product attributes
-        typeInfo.attributes.forEach(attribute => {
+        typeInfo.forEach(characteristic => {
             const attr = document.createElement('div'),
-                title = document.createElement('h4'),
-                values = document.createElement('ul');
-
+                title = document.createElement('h4');
             attr.className = 'characteristic';
             attr.appendChild(title);
-            attr.appendChild(values)
+
             title.style.padding = '.5rem 0 0 0';
             container.appendChild(attr);
-            title.appendChild(document.createTextNode(attribute.verbose_name));
-
-            if (attribute.verbose_name !== 'Цена') {
-                title.addEventListener('click', function (event) {
-                    filtersInfo.response.forEach(attribute => {
-                        if (event.target.innerText === attribute.filter_group_name) {
-                            for (let value of attribute.attributes) {
-                                const li = document.createElement('li');
-                                li.appendChild(document.createTextNode(value));
-                                values.appendChild(li);
-                                li.addEventListener('click', function () {
-                                });
-                            }
-
-                            console.log(attribute.filter_group_name, attribute.attributes);
-                        }
-                    });
-                });
-            }
-            else {
+            title.appendChild(document.createTextNode(characteristic.filter_group_name));
+            if (characteristic.filter_group_name === "Цена") {
                 const slider = document.createElement('div'),
                     label = document.createElement('label'),
                     inputMin = document.createElement('input'),
@@ -182,23 +134,38 @@ class Filter extends Block {
                 label.appendChild(inputMin);
                 label.appendChild(h5);
                 label.appendChild(inputMax);
+
+                new Filter().rangeSliderInit(characteristic.attributes, productsJSON);
+            }
+            else {
+                const values = document.createElement('ul');
+                attr.appendChild(values);
+                values.style.display = 'none';
+                for (let valueIndex in characteristic.attributes) {
+                    const value = document.createElement('li');
+                    let liActive = false;
+                    value.addEventListener('click', () => {
+                        if (liActive === false) {
+                            liActive = true;
+                        } else {
+                            liActive = false;
+                        }
+                    });
+                    value.appendChild(document.createTextNode(characteristic.attributes[valueIndex]))
+                    values.appendChild(value);
+                }
+                title.addEventListener('click', () => {
+                        if (values.style.display === 'none') {
+                            values.style.display = 'block';
+                        } else {
+                            values.style.display = 'none';
+                        }
+
+                });
             }
         });
-
-        // get prises for price filter
-        let priceList = [];
-
-        productsJSON.forEach(product => {
-            // priceList.push(product.price);
-            product.attributes.forEach(attribute => {
-                if (attribute.verbose_name === 'Цена') {
-                    priceList.push(Number(attribute.value));
-                }
-            });
-        });
-        console.log(priceList, productsJSON)
-        new Filter().rangeSliderInit(priceList, productsJSON);
     }
 }
+
 
 window.addEventListener('load', new Filter().getProducts);
