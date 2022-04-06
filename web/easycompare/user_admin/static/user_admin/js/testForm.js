@@ -21,11 +21,10 @@ function fillSections (sections) {
 async function deleteSections () {
   headers = {
     'content-type': 'application/json',
+    'X-CSRF-TOKEN': document.cookie
   };
   await fetch('http://192.168.0.89:8000/api/sections/', {
-    method: 'DELETE',
+    method: 'POST',
     headers: headers,
   })
 }
-
-
