@@ -59,10 +59,13 @@ class MongoWorker:
         return response
 
     def get_product_type(self, type_id):
-        response = self.product_types_coll.find_one({'_id': ObjectId(type_id)})
-        if response:
-            response['_id'] = JSONEncoder().default(response['_id'])
-            return response
+        query = self.product_types_coll.find_one({'_id': ObjectId(type_id)})
+        if query:
+            query['_id'] = JSONEncoder().default(query['_id'])
+            return {
+                'status': 'ok',
+                'response': query,
+            }
         else:
             return {'error': 'Error 404. Object do not exist or something got wrong'}
 
@@ -135,8 +138,7 @@ class JSONEncoder(json.JSONEncoder):
 
 def main():
     w = MongoWorker()
-    w.get_sections()
-    # print(w.get_section('6215397de5dcaa359fc84295'))
+
 
 if __name__ == '__main__':
     main()
