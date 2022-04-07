@@ -6,3 +6,8 @@ class UserAdminView(View):
     @staticmethod
     def get(request):
         return render(request, 'user_admin/user_admin_page.html')
+
+class UserAdminViewTest(View):
+    @staticmethod
+    def get(request):
+        return render(request, 'user_admin/testForm.html')
