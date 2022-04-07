@@ -11,7 +11,7 @@ function uploadFile(e) {
     if (previewImageDiv.innerHTML) {
         let previewName = previewImageDiv.children[0].dataset.imageName;
         let xhr = new XMLHttpRequest();
-        let url = 'http://localhost:8000/api/images/';
+        let url = `${location.protocol}//${location.host}/api/images/`;
         const csrftoken = getCookieByName('csrftoken');
 
         xhr.open('DELETE', url, true);
@@ -37,7 +37,7 @@ function uploadFile(e) {
     const csrftoken = getCookieByName('csrftoken');
 
     let xhr = new XMLHttpRequest();
-    let url = 'http://localhost:8000/api/images/';
+    let url = `${location.protocol}//${location.host}/api/images/`;
 
     xhr.open('POST', url, true);
 

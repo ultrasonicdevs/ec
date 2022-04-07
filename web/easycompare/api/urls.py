@@ -12,6 +12,7 @@ urlpatterns = [
     path('product-types/<str:type_id>/', views.product_type_detail, name='product_type_detail'),
     path('product-types/<str:type_id>/filters/', views.product_type_filters, name='product_type_filters'),
     path('product-types/<str:type_id>/products/', views.products_of_certain_type, name='products-of-certain-type'),
+    path('product-types/<str:type_id>/get-filtered/', views.product_type_get_filtered, name='product_type_get_filtered'),
     path('products/', views.products, name='products'),
     path('products/<str:product_id>/', views.product_detail, name='product_detail'),
     path('images/', views.images, name='images'),

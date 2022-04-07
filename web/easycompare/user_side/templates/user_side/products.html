@@ -1,0 +1,26 @@
+{% extends 'user_side/base.html' %}
+{% load static %}
+
+{% block optional_links %}
+    <link rel="stylesheet" href="{% static 'user_side/css/filter.css' %}">
+    <link rel="stylesheet" href="{% static 'user_side/css/product.css' %}">
+    <link rel="stylesheet" href="{% static 'user_side/libs/noUiSlider-15.5.1/dista/nouislider.css' %}">
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'user_side/js/rangeControl.js' %}"></script>
+    <script type="module" src="{% static 'user_side/libs/noUiSlider-15.5.1/dista/nouislider.js' %}"></script>
+    <script src="{% static 'user_side/js/product.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<aside>
+    <div class="filet-title__button" style="display: flex; justify-content: space-between; margin-bottom: 1.5rem;">
+    <h3>Фильтры</h3>
+    <button type="button" class="selected-filters">Выбранные фильтры</button>
+    </div>
+    <div id="characteristics">
+    </div>
+</aside>
+<section id="products"></section>
+{% endblock %}

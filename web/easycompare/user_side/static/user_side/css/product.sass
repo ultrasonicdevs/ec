@@ -1,32 +1,26 @@
-*
-  margin: 0
-  padding: 0
-  box-sizing: border-box
+@import "mixinsVariables"
 
-html
-  font-size: 16px
+main
+  @include flex(space-around, flex-start, row, nowrap)
 
-.content
-  display: flex
-  flex-direction: column
-  justify-content: space-between
-  width: 18rem
-  height: 21rem
+  #products
+    width: $main-width - $aside-width
+    margin-left: 2rem
+    @include flex(flex-start, flex-start, row, wrap)
 
-.product-image
-  border-radius: 1.25rem
+    .container
+      @include flex(space-between, flex-start, column, nowrap)
+      width: 18rem
+      height: 21rem
 
-.description
-  margin-left: .75rem
+      .product-image
+        width: 15.625rem
+        height: 15.625rem
 
-.manufacturer
-  font-weight: 400
-  font-size: 1rem
-  color: #B0B0B0
+        border-radius: 1.25rem
 
-.product-name
-  font-size: 1.25rem
-  font-weight: 600
+      .description
+        margin-left: .75rem
 
-.price
-  font-weight: 400
+        .price
+          font-weight: 400

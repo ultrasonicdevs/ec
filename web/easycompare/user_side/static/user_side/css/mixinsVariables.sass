@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700&display=swap')
+
+
+$main-width: 75rem
+$nav-width: $main-width + 2rem
+$aside-width: 14.5rem
+
+$nav-height: 4rem
+$section-height: 4rem * 6
+
+$main-margin: $nav-height + 3rem
+
+$icon-size: 1.5rem
+
+
+@mixin font($font-size, $font-weight)
+  font-size: $font-size
+  font-weight: $font-weight
+  text-decoration: none
+
+@mixin flex($justify-content, $align-items, $flex-direction, $flex-wrap)
+  display: flex
+  justify-content: $justify-content
+  align-items: $align-items
+  flex-direction: $flex-direction
+  flex-wrap: $flex-wrap

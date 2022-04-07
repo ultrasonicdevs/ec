@@ -1,4 +1,5 @@
 import json
+from multiprocessing import context
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from ec_admin.mongoworker import MongoWorker
@@ -68,4 +69,9 @@ def get_parent_sections(request):
         return JsonResponse(worker.get_sections())
 
 def facets(request):
-    return render(request, 'ec_admin/facets.html', {'active_nav': 'facets'})
+    worker = MongoWorker()
+    context = {
+        'active_nav': 'facets',
+        'types': worker.get_product_types()['response']
+        }
+    return render(request, 'ec_admin/facets.html', context)
