@@ -1,16 +1,10 @@
-class navBar extends Block {
-    //TODO: write changeProductTypes method
-    changeProductType() {
+class NavBar extends Block {
+    async renderProductTypes(event) {
+        let typeID = event.target.id;
 
-    }
-
-
-    async productTypesDisplay(event) {
         ulProductTypes.innerHTML = '';
         ulProductTypes.style.display = 'none';
         ulProductTypes.style.opacity = '0';
-        let typeID = event.target.id;
-        console.log(typeID);
         sectionsListHTML.style.flexWrap = 'nowrap';
         sectionsListHTML.style.height = '100%';
         sectionsListHTML.style.flexBasis = '30%';
@@ -22,15 +16,13 @@ class navBar extends Block {
                 section.className += ' grey';
             }
         });
-
-        const sectionAct = document.getElementById(typeID);
+        const productTypesList = await new NavBar().getJSON(`${location.protocol}//${location.host}/api/sections/${typeID}/product-types/`, "GET", null),
+            sectionAct = document.getElementById(typeID);
         sectionAct.className = 'section act';
-        const productTypesList = await new navBar().getJSON(`${location.protocol}//${location.host}/api/sections/${typeID}/product-types/`, "GET", null);
-        console.log(productTypesList);
         for (let productType of productTypesList) {
-            let liProductType = document.createElement('li');
+            const liProductType = document.createElement('li'),
+                link = document.createElement('a');
             liProductType.id = productType.id;
-            let link = document.createElement('a');
             link.href = `${location.protocol}//${location.host}/${liProductType.id}/`;
             link.appendChild(document.createTextNode(productType.name));
             liProductType.appendChild(link);
@@ -38,36 +30,33 @@ class navBar extends Block {
         }
         ulProductTypes.style.display = 'block';
         setTimeout(() => {
-
             ulProductTypes.style.opacity = '1';
-        }, 100);
+        });
     }
 
 
-    //TODO: write changeSections method
-    changeSections() {
-
+    async generateSections() {
+        const sectionList = await new NavBar().getJSON(`${location.protocol}//${location.host}/api/sections/`, "GET", null);
+        for (let section of sectionList) {
+            let liSection = document.createElement('li');
+            liSection.className = 'section';
+            liSection.id = section.id;
+            liSection.appendChild(document.createTextNode(section.name));
+            sectionsListHTML.appendChild(liSection);
+        }
+        [...document.getElementsByClassName('section')].forEach(section => {
+                section.addEventListener('click', new NavBar().renderProductTypes);
+        });
     }
 
 
-    async sectionsDisplay() {
+    renderSections() {
         if (document.getElementById('form-btn').checked === true) {
-            const sectionList = await new navBar().getJSON(`${location.protocol}//${location.host}/api/sections/`, "GET", null);
-            console.log(sectionList)
-            for (let section of sectionList) {
-                let liSection = document.createElement('li');
-                liSection.className = 'section';
-                liSection.id = section.id;
-                liSection.appendChild(document.createTextNode(section.name));
-                sectionsListHTML.appendChild(liSection);
-            }
+            new NavBar().generateSections();
+            // console.log(new NavBar().generateSections());
             setTimeout(() => {
                 searchPanel.style.display = 'block';
                 searchPanel.style.opacity = '1';
-            });
-
-            [...document.getElementsByClassName('section')].forEach(section => {
-                section.addEventListener('click', new navBar().productTypesDisplay);
             });
             sectionsListHTML.style.flexWrap = 'wrap';
             sectionsListHTML.style.height = '24rem';
@@ -88,7 +77,8 @@ const searchBtn = document.querySelector('#form-btn'),
     searchPanel = document.querySelector('.search-panel'),
     sectionsListHTML = document.getElementById('section-list'),
     ulProductTypes = document.getElementById('product-type-list');
-searchBtn.addEventListener('click', new navBar().sectionsDisplay);
+searchBtn.addEventListener('click', new NavBar().renderSections);
+
 
 window.addEventListener('load', function () {
     const checkbox = document.querySelector('#form-btn');

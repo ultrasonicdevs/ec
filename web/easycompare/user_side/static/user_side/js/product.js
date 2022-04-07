@@ -145,11 +145,13 @@ class Filter extends Block {
                     const value = document.createElement('li');
                     let liActive = false;
                     value.addEventListener('click', () => {
-                        if (liActive === false) {
-                            liActive = true;
-                        } else {
-                            liActive = false;
-                        }
+                        // if (liActive === false) {
+                        //     liActive = true;
+                        // } else {
+                        //     liActive = false;
+                        //     value.addEventListener('click', )
+                        // }
+                        liActive = liActive === false;
                     });
                     value.appendChild(document.createTextNode(characteristic.attributes[valueIndex]))
                     values.appendChild(value);
