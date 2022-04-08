@@ -5,46 +5,96 @@ aside .selected-filters {
   color: #A5A5A5;
   font-size: 0.9rem;
   font-weight: 500;
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 .characteristic {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  width: 100%; }
-  .characteristic ul {
-    margin: 0.5rem 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    padding: 0; }
-    .characteristic ul li {
-      margin: 0.2rem;
-      padding: 0;
-      font-size: 1rem;
-      font-weight: 400;
-      text-decoration: none;
-      color: #B0B0B0; }
-  .characteristic .value {
-    width: 100%;
-    margin: 0.5rem 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-direction: row;
-    flex-wrap: nowrap; }
-  .characteristic label {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    width: 70%;
-    margin: 0 auto; }
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  width: 100%;
+}
+
+.characteristic ul {
+  margin: .5rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  padding: 0;
+}
+
+.characteristic ul li {
+  margin: .2rem;
+  padding: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: none;
+  color: #B0B0B0;
+}
+
+.characteristic .value {
+  width: 100%;
+  margin: .5rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+}
+
+.characteristic label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  width: 70%;
+  margin: 0 auto;
+}
 
 input[type=number] {
   border: none;
@@ -52,26 +102,32 @@ input[type=number] {
   height: 1rem;
   width: 4rem;
   text-align: center;
-  border-bottom: 0.0625rem solid #B0B0B0; }
+  border-bottom: .0625rem solid #B0B0B0;
+}
 
 #slider-round {
   width: 80%;
-  height: 0.25rem;
-  margin: 0 auto 1rem auto; }
+  height: .25rem;
+  margin: 0 auto 1rem auto;
+}
 
 #slider-round .noUi-connect {
-  background: #000000; }
+  background: #000000;
+}
 
 #slider-round .noUi-handle {
-  height: 0.75rem;
-  width: 0.75rem;
-  top: -0.3rem;
-  right: -0.5rem;
+  height: .75rem;
+  width: .75rem;
+  top: -.3rem;
+  right: -.5rem;
   border-radius: 50%;
   border: none;
-  box-shadow: none;
-  background-color: #000000; }
-  #slider-round .noUi-handle:before, #slider-round .noUi-handle:after {
-    display: none; }
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  background-color: #000000;
+}
 
+#slider-round .noUi-handle:before, #slider-round .noUi-handle:after {
+  display: none;
+}
 /*# sourceMappingURL=filter.css.map */

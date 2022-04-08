@@ -146,7 +146,7 @@ h2 {
   transition: 0.5s ease;
 }
 
-.section__container_outer .sections .sections__container-of-several-elements .section__container .delete-section-btn {
+.section__container_outer .sections .sections__container-of-several-elements .section__container .cross-btn {
   width: 1.3em;
   height: 1.3em;
   position: absolute;
@@ -158,13 +158,14 @@ h2 {
   transition: 0.5s ease;
 }
 
-.section__container_outer .sections .sections__container-of-several-elements .section__container .delete-section-btn .delete-section-btn-relative {
+.section__container_outer .sections .sections__container-of-several-elements .section__container .cross-btn .cross-btn-relative {
   position: relative;
   width: inherit;
   height: inherit;
 }
 
-.section__container_outer .sections .sections__container-of-several-elements .section__container .delete-section-btn .delete-section-btn-relative span {
+.section__container_outer .sections .sections__container-of-several-elements .section__container .cross-btn .cross-btn-relative::after, .section__container_outer .sections .sections__container-of-several-elements .section__container .cross-btn .cross-btn-relative::before {
+  content: '';
   display: block;
   height: 100%;
   width: .1em;
@@ -176,16 +177,12 @@ h2 {
   transition: 0.5s ease;
 }
 
-.section__container_outer .sections .sections__container-of-several-elements .section__container .delete-section-btn .delete-section-btn-relative span::hover + .delete-section-btn-45, .section__container_outer .sections .sections__container-of-several-elements .section__container .delete-section-btn .delete-section-btn-relative span::hover + .delete-section-btn-135 {
-  background-color: red;
-}
-
-.section__container_outer .sections .sections__container-of-several-elements .section__container .delete-section-btn .delete-section-btn-relative .delete-section-btn-45 {
+.section__container_outer .sections .sections__container-of-several-elements .section__container .cross-btn .cross-btn-relative::after {
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
 }
 
-.section__container_outer .sections .sections__container-of-several-elements .section__container .delete-section-btn .delete-section-btn-relative .delete-section-btn-135 {
+.section__container_outer .sections .sections__container-of-several-elements .section__container .cross-btn .cross-btn-relative::before {
   -webkit-transform: rotate(135deg);
           transform: rotate(135deg);
 }
