@@ -63,7 +63,12 @@ class MongoWorker:
 
         return {
                 'status': 'ok',
-                'response': list(query),
+                'response': {
+                    'product_type_name': self.get_product_type(type_id)['response']['name'],
+                    'product_type_filters': list(query),
+                }
+                
+                
             }
 
     def get_sections(self):
