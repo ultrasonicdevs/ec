@@ -87,6 +87,13 @@ class Filter extends Block {
     }
 
 
+    async addValue() {
+       // const typeID = document.URL.replace(`${location.protocol}//${location.host}/`, ''),
+           // filterInfo = await new Filter().getJSON(`${location.protocol}//${location.host}/api/product-types/${typeID}get-filtered/`, "GET", null)
+        // console.log(filterInfo);
+    }
+
+
     async getProducts() {
         const typeID = document.URL.replace(`${location.protocol}//${location.host}/`, ''),
             typeInfo = await new Filter().getJSON(`${location.protocol}//${location.host}/api/product-types/${typeID}filters/`, "GET", null),
@@ -95,7 +102,6 @@ class Filter extends Block {
 
         // console.log(typeInfo);
         const container = document.querySelector('#characteristics');
-
         document.title = `${typeInfo.name} | Easy Compare`;
 
         // generate product attributes
@@ -151,6 +157,7 @@ class Filter extends Block {
                         //     liActive = false;
                         //     value.addEventListener('click', )
                         // }
+                        value.addEventListener('click', new Filter().addValue(title.innerText, value.innerText));
                         liActive = liActive === false;
                     });
                     value.appendChild(document.createTextNode(characteristic.attributes[valueIndex]))

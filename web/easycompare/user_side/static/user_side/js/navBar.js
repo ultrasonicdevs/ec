@@ -5,9 +5,9 @@ class NavBar extends Block {
         ulProductTypes.innerHTML = '';
         ulProductTypes.style.display = 'none';
         ulProductTypes.style.opacity = '0';
-        sectionsListHTML.style.flexWrap = 'nowrap';
-        sectionsListHTML.style.height = '100%';
-        sectionsListHTML.style.flexBasis = '30%';
+        ulSectionsList.style.flexWrap = 'nowrap';
+        ulSectionsList.style.height = '100%';
+        ulSectionsList.style.flexBasis = '30%';
 
         [...document.getElementsByClassName('section')].forEach(section => {
             if (section.className === 'section act') {
@@ -42,7 +42,7 @@ class NavBar extends Block {
             liSection.className = 'section';
             liSection.id = section.id;
             liSection.appendChild(document.createTextNode(section.name));
-            sectionsListHTML.appendChild(liSection);
+            ulSectionsList.appendChild(liSection);
         }
         [...document.getElementsByClassName('section')].forEach(section => {
                 section.addEventListener('click', new NavBar().renderProductTypes);
@@ -55,29 +55,29 @@ class NavBar extends Block {
             new NavBar().generateSections();
             // console.log(new NavBar().generateSections());
             setTimeout(() => {
-                searchPanel.style.display = 'block';
-                searchPanel.style.opacity = '1';
+                    modalWindow.style.display = 'block';
+                    modalWindow.style.opacity = '1';
             });
-            sectionsListHTML.style.flexWrap = 'wrap';
-            sectionsListHTML.style.height = '24rem';
-            sectionsListHTML.style.flexBasis = '70%';
+            ulSectionsList.style.flexWrap = 'wrap';
+            ulSectionsList.style.height = '24rem';
+            ulSectionsList.style.flexBasis = '70%';
         } else {
-            searchPanel.style.opacity = '0';
+                modalWindow.style.opacity = '0';
             setTimeout(() => {
-                searchPanel.style.display = 'none';
+                    modalWindow.style.display = 'none';
             });
-            sectionsListHTML.innerHTML = '';
+            ulSectionsList.innerHTML = '';
             ulProductTypes.innerHTML = '';
         }
     }
 }
 
 
-const searchBtn = document.querySelector('#form-btn'),
-    searchPanel = document.querySelector('.search-panel'),
-    sectionsListHTML = document.getElementById('section-list'),
+const burgerBtn = document.querySelector('#form-btn'),
+    modalWindow = document.querySelector('.search-panel'),
+    ulSectionsList = document.getElementById('section-list'),
     ulProductTypes = document.getElementById('product-type-list');
-searchBtn.addEventListener('click', new NavBar().renderSections);
+burgerBtn.addEventListener('click', new NavBar().renderSections);
 
 
 window.addEventListener('load', function () {
