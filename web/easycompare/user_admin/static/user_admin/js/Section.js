@@ -2,6 +2,7 @@ class Section extends Block {
   constructor (options) { // id, name, parent
     super(options); // id, name
     this.parentContainer = options.parent;
+    this.urlToSection = `${location.protocol}//${location.host}/api/sections/${this.id}/`;
 
     this.createSection ();
   }
@@ -42,8 +43,10 @@ class Section extends Block {
     this.parentContainer.appendChild(child);
   }
 
-  removeChildFromParent (child) {
+  async removeChildFromParent (child) {
+    const deleteResponse = await this.sendRequest(this.urlToSection, 'DELETE', null, true);
     this.parentContainer.removeChild(child);
+    if (deleteResponse.status === 'ok') alert('Раздел удален');
   }
 }
 

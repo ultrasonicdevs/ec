@@ -70,7 +70,7 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
 }
 
-.popup__background .popup__container .popup__container_inner .type-name {
+.popup__background .popup__container .popup__container_inner .product-type-name {
   max-width: 70%;
   font-weight: 500;
 }
@@ -90,7 +90,7 @@ h1, h2, h3, h4, h5, h6 {
   width: calc(2em + 1vw);
 }
 
-.popup__background .popup__container .popup__container_inner .popup__buttons {
+.popup__background .popup__container .popup__container_inner .popup-edit-buttons__container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -99,23 +99,23 @@ h1, h2, h3, h4, h5, h6 {
           align-items: center;
 }
 
-.popup__background .popup__container .popup__container_inner .popup__buttons button {
+.popup__background .popup__container .popup__container_inner .popup-edit-buttons__container button {
   font-size: .35em;
   color: #A5A5A5;
 }
 
-.popup__background .popup__container .popup__container_inner .popup__buttons .save-btn:disabled {
+.popup__background .popup__container .popup__container_inner .popup-edit-buttons__container .save-btn:disabled {
   color: #A5A5A5;
   background-color: #F5F5F5;
 }
 
-.popup__background .popup__container .popup__container_inner .popup__buttons .save-btn {
+.popup__background .popup__container .popup__container_inner .popup-edit-buttons__container .save-btn {
   background-color: #E5E5E5;
   color: #000;
   padding: calc(.5 * calc(1vw + 1rem));
 }
 
-.popup__background .popup__container .popup__container_inner .popup__buttons .add-filter-btn {
+.popup__background .popup__container .popup__container_inner .popup-edit-buttons__container .add-filter-btn {
   margin-left: 2em;
   max-width: -webkit-min-content;
   max-width: -moz-min-content;
@@ -264,19 +264,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media screen and (min-width: 1024px) {
-  .type-name {
+  .product-type-name {
     font-size: 1em;
   }
 }
 
 @media screen and (max-width: 1024px) {
-  .type-name {
+  .product-type-name {
     font-size: .8em;
   }
 }
 
 @media screen and (max-width: 768px) {
-  .type-name {
+  .product-type-name {
     font-size: .5em;
   }
 }
