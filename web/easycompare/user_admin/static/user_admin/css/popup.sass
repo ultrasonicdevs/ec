@@ -1,0 +1,166 @@
+.popup__background
+  position: absolute
+  left: 0
+  right: 0
+  top: 0
+  bottom: 0
+  background-color: rgba(0,0,0,.8)
+  display: flex
+  align-items: center
+  justify-content: center
+
+  .popup__container
+    background-color: #fff
+    padding: calc(2vw + 2vh)
+    font-size: calc( (100vw - 320px)/(1200 - 320) * (49 - 16) + 1rem);
+    position: relative
+    transtition: .5s;
+
+    .cross-btn
+      width: 2em
+      height: 2em
+      position: absolute
+      top: 1.3em
+      right: 1.3em
+
+      // Крестик
+      .cross-btn-relative
+        position: relative
+        width: inherit
+        height: inherit
+
+        &::after, &::before
+          content: ''
+          display: block
+          height: 100%
+          width: .15em
+          background-color: #000
+          position: absolute
+          left: 50%
+          top: 0
+
+        &::after
+          transform: rotate(45deg)
+
+        &::before
+          transform: rotate(135deg)
+
+    .product-form
+
+      .product-type-name::placeholder
+        color: #A5A5A5
+
+      .product-type-name
+        font-weight: 600
+        font-size: 1.2em
+        max-width: 80%
+
+      .filter__container
+        display: flex
+        flex-direction: column
+        margin: 1em 0
+
+      .product-edit-btns__container
+        position: absolute
+        bottom: 4vh
+        display: flex
+        align-items: center
+        
+        .save-product-btn:disabled
+          background-color: #F5F5F5
+          color: #A5A5A5
+
+        .save-product-btn
+          padding: .8em 2em
+          background-color: #E5E5E5
+          color: #000
+          font-weight: 500
+        
+        .add-filter-btn
+          margin-left: 2em
+          color: #A5A5A5
+          max-width: min-content
+          font-weight: 500
+
+.filter__container_inner:first-child
+  margin-top: 0
+  
+.filter__container_inner
+  position: relative
+  font-size: 1rem
+  margin-top: 2em
+
+  .filter-close-btn
+    width: 1.3em
+    height: 1.3em
+    position: absolute
+    top: 0
+    right: 0
+
+    // Крестик
+    .filter-close-btn-relative
+      position: relative
+      width: inherit
+      height: inherit
+
+      &::after, &::before
+        content: ''
+        display: block
+        height: 100%
+        width: .1em
+        background-color: #000
+        position: absolute
+        left: 50%
+        top: 0
+
+      &::after
+        transform: rotate(45deg)
+
+      &::before
+        transform: rotate(135deg)
+
+  .filter-name::placeholder
+    color: #A5A5A5
+
+  .filter-name
+    font-size: 1.2em
+    border-bottom: 1px solid #A5A5A5
+    max-width: 80%
+    width: 100%
+
+  .filter-settings__container
+    background-color: #F5F5F5
+    margin: 2em 0
+    padding: 1em
+
+    h2
+      font-size: 1.3em
+
+    .filter-type__container
+      margin-top: 2em
+
+      h3
+        font-size: 1.2em
+        margin-top: 1em
+
+      .filter-value-type
+        margin-top: .5em
+        
+        .radio-label
+          font-weight: 600
+          margin-left: .7em
+
+
+@media screen and (min-width: 426px)
+  .popup__container
+    min-width: 60vw
+    min-height: calc(5vh + 30vw)
+  .save-product-btn, .add-filter-btn
+    font-size: .4em
+
+@media screen and (max-width: 425px)
+    .popup__container
+      min-height: 60vw
+      min-width: calc(5vh + 30vw)
+    .save-product-btn, .add-filter-btn
+      font-size: .7em
