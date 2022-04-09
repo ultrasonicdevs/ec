@@ -7,6 +7,13 @@ aside .selected-filters {
   font-weight: 500;
   text-decoration: none; }
 
+#characteristics {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  flex-wrap: nowrap; }
+
 .characteristic {
   display: flex;
   justify-content: flex-start;
@@ -29,6 +36,11 @@ aside .selected-filters {
       font-weight: 400;
       text-decoration: none;
       color: #B0B0B0; }
+      .characteristic ul li[data-selected="true"] {
+        color: #000;
+        margin-left: 0.75rem; }
+      .characteristic ul li[data-selected="false"] {
+        color: #B0B0B0; }
   .characteristic .value {
     width: 100%;
     margin: 0.5rem 0;

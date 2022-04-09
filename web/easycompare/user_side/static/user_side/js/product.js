@@ -2,7 +2,7 @@ class Filter extends Block {
     displayCards(productsJSON) {
         const productsContainer = document.querySelector('#products');
         productsContainer.innerHTML = '';
-        productsJSON.products.forEach(product => {
+        productsJSON.forEach(product => {
             const link = document.createElement('a'),
                 cardContainer = document.createElement('div'),
                 image = document.createElement('img'),
@@ -17,11 +17,9 @@ class Filter extends Block {
             image.src = product.preview_url;
             description.className = 'description';
             manufacturer.className = 'manufacturer';
-            // manufacturer.appendChild(document.createTextNode(product.manufacturer));
             name.className = 'product-name';
             name.appendChild(document.createTextNode(product.name));
             price.className = 'price';
-            // price.appendChild(document.createTextNode(product.price));
             cardContainer.appendChild(image);
             cardContainer.appendChild(description);
             description.appendChild(manufacturer);
@@ -53,7 +51,7 @@ class Filter extends Block {
                 }
             });
         });
-        new Filter().displayCards({'products': productsArray});
+        new Filter().displayCards(productsArray);
     }
 
 
@@ -88,9 +86,36 @@ class Filter extends Block {
 
 
     async addValue() {
-       // const typeID = document.URL.replace(`${location.protocol}//${location.host}/`, ''),
-           // filterInfo = await new Filter().getJSON(`${location.protocol}//${location.host}/api/product-types/${typeID}get-filtered/`, "GET", null)
-        // console.log(filterInfo);
+        let selectedValues = [];
+        [...document.getElementsByClassName('filter-value')].forEach(elem => {
+            if (elem.getAttribute("data-selected") === "true") {
+                selectedValues.push({
+                    value: elem.innerText,
+                    filter_group_name: elem.getAttribute("data-filter-group-name")
+                });
+            }
+        });
+        let headers = {"Selected-Filters": []};
+        selectedValues.forEach(elem => {
+            headers["Selected-Filters"].push({filter_group_name: elem.filter_group_name, attributes: []});
+        });
+        for (let group of headers["Selected-Filters"]) {
+            selectedValues.forEach(elem => {
+                if (group.filter_group_name === elem.filter_group_name) {
+                    group.attributes.push(elem.value);
+                }
+            });
+        }
+        console.log(headers);
+        const typeID = document.URL.replace(`${location.protocol}//${location.host}/`, ''),
+            filtered = await new Filter().getJSON(
+                `${location.protocol}//${location.host}/api/product-types/${typeID}get-filtered/`,
+                "GET",
+                null,
+                headers
+            )
+        console.log(filtered);
+        // new Filter().displayCards(filtered);
     }
 
 
@@ -102,10 +127,10 @@ class Filter extends Block {
 
         // console.log(typeInfo);
         const container = document.querySelector('#characteristics');
-        document.title = `${typeInfo.name} | Easy Compare`;
+        document.title = `${typeInfo.product_type_name} | Easy Compare`;
 
         // generate product attributes
-        typeInfo.forEach(characteristic => {
+        typeInfo.product_type_filters.forEach(characteristic => {
             const attr = document.createElement('div'),
                 title = document.createElement('h4');
             attr.className = 'characteristic';
@@ -115,6 +140,7 @@ class Filter extends Block {
             container.appendChild(attr);
             title.appendChild(document.createTextNode(characteristic.filter_group_name));
             if (characteristic.filter_group_name === "Цена") {
+                attr.style.order = "-1";
                 const slider = document.createElement('div'),
                     label = document.createElement('label'),
                     inputMin = document.createElement('input'),
@@ -142,34 +168,24 @@ class Filter extends Block {
                 label.appendChild(inputMax);
 
                 new Filter().rangeSliderInit(characteristic.attributes, productsJSON);
-            }
-            else {
+            } else {
                 const values = document.createElement('ul');
                 attr.appendChild(values);
                 values.style.display = 'none';
                 for (let valueIndex in characteristic.attributes) {
                     const value = document.createElement('li');
-                    let liActive = false;
-                    value.addEventListener('click', () => {
-                        // if (liActive === false) {
-                        //     liActive = true;
-                        // } else {
-                        //     liActive = false;
-                        //     value.addEventListener('click', )
-                        // }
-                        value.addEventListener('click', new Filter().addValue(title.innerText, value.innerText));
-                        liActive = liActive === false;
-                    });
+                    value.dataset.filterGroupName = title.innerText;
+                    value.dataset.selected = "false";
+                    value.className = "filter-value";
                     value.appendChild(document.createTextNode(characteristic.attributes[valueIndex]))
                     values.appendChild(value);
+                    value.addEventListener('click', () => {
+                        value.dataset.selected === "false" ? value.setAttribute("data-selected", "true") : value.setAttribute("data-selected", "false");
+                       new Filter().addValue()
+                    });
                 }
                 title.addEventListener('click', () => {
-                        if (values.style.display === 'none') {
-                            values.style.display = 'block';
-                        } else {
-                            values.style.display = 'none';
-                        }
-
+                        values.style.display === 'none' ? values.style.display = 'block' : values.style.display = 'none';
                 });
             }
         });

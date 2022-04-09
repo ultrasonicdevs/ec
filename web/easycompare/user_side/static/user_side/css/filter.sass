@@ -7,6 +7,9 @@ aside
     color: #A5A5A5
     @include font(.9rem, 500)
 
+#characteristics
+  @include flex(flex-start, flex-start, column, nowrap)
+
 .characteristic
   @include flex(flex-start, flex-start, column, nowrap)
   width: 100%
@@ -20,6 +23,12 @@ aside
       padding: 0
       @include font(1rem, 400)
       color: #B0B0B0
+      &[data-selected = "true"]
+        color: #000
+        margin-left: .75rem
+
+      &[data-selected = "false"]
+        color: #B0B0B0
 
   .value
     width: 100%
