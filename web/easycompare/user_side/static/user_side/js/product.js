@@ -115,7 +115,7 @@ class Filter extends Block {
                 headers
             )
         console.log(filtered);
-        // new Filter().displayCards(filtered);
+        new Filter().displayCards(filtered);
     }
 
 

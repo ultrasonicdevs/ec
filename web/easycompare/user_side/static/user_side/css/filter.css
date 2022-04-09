@@ -38,7 +38,8 @@ aside .selected-filters {
       color: #B0B0B0; }
       .characteristic ul li[data-selected="true"] {
         color: #000;
-        margin-left: 0.75rem; }
+        margin-left: 1.5rem;
+        font-weight: 600; }
       .characteristic ul li[data-selected="false"] {
         color: #B0B0B0; }
   .characteristic .value {

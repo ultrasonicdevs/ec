@@ -8,15 +8,16 @@ class Block {
         if (header) {
             for (let [key, value] of Object.entries(header)) {
                 console.log(key, value);
-                headers[key] = value;
                 if (typeof value === "object") {
-                    value = encodeURI(JSON.stringify(value))
-                    // console.log(value)
+                    value = encodeURIComponent(JSON.stringify(value))
                 }
+                headers[key] = value;
             }
         }
+
+
         const json = await fetch(url, {
-            method, body,headers
+            method, body, headers
         }).then(res => res.json());
         return json.response;
         }
