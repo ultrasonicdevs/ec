@@ -32,7 +32,8 @@ class Filter {
 
     filterName.className = 'filter-name';
     filterName.placeholder = 'Название фильтра';
-    
+    filterName.name = 'filterName';
+
     filterContainerElement.className = 'filter__container_inner';
     filterContainerElement.id = this.id;
     filterSettingsTitle.className = 'filter-settings-title';
@@ -45,20 +46,20 @@ class Filter {
     filterValueTypeNumber.className = 'filter-value-type';
     radioInputNumber.className = 'radio-input';
     radioInputNumber.type = 'radio';
-    radioInputNumber.id = 'number';
+    radioInputNumber.id = `number-${this.id}`;
     radioInputNumber.name = `type-value-${this.id}`;
     radioLabelNumber.className = 'radio-label';
-    radioLabelNumber.setAttribute('for', 'number');
+    radioLabelNumber.setAttribute('for', `number-${this.id}`);
     radioLabelNumber.textContent = 'Число';
     radioInputNumber.checked = true;
 
     filterValueTypeString.className = 'filter-value-type';
     radioInputString.className = 'radio-input';
     radioInputString.type = 'radio';
-    radioInputString.id = 'string';
+    radioInputString.id = `string-${this.id}`;
     radioInputString.name = `type-value-${this.id}`;
     radioLabelString.className = 'radio-label';
-    radioLabelString.setAttribute('for', 'string');
+    radioLabelString.setAttribute('for', `string-${this.id}`);
     radioLabelString.textContent = 'Строка';
 
     filterCloseBtn.addEventListener('click', () => this.removeChildFromParent(filterContainerElement))

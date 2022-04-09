@@ -18,7 +18,7 @@
 
 .popup__background .popup__container {
   background-color: #fff;
-  padding: calc(2vw + 2vh);
+  padding: calc(1vw + 1rem);
   font-size: calc( (100vw - 320px)/(1200 - 320) * (49 - 16) + 1rem);
   position: relative;
   transtition: .5s;
@@ -59,25 +59,25 @@
           transform: rotate(135deg);
 }
 
-.popup__background .popup__container .product-form .product-type-name::-webkit-input-placeholder {
+.popup__background .popup__container .product-type-name::-webkit-input-placeholder {
   color: #A5A5A5;
 }
 
-.popup__background .popup__container .product-form .product-type-name:-ms-input-placeholder {
+.popup__background .popup__container .product-type-name:-ms-input-placeholder {
   color: #A5A5A5;
 }
 
-.popup__background .popup__container .product-form .product-type-name::-ms-input-placeholder {
+.popup__background .popup__container .product-type-name::-ms-input-placeholder {
   color: #A5A5A5;
 }
 
-.popup__background .popup__container .product-form .product-type-name::placeholder {
+.popup__background .popup__container .product-type-name::placeholder {
   color: #A5A5A5;
 }
 
-.popup__background .popup__container .product-form .product-type-name {
+.popup__background .popup__container .product-type-name {
   font-weight: 600;
-  font-size: 1.2em;
+  font-size: 1em;
   max-width: 80%;
 }
 
@@ -94,7 +94,7 @@
 
 .popup__background .popup__container .product-form .product-edit-btns__container {
   position: absolute;
-  bottom: 4vh;
+  bottom: calc(1vw + 1rem);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -236,7 +236,7 @@
     min-width: calc(5vh + 30vw);
   }
   .save-product-btn, .add-filter-btn {
-    font-size: .7em;
+    font-size: .5em;
   }
 }
 /*# sourceMappingURL=popup.css.map */

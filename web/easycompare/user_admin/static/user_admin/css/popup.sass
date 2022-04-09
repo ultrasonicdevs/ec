@@ -11,7 +11,7 @@
 
   .popup__container
     background-color: #fff
-    padding: calc(2vw + 2vh)
+    padding: calc(1vw + 1rem)
     font-size: calc( (100vw - 320px)/(1200 - 320) * (49 - 16) + 1rem);
     position: relative
     transtition: .5s;
@@ -45,16 +45,15 @@
         &::before
           transform: rotate(135deg)
 
+    .product-type-name::placeholder
+      color: #A5A5A5
+
+    .product-type-name
+      font-weight: 600
+      font-size: 1em
+      max-width: 80%
+
     .product-form
-
-      .product-type-name::placeholder
-        color: #A5A5A5
-
-      .product-type-name
-        font-weight: 600
-        font-size: 1.2em
-        max-width: 80%
-
       .filter__container
         display: flex
         flex-direction: column
@@ -62,7 +61,7 @@
 
       .product-edit-btns__container
         position: absolute
-        bottom: 4vh
+        bottom: calc(1vw + 1rem)
         display: flex
         align-items: center
         
@@ -81,6 +80,8 @@
           color: #A5A5A5
           max-width: min-content
           font-weight: 500
+
+
 
 .filter__container_inner:first-child
   margin-top: 0
@@ -150,7 +151,6 @@
           font-weight: 600
           margin-left: .7em
 
-
 @media screen and (min-width: 426px)
   .popup__container
     min-width: 60vw
@@ -163,4 +163,4 @@
       min-height: 60vw
       min-width: calc(5vh + 30vw)
     .save-product-btn, .add-filter-btn
-      font-size: .7em
+      font-size: .5em
