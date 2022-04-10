@@ -1,5 +1,4 @@
 class Block {
-
     async getJSON (url, method, body, header) {
         let headers = {
                 'Content-Type': 'application/json',
@@ -14,8 +13,6 @@ class Block {
                 headers[key] = value;
             }
         }
-
-
         const json = await fetch(url, {
             method, body, headers
         }).then(res => res.json());

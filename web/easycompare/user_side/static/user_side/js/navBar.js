@@ -8,7 +8,6 @@ class NavBar extends Block {
         ulSectionsList.style.flexWrap = 'nowrap';
         ulSectionsList.style.height = '100%';
         ulSectionsList.style.flexBasis = '30%';
-
         [...document.getElementsByClassName('section')].forEach(section => {
             if (section.className === 'section act') {
                 section.className = 'section grey';
@@ -19,7 +18,7 @@ class NavBar extends Block {
         const productTypesList = await new NavBar().getJSON(`${location.protocol}//${location.host}/api/sections/${typeID}/product-types/`, "GET", null),
             sectionAct = document.getElementById(typeID);
         sectionAct.className = 'section act';
-        for (let productType of productTypesList) {
+        productTypesList.forEach(productType => {
             const liProductType = document.createElement('li'),
                 link = document.createElement('a');
             liProductType.id = productType.id;
@@ -27,7 +26,7 @@ class NavBar extends Block {
             link.appendChild(document.createTextNode(productType.name));
             liProductType.appendChild(link);
             ulProductTypes.appendChild(liProductType);
-        }
+        });
         ulProductTypes.style.display = 'block';
         setTimeout(() => {
             ulProductTypes.style.opacity = '1';
@@ -52,11 +51,10 @@ class NavBar extends Block {
 
     renderSections() {
         if (document.getElementById('form-btn').checked === true) {
-            new NavBar().generateSections();
-            // console.log(new NavBar().generateSections());
+            new NavBar().generateSections().then(r => r)
             setTimeout(() => {
-                    modalWindow.style.display = 'block';
-                    modalWindow.style.opacity = '1';
+                modalWindow.style.display = 'block';
+                modalWindow.style.opacity = '1';
             });
             ulSectionsList.style.flexWrap = 'wrap';
             ulSectionsList.style.height = '24rem';
@@ -64,7 +62,7 @@ class NavBar extends Block {
         } else {
                 modalWindow.style.opacity = '0';
             setTimeout(() => {
-                    modalWindow.style.display = 'none';
+                modalWindow.style.display = 'none';
             });
             ulSectionsList.innerHTML = '';
             ulProductTypes.innerHTML = '';

@@ -70,7 +70,7 @@ input[type=number] {
 #slider-round {
   width: 80%;
   height: 0.25rem;
-  margin: 0 auto 1rem auto; }
+  margin: 0 auto 0.75rem auto; }
 
 #slider-round .noUi-connect {
   background: #000000; }

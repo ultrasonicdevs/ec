@@ -1,0 +1,47 @@
+@import "mixinsVariables"
+#product-detail
+  width: 80%
+  margin: 0 auto
+
+  h1
+    margin: 0 0 3rem 5rem
+
+  .container
+    @include flex(space-between, flex-start, row, nowrap)
+
+    div
+      width: 50%
+      .btns
+        @include flex(flex-start, flex-start, row, nowrap)
+        width: 100%
+        button
+          margin: .25rem
+          padding: 1rem 3rem
+          width: 100%
+          height: 5rem
+          border-radius: 1rem
+
+        .bue
+          background-color: #f7f381
+        .compare
+          background-color: #458cf7
+    img
+      width: 25rem
+      height: 35rem
+      object-fit: cover
+      border-radius: 2rem
+
+    ul
+      width: 100%
+      padding: 2rem
+      margin: 0
+      border-radius: 2rem
+      background-color: #ddd
+
+      li
+        display: flex
+        justify-content: space-between
+        width: 100%
+
+        &:last-child
+          padding: 0

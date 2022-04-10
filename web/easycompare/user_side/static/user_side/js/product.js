@@ -4,7 +4,7 @@ class Filter extends Block {
         productsContainer.innerHTML = '';
         productsJSON.forEach(product => {
             const link = document.createElement('a'),
-                cardContainer = document.createElement('div'),
+                cardContainer = document.createElement('figure'),
                 image = document.createElement('img'),
                 description = document.createElement('div'),
                 manufacturer = document.createElement('h5'),
@@ -61,8 +61,9 @@ class Filter extends Block {
 
         const range = document.querySelector('#slider-round'),
             inputMin = document.getElementById('min'),
-            inputMax = document.getElementById('max');
-        const inputs = [inputMin, inputMax];
+            inputMax = document.getElementById('max'),
+
+            inputs = [inputMin, inputMax];
         noUiSlider.create(range, {
             start: [startValue, endValue],
             connect: true,
@@ -86,7 +87,8 @@ class Filter extends Block {
 
 
     async addValue() {
-        let selectedValues = [];
+        let selectedValues = [],
+            headers = {"Selected-Filters": []};
         [...document.getElementsByClassName('filter-value')].forEach(elem => {
             if (elem.getAttribute("data-selected") === "true") {
                 selectedValues.push({
@@ -95,7 +97,6 @@ class Filter extends Block {
                 });
             }
         });
-        let headers = {"Selected-Filters": []};
         selectedValues.forEach(elem => {
             headers["Selected-Filters"].push({filter_group_name: elem.filter_group_name, attributes: []});
         });
@@ -106,7 +107,6 @@ class Filter extends Block {
                 }
             });
         }
-        console.log(headers);
         const typeID = document.URL.replace(`${location.protocol}//${location.host}/`, ''),
             filtered = await new Filter().getJSON(
                 `${location.protocol}//${location.host}/api/product-types/${typeID}get-filtered/`,
@@ -122,11 +122,9 @@ class Filter extends Block {
     async getProducts() {
         const typeID = document.URL.replace(`${location.protocol}//${location.host}/`, ''),
             typeInfo = await new Filter().getJSON(`${location.protocol}//${location.host}/api/product-types/${typeID}filters/`, "GET", null),
-            productsJSON = await new Filter().getJSON(`${location.protocol}//${location.host}/api/product-types/${typeID}products/`, "GET", null);
+            productsJSON = await new Filter().getJSON(`${location.protocol}//${location.host}/api/product-types/${typeID}products/`, "GET", null),
 
-
-        // console.log(typeInfo);
-        const container = document.querySelector('#characteristics');
+            container = document.querySelector('#characteristics');
         document.title = `${typeInfo.product_type_name} | Easy Compare`;
 
         // generate product attributes
