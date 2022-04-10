@@ -2,13 +2,12 @@
 {% load static %}
 
 {% block optional_links %}
-
+    <link rel="stylesheet" href="{% static 'user_side/css/productDetail.css' %}">
+{% endblock %}
+{% block content %}
+<section id="product-detail"></section>
 {% endblock %}
 
 {% block scripts %}
-
-{% endblock %}
-
-{% block content %}
-<section id=product-detail"></section>
+    <script src="{% static 'user_side/js/productDetail.js' %}"></script>
 {% endblock %}

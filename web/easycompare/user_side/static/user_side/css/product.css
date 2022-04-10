@@ -24,6 +24,7 @@ main {
       main #products .container .product-image {
         width: 15.625rem;
         height: 15.625rem;
+        object-fit: cover;
         border-radius: 1.25rem; }
       main #products .container .description {
         margin-left: 0.75rem; }
