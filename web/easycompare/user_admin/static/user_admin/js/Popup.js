@@ -6,8 +6,9 @@ class Popup extends Request {
     this.createPopup ();
   }
 
-  createPopup () {
-    const popupBackground = document.createElement('section'),
+  async createPopup () {
+    const parentSectionSelect = document.createElement('select'),
+          popupBackground = document.createElement('section'),
           popupContainer = document.createElement('div'),
 
           popupCloseBtn = document.createElement('button'),
@@ -20,12 +21,22 @@ class Popup extends Request {
           addFilterBtn = document.createElement('button'),
           filterContainer = document.createElement('section');
 
+    const parentSections = await this.sendRequest (this.urlToSections, 'GET').then(res => res.response);
+
+    parentSections.forEach(parentSection => {
+      const option = document.createElement('option');
+      option.value = parentSection.id;
+      option.textContent = parentSection.name;
+      parentSectionSelect.appendChild(option);
+    });
+
     popupBackground.className = 'popup__background';
     popupContainer.className = 'popup__container';
     popupCloseBtn.className = 'popup-close-btn cross-btn';
     popupCloseBtnRelative.className = 'popup-close-btn-relative cross-btn-relative';
     productDataForm.className = 'product-form';
     productTypeName.className = 'product-type-name';
+    parentSectionSelect.className = 'parent-section';
 
     popupEditBtnsContainer.className = 'product-edit-btns__container';
     saveProductBtn.className = 'save-product-btn';
@@ -53,6 +64,7 @@ class Popup extends Request {
 
     popupCloseBtn.appendChild(popupCloseBtnRelative);
     popupContainer.appendChild(productTypeName);
+    popupContainer.appendChild(parentSectionSelect);
     productDataForm.appendChild(filterContainer);
     productDataForm.appendChild(popupEditBtnsContainer);
     
@@ -84,7 +96,7 @@ class Popup extends Request {
     const fields = form.querySelectorAll('.filter__container_inner');
     const productTypeInfo = {};
     productTypeInfo['name'] = document.querySelector('#product-type-name').value;
-    productTypeInfo['section'] = document.querySelector('#sections-name').textContent;
+    productTypeInfo['section'] = document.querySelector('.parent-section').value;
     productTypeInfo['attributes'] = [];
     for (let i = 0; i < fields.length; i++) {
       const field = fields[i];
