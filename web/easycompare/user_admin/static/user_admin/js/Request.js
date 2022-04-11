@@ -1,7 +1,12 @@
 class Request {
+  constructor () {
+    this.urlToSections = `${location.protocol}//${location.host}/api/sections/`;
+    this.urlToProductTypes = `${location.protocol}//${location.host}/api/product-types/`;
+  }
+
   async sendRequest (url, method, body = null, hasCSRFtoken = null) {
     const XCSRF = hasCSRFtoken ? this.getCookieByName('csrftoken') : null;
-    console.log(XCSRF)
+    
     return await fetch(url, {
       method,
       body,

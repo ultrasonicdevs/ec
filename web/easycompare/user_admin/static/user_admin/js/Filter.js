@@ -2,7 +2,7 @@ class Filter {
   constructor ({parentContainer}) {
     this.parentContainer = parentContainer;
     const filterContainersInner = document.querySelectorAll('.filter__container_inner');
-    console.log(filterContainersInner)
+    
     filterContainersInner.length !== 0 ? 
       this.id = Number(filterContainersInner[filterContainersInner.length - 1].id) + 1:
       this.id = 1;
