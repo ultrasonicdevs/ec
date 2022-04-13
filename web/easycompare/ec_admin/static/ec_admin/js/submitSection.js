@@ -53,7 +53,7 @@ function getSectionJson(){
 
 function renderParentSectionsSelect(){
     let xhr = new XMLHttpRequest();
-    let url = `${location.protocol}//${location.host}/api/sections/`;
+    let url = `${location.protocol}/api/sections/`;
 
     xhr.open('GET', url, true);
 
