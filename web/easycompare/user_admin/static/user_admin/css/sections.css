@@ -137,6 +137,7 @@ h2 {
 
 .section__container_outer .sections .sections__container-of-several-elements .section__container .products-menu li .product-name {
   font-size: 16px;
+  cursor: pointer;
 }
 
 .section__container_outer .sections .sections__container-of-several-elements .section__container .delete-section-btn.remove-mode {

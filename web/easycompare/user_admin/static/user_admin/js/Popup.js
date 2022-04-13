@@ -7,9 +7,12 @@ class Popup extends Request {
   }
 
   async createPopup () {
-    const parentSectionSelect = document.createElement('select'),
-          popupBackground = document.createElement('section'),
+    const popupBackground = document.createElement('section'),
           popupContainer = document.createElement('div'),
+          
+          selectContainer = document.createElement('section'),
+          selectContainerName = document.createElement('span'),
+          parentSectionSelect = document.createElement('select'),
 
           popupCloseBtn = document.createElement('button'),
           popupCloseBtnRelative = document.createElement('div'),
@@ -36,8 +39,9 @@ class Popup extends Request {
     popupCloseBtnRelative.className = 'popup-close-btn-relative cross-btn-relative';
     productDataForm.className = 'product-form';
     productTypeName.className = 'product-type-name';
+    selectContainer.className = 'select__container';
     parentSectionSelect.className = 'parent-section';
-
+    
     popupEditBtnsContainer.className = 'product-edit-btns__container';
     saveProductBtn.className = 'save-product-btn';
     addFilterBtn.className = 'add-filter-btn';
@@ -51,6 +55,8 @@ class Popup extends Request {
     productTypeName.id = 'product-type-name';
     saveProductBtn.textContent = 'Сохранить';
     addFilterBtn.textContent = 'Добавить фильтр';
+    selectContainerName.textContent = 'Родительский раздел:';
+
 
     popupCloseBtn.addEventListener('click', () => this.hidePopup(popupBackground));
     productTypeName.addEventListener('input', (e) => {
@@ -61,10 +67,11 @@ class Popup extends Request {
       new Filter ({parentContainer: filterContainer});
     });
 
-
+    selectContainer.appendChild(selectContainerName);
+    selectContainer.appendChild(parentSectionSelect);
     popupCloseBtn.appendChild(popupCloseBtnRelative);
     popupContainer.appendChild(productTypeName);
-    popupContainer.appendChild(parentSectionSelect);
+    popupContainer.appendChild(selectContainer);
     productDataForm.appendChild(filterContainer);
     productDataForm.appendChild(popupEditBtnsContainer);
     

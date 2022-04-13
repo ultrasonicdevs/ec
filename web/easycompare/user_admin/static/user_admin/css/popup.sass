@@ -45,8 +45,6 @@
         &::before
           transform: rotate(135deg)
 
-    
-
     .product-type-name
       font-weight: 600
       font-size: 1em
@@ -54,6 +52,23 @@
 
       &::placeholder
         color: #A5A5A5
+
+    .select__container
+      display: flex
+      align-items: center
+      margin-top: 2rem
+      font-size: .4em
+
+      select
+        margin-left: 3rem
+        font-size: 1em
+        box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px
+        transition: .5s
+        outline: none
+        padding-right: 1em
+
+        &:hover
+          box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset
 
     .product-form
       .filter__container
