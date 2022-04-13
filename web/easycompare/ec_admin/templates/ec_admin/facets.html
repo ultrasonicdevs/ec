@@ -17,16 +17,7 @@
                             {% endfor %}
                         </select>
                     </div>
-                    <ul id="filter-groups"> 
-                        {% csrf_token %} 
-                        <fieldset>      
-                            <legend>What is Your Favorite Pet?</legend>      
-                            <input type="checkbox" name="favorite_pet" value="Cats">Cats<br>      
-                            <input type="checkbox" name="favorite_pet" value="Dogs">Dogs<br>      
-                            <input type="checkbox" name="favorite_pet" value="Birds">Birds<br>      
-                            <br>      
-                            <input type="submit" value="Submit now" />      
-                        </fieldset>      
+                    <ul id="filter-groups">     
                     </ul>
                     <button type="button" id="submit-filters" class="btn btn-primary col-12">Найти</button>
                 </fieldset>
