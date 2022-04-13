@@ -6,11 +6,13 @@ const parentSectionSelect = document.getElementById('parent-section');
 const submitSectionBtn = document.getElementById('submit-section');
 
 submitSectionBtn.addEventListener('click', sendSectionJsonToServer);
-document.addEventListener('DOMContentLoaded', createParentSectionsSelect);
+document.addEventListener('DOMContentLoaded', renderParentSectionsSelect);
 
 function sendSectionJsonToServer() {
     let xhr = new XMLHttpRequest();
-    let url = `${location.protocol}/api/sections/`;
+    let url = `${location.protocol}//${location.host}/api/sections/`;
+
+    console.log('Sending new section to: ', url);
 
     xhr.open('POST', url, true);
 
@@ -49,7 +51,7 @@ function getSectionJson(){
     return sectionJson;
 }
 
-function createParentSectionsSelect(){
+function renderParentSectionsSelect(){
     let xhr = new XMLHttpRequest();
     let url = `${location.protocol}/api/sections/`;
 
