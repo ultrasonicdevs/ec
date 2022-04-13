@@ -8,6 +8,8 @@
   display: flex
   align-items: center
   justify-content: center
+  overflow: auto
+  padding: 3em 0
 
   .popup__container
     background-color: #fff
@@ -57,10 +59,12 @@
       display: flex
       align-items: center
       margin-top: 2rem
-      font-size: .4em
+
+      span
+        font-size: 1em
 
       select
-        margin-left: 3rem
+        margin-left: 1em
         font-size: 1em
         box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px
         transition: .5s
@@ -98,10 +102,6 @@
           max-width: min-content
           font-weight: 500
 
-
-
-
-  
 .filter__container_inner
   position: relative
   font-size: 1rem
@@ -207,6 +207,8 @@
     min-height: calc(5vh + 30vw)
   .save-product-btn, .add-filter-btn
     font-size: .4em
+  .select__container
+    font-size: .4em
 
 @media screen and (max-width: 425px)
     .popup__container
@@ -214,3 +216,5 @@
       min-width: calc(5vh + 30vw)
     .save-product-btn, .add-filter-btn
       font-size: .5em
+    .select__container
+      font-size: .6em

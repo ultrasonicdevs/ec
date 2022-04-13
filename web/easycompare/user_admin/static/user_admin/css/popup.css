@@ -14,6 +14,8 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  overflow: auto;
+  padding: 3em 0;
 }
 
 .popup__background .popup__container {
@@ -89,11 +91,14 @@
       -ms-flex-align: center;
           align-items: center;
   margin-top: 2rem;
-  font-size: .4em;
+}
+
+.popup__background .popup__container .select__container span {
+  font-size: 1em;
 }
 
 .popup__background .popup__container .select__container select {
-  margin-left: 3rem;
+  margin-left: 1em;
   font-size: 1em;
   -webkit-box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
           box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
@@ -297,6 +302,9 @@
   .save-product-btn, .add-filter-btn {
     font-size: .4em;
   }
+  .select__container {
+    font-size: .4em;
+  }
 }
 
 @media screen and (max-width: 425px) {
@@ -306,6 +314,9 @@
   }
   .save-product-btn, .add-filter-btn {
     font-size: .5em;
+  }
+  .select__container {
+    font-size: .6em;
   }
 }
 /*# sourceMappingURL=popup.css.map */
