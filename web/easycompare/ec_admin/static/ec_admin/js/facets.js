@@ -1,3 +1,6 @@
+import { getCookieByName } from './globals.js';
+
+
 const productTypeSelect = document.getElementById('product-type');
 const productCardsDiv = document.getElementById('found-products');
 const filterGroupsUl = document.getElementById('filter-groups');
@@ -152,17 +155,3 @@ function createProductCards(e){
     xhr.send();
 }
 
-function getCookieByName(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
