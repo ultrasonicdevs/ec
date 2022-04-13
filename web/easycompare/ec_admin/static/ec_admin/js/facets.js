@@ -90,7 +90,7 @@ function createFilterPanel(e){
         if (requestCompleted) {
             filterGroupsUl.innerHTML = '';
             responseJson = JSON.parse(xhr.response);
-            responseJson.response.product_type_filters.forEach(filterGroup => {
+            responseJson.response.forEach(filterGroup => {
                 const filterGroupFieldset = document.createElement('fieldset');
                 const filterGroupFiltersDiv = document.createElement('div');
                 const filterGroupName = document.createElement('legend');

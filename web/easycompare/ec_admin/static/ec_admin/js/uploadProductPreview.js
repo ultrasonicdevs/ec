@@ -23,7 +23,7 @@ function uploadFile(e) {
             const SUCCESS = 200;
             let requestCompleted = (xhr.readyState === DONE) && (xhr.status === SUCCESS);
             if (requestCompleted) {
-                responseJson = JSON.parse(xhr.responseText);
+                responseJson = JSON.parse(xhr.response);
                 alert('Deleted Image Name: ' + responseJson.image_name);
             }
         };
