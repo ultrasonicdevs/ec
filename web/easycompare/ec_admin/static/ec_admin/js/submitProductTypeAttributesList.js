@@ -3,10 +3,10 @@ const attributeTypeSelect = document.getElementById('new-attribute-type');
 const attributeNameInput = document.getElementById('new-attribute-name');
 const attributesUl = document.getElementById('attributes-list');
 
-addAttributeButton.addEventListener('click', addAttributeToList);
-attributesUl.addEventListener('click', deleteAttributeFromList);
+addAttributeButton.addEventListener('click', addAttributeToUl);
+attributesUl.addEventListener('click', deleteAttributeFromUl);
 
-function addAttributeToList(e) {
+function addAttributeToUl(e) {
     let attributeTypeValue = attributeTypeSelect.options[attributeTypeSelect.selectedIndex].value;
     let attributeTypeText = attributeTypeSelect.options[attributeTypeSelect.selectedIndex].text;
     let attributeName = attributeNameInput.value;
@@ -41,7 +41,7 @@ function addAttributeToList(e) {
     attributesUl.appendChild(attributeDiv);
 }
 
-function deleteAttributeFromList(e) {
+function deleteAttributeFromUl(e) {
     const attributesUlItem = e.target;
     let ulItemIsDeleteButton = attributesUlItem.classList[0] === 'btn';
 

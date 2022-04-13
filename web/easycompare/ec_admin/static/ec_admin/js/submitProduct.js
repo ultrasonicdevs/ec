@@ -1,3 +1,6 @@
+import { getCookieByName } from './globals.js';
+
+
 const productNameInput = document.getElementById('product-name');
 const productPriceInput = document.getElementById('product-price');
 const productManufacturerInput = document.getElementById('product-manufacturer');
@@ -6,20 +9,18 @@ const productAttributesUl = document.getElementById('product-attributes');
 const submitProductButton = document.getElementById('submit-product');
 
 productTypeSelect.addEventListener('change', renderProductAttributesUl);
-submitProductButton.addEventListener('click', submitProduct);
+submitProductButton.addEventListener('click', sendProductJsonToServer);
 
 function renderProductAttributesUl(e) {
     const productTypeSelectItem = e.target;
-    const csrftoken = getCookieByName('csrftoken');
+    const productTypeId = productTypeSelectItem.value;
 
     let xhr = new XMLHttpRequest();
-    let url = 'get-type-attributes/';
+    let url = `${location.protocol}//${location.host}/api/product-types/${productTypeId}/`;
 
     xhr.open('GET', url, true);
 
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('X-CSRFToken', csrftoken);
-    xhr.setRequestHeader('Product-Type-Id', productTypeSelectItem.value)
     
     xhr.onload = function () {
         const DONE = 4;
@@ -27,8 +28,9 @@ function renderProductAttributesUl(e) {
         let requestCompleted = (xhr.readyState === DONE) && (xhr.status === SUCCESS);
         if (requestCompleted) {
             document.getElementById('product-attributes').innerHTML = '';
-            responseJson = JSON.parse(xhr.response);
-            responseJson.response.forEach(attribute => {
+            let responseJson = JSON.parse(xhr.response);
+            console.log('Attributes for attributesUl: ', responseJson.response);
+            responseJson.response.attributes.forEach(attribute => {
                 const attributeDiv = document.createElement('div');
                 attributeDiv.classList = ['form-group', 'row'];
 
@@ -58,8 +60,32 @@ function renderProductAttributesUl(e) {
     xhr.send();
 }
 
-function submitProduct(e) {
+function sendProductJsonToServer(e) {
     e.preventDefault()
+
+    let xhr = new XMLHttpRequest();
+    let url = `${location.protocol}//${location.host}/api/products/`;
+
+    console.log('Sending new product to: ', url);
+
+    xhr.open('POST', url, true);
+
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('X-CSRFToken', getCookieByName('csrftoken'));
+
+    xhr.onreadystatechange = function () {
+        const DONE = 4;
+        const SUCCESS = 200;
+        let requestCompleted = (xhr.readyState === DONE) && (xhr.status === SUCCESS);
+        if (requestCompleted) {
+            alert(xhr.response);
+        }
+    };
+
+    xhr.send(JSON.stringify(getProductJson()));
+}
+
+function getProductJson() {
     const attributeInputsHtmlCollection = productAttributesUl.getElementsByTagName('input');
     const previewImageUrl = document.getElementsByTagName('img')[0].getAttribute('src');
     let attributeInputsArray = Array.from(attributeInputsHtmlCollection);
@@ -98,42 +124,7 @@ function submitProduct(e) {
         productJson.attributes.push(singleAttributeJson);
     })
     
-    console.log(productJson);
+    console.log('Product Json: ', productJson);
 
-    const csrftoken = getCookieByName('csrftoken');
-
-    let xhr = new XMLHttpRequest();
-    let url = 'processing/';
-
-    xhr.open('POST', url, true);
-
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('X-CSRFToken', csrftoken);
-
-    xhr.onreadystatechange = function () {
-        const DONE = 4;
-        const SUCCESS = 200;
-        let requestCompleted = (xhr.readyState === DONE) && (xhr.status === SUCCESS);
-        if (requestCompleted) {
-            responseJson = JSON.parse(xhr.response);
-            alert(responseJson.message);
-        }
-    };
-
-    xhr.send(JSON.stringify(productJson));
-}
-
-function getCookieByName(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
+    return productJson;
 }

@@ -3,22 +3,20 @@ const productCardsDiv = document.getElementById('found-products');
 const filterGroupsUl = document.getElementById('filter-groups');
 const submitFiltersBtn = document.getElementById('submit-filters');
 
-document.addEventListener('DOMContentLoaded', createProductCards);
-productTypeSelect.addEventListener('change', createFilterPanel);
-submitFiltersBtn.addEventListener('click', showFaceted);
+document.addEventListener('DOMContentLoaded', renderAllProductCards);
+productTypeSelect.addEventListener('change', renderFilterPanel);
+submitFiltersBtn.addEventListener('click', renderFilteredProductCards);
 
-function showFaceted(e){
-    const csrftoken = getCookieByName('csrftoken');
-
+function renderFilteredProductCards(e){
     let xhr = new XMLHttpRequest();
     let url = `${location.protocol}/api/product-types/${productTypeSelect.value}/get-filtered/`;
+
+    console.log('Getting filtered products from: ', url);
 
     xhr.open('GET', url, true);
 
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('X-CSRFToken', csrftoken);
-    xhr.setRequestHeader('Product-Type', productTypeSelect.value)
-    xhr.setRequestHeader('Selected-Filters', encodeURIComponent(JSON.stringify(getSelectedFilters())))
+    xhr.setRequestHeader('Selected-Filters', encodeURIComponent(JSON.stringify(getSelectedFilters())));
     
     xhr.onload = function () {
         const DONE = 4;
@@ -26,22 +24,10 @@ function showFaceted(e){
         let requestCompleted = (xhr.readyState === DONE) && (xhr.status === SUCCESS);
         if (requestCompleted) {
             productCardsDiv.innerHTML = '';
-            console.log(JSON.parse(xhr.response));
-            console.log('byla otvetka')
-            JSON.parse(xhr.response).response.forEach(product => {
-                const productCard = document.createElement('div');
-                const productPreview = document.createElement('img');
-                const productName = document.createElement('h1');
-    
-                productPreview.src = product.preview_url;
-                productPreview.width = 250;
-                productPreview.height = 250;
-                productName.innerHTML = product.name;
-
-                productCard.appendChild(productPreview);
-                productCard.appendChild(productName);
-
-                productCardsDiv.appendChild(productCard);
+            let responseJson = JSON.parse(xhr.response);
+            console.log('Filtered products json: ', responseJson);
+            responseJson.response.forEach(product => {
+                renderProductCard(product);
             })
         }
     };
@@ -49,36 +35,33 @@ function showFaceted(e){
 }
 
 function getSelectedFilters(){
-    var checkboxes = Array.from(document.querySelectorAll('input[type=checkbox]:checked'));
-    let filterGroupNames = [...new Set(checkboxes.map(checkbox => checkbox.dataset.groupName))];
-    console.log(filterGroupNames);
-    let selectedFilters = []
+    let selectedCheckboxes = Array.from(document.querySelectorAll('input[type=checkbox]:checked'));
+    let filterGroupNames = [...new Set(selectedCheckboxes.map(checkbox => checkbox.dataset.groupName))];
+    let selectedFilters = [];
+
     filterGroupNames.forEach((filterGroupName, fgnIndex) => {
         selectedFilters.push({
             'filter_group_name': filterGroupName,
             'attributes': [],
         })
         
-        checkboxes.forEach(checkbox => {
+        selectedCheckboxes.forEach(checkbox => {
             if (filterGroupName == checkbox.dataset.groupName) {
                 selectedFilters[fgnIndex].attributes.push(checkbox.value);
             }
         })
     })
-    console.log(selectedFilters);
+    console.log('Selected filters json: ', selectedFilters);
     return selectedFilters
 }
 
-function createFilterPanel(e){
-    const csrftoken = getCookieByName('csrftoken');
-
+function renderFilterPanel(e){
     let xhr = new XMLHttpRequest();
     let url = `${location.protocol}/api/product-types/${productTypeSelect.value}/filters/`;
 
     xhr.open('GET', url, true);
 
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('X-CSRFToken', csrftoken);
     
     xhr.onload = function () {
         const DONE = 4;
@@ -86,7 +69,8 @@ function createFilterPanel(e){
         let requestCompleted = (xhr.readyState === DONE) && (xhr.status === SUCCESS);
         if (requestCompleted) {
             filterGroupsUl.innerHTML = '';
-            responseJson = JSON.parse(xhr.response);
+            let responseJson = JSON.parse(xhr.response);
+            console.log('Filters for filter panel: ', responseJson);
             responseJson.response.product_type_filters.forEach(filterGroup => {
                 const filterGroupFieldset = document.createElement('fieldset');
                 const filterGroupFiltersDiv = document.createElement('div');
@@ -112,57 +96,41 @@ function createFilterPanel(e){
     xhr.send();
 }
 
-function createProductCards(e){
-    const csrftoken = getCookieByName('csrftoken');
-
+function renderAllProductCards(e){
     let xhr = new XMLHttpRequest();
     let url = `${location.protocol}/api/products/`;
-
 
     xhr.open('GET', url, true);
 
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('X-CSRFToken', csrftoken);
     
     xhr.onload = function () {
         const DONE = 4;
         const SUCCESS = 200;
         let requestCompleted = (xhr.readyState === DONE) && (xhr.status === SUCCESS);
         if (requestCompleted) {
-            console.log(JSON.parse(xhr.response));
-            JSON.parse(xhr.response).response.forEach(product => {
-                const productCard = document.createElement('div');
-                const productPreview = document.createElement('img');
-                const productName = document.createElement('h1');
-    
-                productPreview.src = product.preview_url;
-                productPreview.width = 250;
-                productPreview.height = 250;
-                productName.innerHTML = product.name;
-
-                productCard.appendChild(productPreview);
-                productCard.appendChild(productName);
-
-                productCardsDiv.appendChild(productCard);
-                }
-
-            )
+            let responseJson = JSON.parse(xhr.response);
+            console.log('All products JSON: ', responseJson);
+            responseJson.response.forEach(product => {
+                renderProductCard(product);
+            })
         }
     };
     xhr.send();
 }
 
-function getCookieByName(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
+function renderProductCard(productJson) {
+    const productCard = document.createElement('div');
+    const productPreview = document.createElement('img');
+    const productName = document.createElement('h1');
+
+    productPreview.src = productJson.preview_url;
+    productPreview.width = 250;
+    productPreview.height = 250;
+    productName.innerHTML = productJson.name;
+
+    productCard.appendChild(productPreview);
+    productCard.appendChild(productName);
+
+    productCardsDiv.appendChild(productCard);
 }
