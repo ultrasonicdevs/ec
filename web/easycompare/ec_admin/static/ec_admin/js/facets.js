@@ -69,10 +69,8 @@ function renderFilterPanel(e){
         let requestCompleted = (xhr.readyState === DONE) && (xhr.status === SUCCESS);
         if (requestCompleted) {
             filterGroupsUl.innerHTML = '';
-
             let responseJson = JSON.parse(xhr.response);
             console.log('Filters for filter panel: ', responseJson);
-            
             responseJson.response.product_type_filters.forEach(filterGroup => {
                 const filterGroupFieldset = document.createElement('fieldset');
                 const filterGroupFiltersDiv = document.createElement('div');
