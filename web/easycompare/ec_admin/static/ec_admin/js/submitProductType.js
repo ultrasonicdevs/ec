@@ -4,31 +4,28 @@ import { getCookieByName } from './globals.js';
 const typeNameInput = document.getElementById('type-name');
 const typeSectionSelect = document.getElementById('type-section');
 const submitTypeBtn = document.getElementById('submit-type');
+const attributesUl = document.getElementById('attributes-list');
 
-var typeName = typeNameInput.text;
-var typeSection = typeSectionSelect.value;
+submitTypeBtn.addEventListener('click', sendTypeJsonToServer);
+document.addEventListener('DOMContentLoaded', renderTypeSectionsSelect);
 
-submitTypeBtn.addEventListener('click', sendCategoryJsonToServer);
-document.addEventListener('DOMContentLoaded', createTypeSectionsSelect);
-
-function sendCategoryJsonToServer(e) {
-    const csrftoken = getCookieByName('csrftoken');
-
+function sendTypeJsonToServer(e) {
     let xhr = new XMLHttpRequest();
-    let url = 'processing/';
+    let url = `${location.protocol}//${location.host}/api/product-types/`;
+
+    console.log('Sending new product type json to: ', url);
 
     xhr.open('POST', url, true);
 
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('X-CSRFToken', csrftoken);
+    xhr.setRequestHeader('X-CSRFToken', getCookieByName('csrftoken'));
 
-    xhr.onreadystatechange = function () {
+    xhr.onload = function () {
         const DONE = 4;
         const SUCCESS = 200;
         let requestCompleted = (xhr.readyState === DONE) && (xhr.status === SUCCESS);
         if (requestCompleted) {
-            responseJson = JSON.parse(xhr.response);
-            alert(responseJson.message);
+            alert(xhr.response);
         }
     };
 
@@ -56,26 +53,28 @@ function getProductTypeJson() {
         productTypeJson.attributes.push(singleAttributeJson);
     });
 
+    console.log('Product type JSON: ', productTypeJson);
+
     return productTypeJson;
 }
 
-function createTypeSectionsSelect(){
-    const csrftoken = getCookieByName('csrftoken');
-
+function renderTypeSectionsSelect(){
     let xhr = new XMLHttpRequest();
-    let url =`${location.protocol}/api/sections/`;
+    let url =`${location.protocol}//${location.host}/api/sections/`;
 
     xhr.open('GET', url, true);
 
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('X-CSRFToken', csrftoken);
+    xhr.setRequestHeader('X-CSRFToken', getCookieByName('csrftoken'));
     
     xhr.onload = function () {
         const DONE = 4;
         const SUCCESS = 200;
         let requestCompleted = (xhr.readyState === DONE) && (xhr.status === SUCCESS);
         if (requestCompleted) {
-            responseJson = JSON.parse(xhr.response);
+            let responseJson = JSON.parse(xhr.response);
+            console.log('Type sections JSON for typeSectionsSelect: ', responseJson);
+
             responseJson.response.forEach(section => {
                 const typeSectionOption = document.createElement('option');
                 typeSectionOption.innerText = section.name;
