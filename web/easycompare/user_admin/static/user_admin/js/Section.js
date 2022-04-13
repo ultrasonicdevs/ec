@@ -12,9 +12,7 @@ class Section extends Block {
           sectionName = document.createElement('span'),
           productMenu = document.createElement('ul'),
           deleteSectionBtn = document.createElement('button'),
-          deleteSectionBtnRelative = document.createElement('div'),
-          deleteSectionBtn45 = document.createElement('span'),
-          deleteSectionBtn135 = document.createElement('span');
+          deleteSectionBtnRelative = document.createElement('div');
 
     sectionContainer.id = this.id;
     sectionName.textContent = this.name;
@@ -22,15 +20,11 @@ class Section extends Block {
     sectionContainer.className = 'section__container';
     sectionName.className = 'section-name';
     productMenu.className = 'products-menu';
-    deleteSectionBtn.className = 'delete-section-btn';
-    deleteSectionBtnRelative.className = 'delete-section-btn-relative';
-    deleteSectionBtn45.className = 'delete-section-btn-45';
-    deleteSectionBtn135.className = 'delete-section-btn-135';
+    deleteSectionBtn.className = 'delete-section-btn cross-btn';
+    deleteSectionBtnRelative.className = 'delete-section-btn-relative cross-btn-relative';
 
     deleteSectionBtn.addEventListener('click', () => this.removeChildFromParent(sectionContainer));
 
-    deleteSectionBtnRelative.appendChild(deleteSectionBtn45);
-    deleteSectionBtnRelative.appendChild(deleteSectionBtn135);
     deleteSectionBtn.appendChild(deleteSectionBtnRelative)
     sectionContainer.appendChild(sectionName);
     sectionContainer.appendChild(productMenu);

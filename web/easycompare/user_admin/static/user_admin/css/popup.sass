@@ -1,191 +1,220 @@
-@import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900);
-
-$padding: calc(.5 * calc(1vw + 1rem))
-$fontSize: calc(2rem + 2vw)
-$margin: 1em
-$transition: .5s ease
-
-*
-  box-sizing: border-box
-  font-family: 'Inter', sans-serif
-
-button
-  border: 0
-  background-color: inherit
-  cursor: pointer
-
-input
-  border: 0
-  outline: none
-
-h1, h2, h3, h4, h5, h6
-  margin: 0
-
-.popup__background.open
-  z-index: 10000
-  opacity: 1
-  visibility: visible
-  .popup__container
-    margin-top: 0
-
 .popup__background
-  z-index: 0
-  display: flex
-  justify-content: center
-  align-items: center
   position: absolute
   left: 0
   right: 0
-  bottom: 0
   top: 0
-  background-color: rgba(0,0,0,.8);
-  padding: 3rem
-  opacity: 0
-  visibility: hidden
-  transition: $transition
+  bottom: 0
+  background-color: rgba(0,0,0,.8)
+  display: flex
+  align-items: center
+  justify-content: center
+  overflow: auto
+  padding: 3em 0
 
   .popup__container
-    font-size: $fontSize
-    position: relative
-    padding: 2vw
     background-color: #fff
-    max-width: calc(50% + 5em)
-    width: 100%
-    margin-top: 10%
-    transition: $transition
-    .popup__container_inner
-      position: relative
-      .product-type-name
-        max-width: 70%
-        font-weight: 500
-      .close-btn
-        position: absolute
-        right: 0
-        top: 0
-        background-color: inherit
-        border: 0
-        cursor: pointer
-        padding: 0
-        img
-          height: calc(2em + 1vh)
-          width: calc(2em + 1vw)
+    padding: calc(1vw + 1rem)
+    font-size: calc( (100vw - 320px)/(1200 - 320) * (49 - 16) + 1rem)
+    position: relative
+    transtition: .5s
 
-      .popup-edit-buttons__container
+    .cross-btn
+      width: 2em
+      height: 2em
+      position: absolute
+      top: 1.3em
+      right: 1.3em
+
+      // Крестик
+      .cross-btn-relative
+        position: relative
+        width: inherit
+        height: inherit
+
+        &::after, &::before
+          content: ''
+          display: block
+          height: 100%
+          width: .15em
+          background-color: #000
+          position: absolute
+          left: 50%
+          top: 0
+
+        &::after
+          transform: rotate(45deg)
+
+        &::before
+          transform: rotate(135deg)
+
+    .product-type-name
+      font-weight: 600
+      font-size: 1em
+      max-width: 80%
+
+      &::placeholder
+        color: #A5A5A5
+
+    .select__container
+      display: flex
+      align-items: center
+      margin-top: 2rem
+
+      span
+        font-size: 1em
+
+      select
+        margin-left: 1em
+        font-size: 1em
+        box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px
+        transition: .5s
+        outline: none
+        padding-right: 1em
+
+        &:hover
+          box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset
+
+    .product-form
+      .filter__container
+        display: flex
+        flex-direction: column
+        margin: 1em 0
+
+      .product-edit-btns__container
+        position: absolute
+        bottom: calc(1vw + 1rem)
         display: flex
         align-items: center
-        button
-          font-size: .35em
-          color: #A5A5A5
-        .save-btn:disabled
-          color: #A5A5A5
+        
+        .save-product-btn:disabled
           background-color: #F5F5F5
-        .save-btn
+          color: #A5A5A5
+
+        .save-product-btn
+          padding: .8em 2em
           background-color: #E5E5E5
           color: #000
-          padding: $padding
+          font-weight: 500
+        
         .add-filter-btn
           margin-left: 2em
+          color: #A5A5A5
           max-width: min-content
+          font-weight: 500
 
-      .filter__container.open
-        opacity: 1
-        visibility: visible
-        margin: $margin 0
+.filter__container_inner
+  position: relative
+  font-size: 1rem
+  margin-top: 2em
+
+  &:first-child
+    margin-top: 0
+
+  .filter-close-btn
+    width: 1.3em
+    height: 1.3em
+    position: absolute
+    top: 0
+    right: 0
+
+    // Крестик
+    .filter-close-btn-relative
+      position: relative
+      width: inherit
+      height: inherit
+
+      &::after, &::before
+        content: ''
+        display: block
         height: 100%
+        width: .1em
+        background-color: #000
+        position: absolute
+        left: 50%
+        top: 0
 
-      .filter__container
-        font-size: .5em
-        position: relative
-        opacity: 0
-        visibility: hidden
-        height: 50%
-        transition: $transition
-        .close-btn
-          img
-            width: 1.5em
-            height: 1.5em
+      &::after
+        transform: rotate(45deg)
 
-        .filter-name
-          border-bottom: 1px solid #A5A5A5
-          max-width: 55%
-          width: 100%
-          font-size: .7em
+      &::before
+        transform: rotate(135deg)
 
-        .filter__settings
-          margin: $margin 0
-          background-color: #F5F5F5
-          padding: $padding
-          h2
-            font-size: .8em
-          h3
-            font-size: .6em
-            margin-bottom: $margin
-          .filter-value-type__container
-            margin: $margin 0
-            .filter-value-type
-              margin-top: 1em
-              display: flex
-              align-items: center
-              font-size: .5em
-              font-weight: 500
-              
-              .radio-input
-                appearance: none
-                position: absolute
-              .radio-label
-                padding-left: 2em
-                position: relative
-              .radio-label::before
-                content: ''
-                display: block
-                position: absolute
-                left: 0
-                top: 50%
-                transform: translate(0, -50%)
-                width: 1em
-                height: 1em
-                border-radius: 50%
-                background-color: #000
-              .radio-label::after
-                content: ''
-                display: block
-                position: absolute
-                left: 0
-                top: 50%
-                transform: translate(.15em, -50%)
-                width: .7em
-                height: .7em
-                border-radius: 50%
-                background-color: #fff
-              .radio-input:checked + .radio-label::after
-                transform: translate(.275em, -50%)
-                width: .45em
-                height: .45em
+  
 
-          .filter-value__container
-            .filter-value
-              font-size: .6em
-              border-bottom: 1px solid #A5A5A5
-              background-color: inherit
-              max-width: 40%
-              width: 100%
+  .filter-name
+    font-size: 1.2em
+    border-bottom: 1px solid #A5A5A5
+    max-width: 80%
+    width: 100%
 
-@keyframes openFilter
-  0% 
-    transfrom: scale(.5)
-  50%
-    background-color: red
-  100%
-    transform: scale(1)
+    &::placeholder
+        color: #A5A5A5
 
-@media screen and (min-width: 1024px)
-  .product-type-name
-    font-size: 1em
+  .filter-settings__container
+    background-color: #F5F5F5
+    margin: 2em 0
+    padding: 1em
 
-@media screen and (max-width: 1024px)
-  .product-type-name
-    font-size: .8em
+    h2
+      font-size: 1.3em
 
-@media screen and (max-width: 768px)
-  .product-type-name
-    font-size: .5em
+    .filter-type__container
+      margin-top: 2em
+
+      h3
+        font-size: 1.2em
+        margin-top: 1em
+
+      .filter-value-type
+        margin-top: .5em
+        
+        .radio-input
+          appearance: none
+          position: absolute
+        .radio-label
+          padding-left: 2em
+          position: relative
+          &::before
+            content: ''
+            display: block
+            position: absolute
+            left: 0
+            top: 50%
+            transform: translate(0, -50%)
+            width: 1em
+            height: 1em
+            border-radius: 50%
+            background-color: #000
+          &::after
+            content: ''
+            display: block
+            position: absolute
+            left: 0
+            top: 50%
+            transform: translate(.15em, -50%)
+            width: .7em
+            height: .7em
+            border-radius: 50%
+            background-color: #fff
+        .radio-input:checked + .radio-label::after
+          transform: translate(.275em, -50%)
+          width: .45em
+          height: .45em
+
+@media screen and (min-width: 426px)
+  .popup__container
+    min-width: 60vw
+    min-height: calc(5vh + 30vw)
+  .save-product-btn, .add-filter-btn
+    font-size: .4em
+  .select__container
+    font-size: .4em
+
+@media screen and (max-width: 425px)
+    .popup__container
+      min-height: 60vw
+      min-width: calc(5vh + 30vw)
+    .save-product-btn, .add-filter-btn
+      font-size: .5em
+    .select__container
+      font-size: .6em
