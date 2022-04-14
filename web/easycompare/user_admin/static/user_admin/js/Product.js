@@ -3,6 +3,7 @@ class Product extends Block {
     super (options) // id, name
 
     this.parentContainer = options.parent;
+    this.urlToDetailView = `${location.protocol}//${location.host}/${this.id}`;
     
     this.createProduct ();
   }
@@ -16,6 +17,10 @@ class Product extends Block {
 
     productContainer.className = 'product__container';
     productName.className = 'product-name';
+
+    productName.addEventListener('click',() => {
+      window.open(this.urlToDetailView);
+    });
 
     productContainer.appendChild(productName);
 

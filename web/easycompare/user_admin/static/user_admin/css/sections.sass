@@ -103,7 +103,6 @@ h2
           position: absolute
           left: 70%
           top: 0
-          // font-size: .9em
           font-weight: 500
           @include animationHidden
 
@@ -112,11 +111,12 @@ h2
             
             .product-name
               font-size: 16px
+              cursor: pointer
 
         .delete-section-btn.remove-mode
           @include animationVisible
           
-        .delete-section-btn
+        .cross-btn
           width: 1.3em
           height: 1.3em
           position: absolute
@@ -125,12 +125,13 @@ h2
           @include animationHidden
 
           // Крестик
-          .delete-section-btn-relative
+          .cross-btn-relative
             position: relative
             width: inherit
             height: inherit
 
-            span
+            &::after, &::before
+              content: ''
               display: block
               height: 100%
               width: .1em
@@ -140,13 +141,10 @@ h2
               top: 0
               transition: $transition
 
-              &::hover + .delete-section-btn-45, &::hover + .delete-section-btn-135
-                background-color: red
-
-            .delete-section-btn-45
+            &::after
               transform: rotate(45deg)
 
-            .delete-section-btn-135
+            &::before
               transform: rotate(135deg)
 
 .editing-buttons__container_wrapper

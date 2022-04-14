@@ -1,7 +1,7 @@
-class Generator {
+class Generator extends Request {
 
   constructor () {
-    this.urlToSections = `${location.protocol}//${location.host}/api/sections/`;
+    super();
   }
 
   generateSections (sectionsData) {
@@ -15,7 +15,6 @@ class Generator {
       sectionsContainerOfSixElems.className = `sections__container-of-several-elements`;
 
       for (let j = 0; j < howManyElems; j++) {
-        console.log(sectionsData[i])
         const {id, name} = sectionsData[i];
 
         new Section ({
@@ -33,7 +32,7 @@ class Generator {
   }
 
   async generateProducts (section) {
-    const productsArray = await this.getJSON(`${this.urlToSections}${section.id}/product-types/`).then(res => res.response);
+    const productsArray = await this.sendRequest (`${this.urlToSections}${section.id}/product-types/`, 'GET').then(res => res.response);
 
     const productMenu = section.querySelector('.products-menu');
 
@@ -46,10 +45,6 @@ class Generator {
         parent: productMenu,
       });
     })
-  }
-
-  async getJSON (url, method, body = null) {
-    return await fetch(url, {method, body}).then(response => response.json());
   }
 
 }
