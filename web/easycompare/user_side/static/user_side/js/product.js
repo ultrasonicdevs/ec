@@ -137,8 +137,11 @@ class Filter extends Block {
             title.style.padding = '.5rem 0 0 0';
             container.appendChild(attr);
             title.appendChild(document.createTextNode(characteristic.filter_group_name));
-            if (characteristic.filter_group_name === "Цена") {
+            if (characteristic.filter_group_name === "Производитель") {
                 attr.style.order = "-1";
+            }
+            if (characteristic.filter_group_name === "Цена") {
+                attr.style.order = "-2";
                 const slider = document.createElement('div'),
                     label = document.createElement('label'),
                     inputMin = document.createElement('input'),
