@@ -6,7 +6,7 @@ class Block {
             };
         if (header) {
             for (let [key, value] of Object.entries(header)) {
-                console.log(key, value);
+                // console.log(key, value);
                 if (typeof value === "object") {
                     value = encodeURIComponent(JSON.stringify(value))
                 }
@@ -17,8 +17,7 @@ class Block {
             method, body, headers
         }).then(res => res.json());
         return json.response;
-        }
-
+    }
 
 
     getCookieByName(name) {

@@ -1,6 +1,6 @@
 @import "mixinsVariables"
 #product-detail
-  width: 80%
+  width: 100%
   margin: 0 auto
 
   h1
@@ -10,8 +10,9 @@
     @include flex(space-between, flex-start, row, nowrap)
 
     div
-      width: 50%
+
       .btns
+        margin-top: 1rem
         width: 100%
 
         @include flex(flex-start, flex-start, row, nowrap)
@@ -22,6 +23,7 @@
           border-radius: .1rem
           font-size: .75rem
           background: #0D73C6
+          color: #fff
 
     img
       width: 35rem

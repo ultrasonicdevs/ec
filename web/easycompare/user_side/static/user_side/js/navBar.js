@@ -1,4 +1,8 @@
 class NavBar extends Block {
+    constructor() {
+        super();
+    }
+
     async renderProductTypes(event) {
         let typeID = event.target.id;
 
@@ -35,7 +39,7 @@ class NavBar extends Block {
 
 
     async generateSections() {
-        const sectionList = await new NavBar().getJSON(`${location.protocol}//${location.host}/api/sections/`, "GET", null);
+        const sectionList = await this.getJSON(`${location.protocol}//${location.host}/api/sections/`, "GET", null);
         for (let section of sectionList) {
             let liSection = document.createElement('li');
             liSection.className = 'section';
@@ -43,15 +47,16 @@ class NavBar extends Block {
             liSection.appendChild(document.createTextNode(section.name));
             ulSectionsList.appendChild(liSection);
         }
-        [...document.getElementsByClassName('section')].forEach(section => {
-                section.addEventListener('click', new NavBar().renderProductTypes);
+        return [...document.getElementsByClassName('section')].forEach(section => {
+                section.addEventListener('click', this.renderProductTypes);
         });
     }
 
 
     renderSections() {
-        if (document.getElementById('form-btn').checked === true) {
-            new NavBar().generateSections().then(r => r)
+        if (document.getElementById('form-btn').getAttribute('data-active') === "false") {
+            new NavBar().generateSections();
+            document.getElementById('form-btn').setAttribute('data-active', "true");
             setTimeout(() => {
                 modalWindow.style.display = 'block';
                 modalWindow.style.opacity = '1';
@@ -60,7 +65,8 @@ class NavBar extends Block {
             ulSectionsList.style.height = '24rem';
             ulSectionsList.style.flexBasis = '70%';
         } else {
-                modalWindow.style.opacity = '0';
+            document.getElementById('form-btn').setAttribute('data-active', "false");
+            modalWindow.style.opacity = '0';
             setTimeout(() => {
                 modalWindow.style.display = 'none';
             });
