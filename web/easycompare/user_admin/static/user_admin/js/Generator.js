@@ -39,7 +39,7 @@ class Generator extends Request {
     productsArray.forEach(product => {
       const {id, name} = product;
 
-      new Product ({
+      new ProductType ({
         id,
         name,
         parent: productMenu,
