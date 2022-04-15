@@ -1,8 +1,12 @@
 class Filter extends Block {
-    displayCards(productsJSON) {
+    constructor() {
+        super();
+        this.products = []
+    }
+    displayCards() {
         const productsContainer = document.querySelector('#products');
         productsContainer.innerHTML = '';
-        productsJSON.forEach(product => {
+        this.products.forEach(product => {
             const link = document.createElement('a'),
                 cardContainer = document.createElement('figure'),
                 image = document.createElement('img'),
@@ -40,9 +44,9 @@ class Filter extends Block {
     }
 
 
-    checkPrice(inputs, productJSON) {
+    checkPrice(inputs) {
         let productsArray = [];
-        productJSON.forEach(product =>{
+        this.products.forEach(product =>{
             product.attributes.forEach(attribute => {
                 if (attribute.verbose_name === 'Цена') {
                     if (Number(attribute.value) >= inputs[0] && Number(attribute.value) <= inputs[1]){
@@ -51,11 +55,12 @@ class Filter extends Block {
                 }
             });
         });
-        new Filter().displayCards(productsArray);
+        this.products =productsArray
+        new Filter().displayCards();
     }
 
 
-    rangeSliderInit(input, productsJSON) {
+    rangeSliderInit(input) {
         let startValue = Math.min.apply(null, input),
             endValue = Math.max.apply(null, input);
 
@@ -75,7 +80,7 @@ class Filter extends Block {
         });
         range.noUiSlider.on('update', function (values, handle) {
             inputs[handle].value = parseInt(values[handle]);
-            new Filter().checkPrice([Number(inputMin.value), Number(inputMax.value)], productsJSON);
+            new Filter().checkPrice([Number(inputMin.value), Number(inputMax.value)]);
         });
         inputMin.addEventListener('change', function () {
             range.noUiSlider.set([this.value, null]);
@@ -107,25 +112,24 @@ class Filter extends Block {
                 }
             });
         }
-        const typeID = document.URL.replace(`${location.protocol}//${location.host}/`, ''),
-            filtered = await new Filter().getJSON(
-                `${location.protocol}//${location.host}/api/product-types/${typeID}get-filtered/`,
-                "GET",
-                null,
-                headers
-            )
-        console.log(filtered);
-        new Filter().displayCards(filtered);
+        const typeID = document.URL.replace(`${location.protocol}//${location.host}/`, '');
+        this.products = await new Filter().getJSON(
+            `${location.protocol}//${location.host}/api/product-types/${typeID}get-filtered/`,
+            "GET",
+            null,
+            headers
+        );
+        this.displayCards();
     }
 
 
     async getProducts() {
         const typeID = document.URL.replace(`${location.protocol}//${location.host}/`, ''),
             typeInfo = await new Filter().getJSON(`${location.protocol}//${location.host}/api/product-types/${typeID}filters/`, "GET", null),
-            productsJSON = await new Filter().getJSON(`${location.protocol}//${location.host}/api/product-types/${typeID}products/`, "GET", null),
-
             container = document.querySelector('#characteristics');
         document.title = `${typeInfo.product_type_name} | Easy Compare`;
+
+        this.products = await new Filter().getJSON(`${location.protocol}//${location.host}/api/product-types/${typeID}products/`, "GET", null),
 
         // generate product attributes
         typeInfo.product_type_filters.forEach(characteristic => {
@@ -168,7 +172,7 @@ class Filter extends Block {
                 label.appendChild(h5);
                 label.appendChild(inputMax);
 
-                new Filter().rangeSliderInit(characteristic.attributes, productsJSON);
+                new Filter().rangeSliderInit(characteristic.attributes);
             } else {
                 const values = document.createElement('ul');
                 attr.appendChild(values);
@@ -182,7 +186,8 @@ class Filter extends Block {
                     values.appendChild(value);
                     value.addEventListener('click', () => {
                         value.dataset.selected === "false" ? value.setAttribute("data-selected", "true") : value.setAttribute("data-selected", "false");
-                       new Filter().addValue()
+                        console.log(this);
+                        new Filter().addValue();
                     });
                 }
                 title.addEventListener('click', () => {
@@ -193,5 +198,5 @@ class Filter extends Block {
     }
 }
 
-
+new Filter()
 window.addEventListener('load', new Filter().getProducts);

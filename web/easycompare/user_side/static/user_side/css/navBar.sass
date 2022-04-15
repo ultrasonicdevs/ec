@@ -45,16 +45,16 @@
         transition: all .5s cubic-bezier(0.23, 1, 0.32, 1)
 
 
-  input[type=checkbox]:checked + label span
+  label[data-active="true"] span
     background: rgba(255, 255, 255, 0)
 
-  input[type=checkbox]:checked + label span:before
-    transform: rotate(405deg)
-    margin-top: 0
+    &:before
+      transform: rotate(405deg)
+      margin-top: 0
 
-  input[type=checkbox]:checked + label span:after
-    transform: rotate(-405deg)
-    margin-top: 0
+    &:after
+      transform: rotate(-405deg)
+      margin-top: 0
 
 .search-panel
   width: 100%
