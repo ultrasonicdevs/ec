@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700&display=swap");
 #product-detail {
-  width: 80%;
+  width: 100%;
   margin: 0 auto; }
   #product-detail h1 {
     margin: 0 0 3rem 5rem; }
@@ -10,22 +10,22 @@
     align-items: flex-start;
     flex-direction: row;
     flex-wrap: nowrap; }
-    #product-detail .container div {
-      width: 50%; }
-      #product-detail .container div .btns {
-        width: 100%;
-        display: flex;
-        justify-content: flex-start;
-        align-items: flex-start;
-        flex-direction: row;
-        flex-wrap: nowrap; }
-        #product-detail .container div .btns button {
-          margin: 0.25rem;
-          width: 15rem;
-          height: 2.5rem;
-          border-radius: 0.1rem;
-          font-size: 0.75rem;
-          background: #0D73C6; }
+    #product-detail .container div .btns {
+      margin-top: 1rem;
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-direction: row;
+      flex-wrap: nowrap; }
+      #product-detail .container div .btns button {
+        margin: 0.25rem;
+        width: 15rem;
+        height: 2.5rem;
+        border-radius: 0.1rem;
+        font-size: 0.75rem;
+        background: #0D73C6;
+        color: #fff; }
     #product-detail .container img {
       width: 35rem;
       height: 35rem;
