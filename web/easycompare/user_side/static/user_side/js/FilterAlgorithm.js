@@ -1,8 +1,17 @@
-class Filter extends Block {
-    displayCards(productsJSON) {
+class FilterAlgorithm extends Block {
+    constructor() {
+        super();
+        this.typeID = document.URL.replace(`${location.protocol}//${location.host}/`, '');
+        this.products = []
+        this.inputs = []
+    }
+
+
+    renderCards() {
+        console.log(this.products)
         const productsContainer = document.querySelector('#products');
         productsContainer.innerHTML = '';
-        productsJSON.forEach(product => {
+        this.products.forEach(product => {
             const link = document.createElement('a'),
                 cardContainer = document.createElement('figure'),
                 image = document.createElement('img'),
@@ -12,6 +21,7 @@ class Filter extends Block {
                 price = document.createElement('h5');
 
             link.href = `${document.URL}${product._id}`;
+            link.id = product._id;
             cardContainer.className = 'container';
             image.className = 'product-image';
             image.src = product.preview_url;
@@ -40,22 +50,28 @@ class Filter extends Block {
     }
 
 
-    checkPrice(inputs, productJSON) {
-        let productsArray = [];
-        productJSON.forEach(product =>{
+    checkPrice() {
+        // let productsArray = [];
+        this.products.forEach(product =>{
             product.attributes.forEach(attribute => {
+                let card = document.getElementById(product._id);
+                // console.log(card)
                 if (attribute.verbose_name === 'Цена') {
-                    if (Number(attribute.value) >= inputs[0] && Number(attribute.value) <= inputs[1]){
-                        productsArray.push(product);
+                    if (Number(attribute.value) >= this.inputs[0] && Number(attribute.value) <= this.inputs[1]){
+                        // productsArray.push(product);
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
                     }
                 }
             });
         });
-        new Filter().displayCards(productsArray);
+        // this.products = productsArray
+        // this.renderCards();
     }
 
 
-    rangeSliderInit(input, productsJSON) {
+    rangeSliderInit(input) {
         let startValue = Math.min.apply(null, input),
             endValue = Math.max.apply(null, input);
 
@@ -73,9 +89,10 @@ class Filter extends Block {
             },
             step: 1,
         });
-        range.noUiSlider.on('update', function (values, handle) {
+        range.noUiSlider.on('update', (values, handle) => {
             inputs[handle].value = parseInt(values[handle]);
-            new Filter().checkPrice([Number(inputMin.value), Number(inputMax.value)], productsJSON);
+            this.inputs = [Number(inputMin.value), Number(inputMax.value)]
+            this.checkPrice();
         });
         inputMin.addEventListener('change', function () {
             range.noUiSlider.set([this.value, null]);
@@ -107,27 +124,33 @@ class Filter extends Block {
                 }
             });
         }
-        const typeID = document.URL.replace(`${location.protocol}//${location.host}/`, ''),
-            filtered = await new Filter().getJSON(
-                `${location.protocol}//${location.host}/api/product-types/${typeID}get-filtered/`,
-                "GET",
-                null,
-                headers
-            )
-        console.log(filtered);
-        new Filter().displayCards(filtered);
+        // const typeID = document.URL.replace(`${location.protocol}//${location.host}/`, '');
+        this.products = await super.getJSON(
+            `${location.protocol}//${location.host}/api/product-types/${this.typeID}get-filtered/`,
+            "GET",
+            null,
+            headers
+        );
+        // console.log(this);
+        this.renderCards();
+        this.checkPrice();
     }
 
 
     async getProducts() {
-        const typeID = document.URL.replace(`${location.protocol}//${location.host}/`, ''),
-            typeInfo = await new Filter().getJSON(`${location.protocol}//${location.host}/api/product-types/${typeID}filters/`, "GET", null),
-            productsJSON = await new Filter().getJSON(`${location.protocol}//${location.host}/api/product-types/${typeID}products/`, "GET", null),
+        this.products = await super.getJSON(`${location.protocol}//${location.host}/api/product-types/${this.typeID}products/`, "GET", null);
+        await this.renderCards();
+        await this.renderFilters();
+    }
 
+    async renderFilters() {
+        // console.log(this.products)
+        // console.log(this);
+        // this.renderCards();
+        const typeInfo = await super.getJSON(`${location.protocol}//${location.host}/api/product-types/${this.typeID}filters/`, "GET", null),
             container = document.querySelector('#characteristics');
-        document.title = `${typeInfo.product_type_name} | Easy Compare`;
 
-        // generate product attributes
+        document.title = `${typeInfo.product_type_name} | Easy Compare`;
         typeInfo.product_type_filters.forEach(characteristic => {
             const attr = document.createElement('div'),
                 title = document.createElement('h4');
@@ -140,7 +163,26 @@ class Filter extends Block {
             if (characteristic.filter_group_name === "Производитель") {
                 attr.style.order = "-1";
             }
-            if (characteristic.filter_group_name === "Цена") {
+            if (characteristic.filter_group_name !== "Цена") {
+                const values = document.createElement('ul');
+                attr.appendChild(values);
+                values.style.display = 'none';
+                for (let valueIndex in characteristic.attributes) {
+                    const value = document.createElement('li');
+                    value.dataset.filterGroupName = title.innerText;
+                    value.dataset.selected = "false";
+                    value.className = "filter-value";
+                    value.appendChild(document.createTextNode(characteristic.attributes[valueIndex]))
+                    values.appendChild(value);
+                    value.addEventListener('click', async () => {
+                        value.dataset.selected === "false" ? value.setAttribute("data-selected", "true") : value.setAttribute("data-selected", "false");
+                        await this.addValue();
+                    });
+                }
+                title.addEventListener('click', () => {
+                        values.style.display === 'none' ? values.style.display = 'block' : values.style.display = 'none';
+                });
+            } else {
                 attr.style.order = "-2";
                 const slider = document.createElement('div'),
                     label = document.createElement('label'),
@@ -168,30 +210,14 @@ class Filter extends Block {
                 label.appendChild(h5);
                 label.appendChild(inputMax);
 
-                new Filter().rangeSliderInit(characteristic.attributes, productsJSON);
-            } else {
-                const values = document.createElement('ul');
-                attr.appendChild(values);
-                values.style.display = 'none';
-                for (let valueIndex in characteristic.attributes) {
-                    const value = document.createElement('li');
-                    value.dataset.filterGroupName = title.innerText;
-                    value.dataset.selected = "false";
-                    value.className = "filter-value";
-                    value.appendChild(document.createTextNode(characteristic.attributes[valueIndex]))
-                    values.appendChild(value);
-                    value.addEventListener('click', () => {
-                        value.dataset.selected === "false" ? value.setAttribute("data-selected", "true") : value.setAttribute("data-selected", "false");
-                       new Filter().addValue()
-                    });
-                }
-                title.addEventListener('click', () => {
-                        values.style.display === 'none' ? values.style.display = 'block' : values.style.display = 'none';
-                });
+                this.rangeSliderInit(characteristic.attributes);
             }
         });
     }
 }
 
 
-window.addEventListener('load', new Filter().getProducts);
+
+window.addEventListener('load', () => {
+    new FilterAlgorithm().getProducts();
+});
