@@ -38,7 +38,7 @@ class Section extends Block {
   }
 
   async removeChildFromParent (child) {
-    const deleteResponse = await this.sendRequest(this.urlToSection, 'DELETE', null, true);
+    const deleteResponse = await this.sendRequest(this.urlToSection, 'DELETE', null, null, true);
     this.parentContainer.removeChild(child);
     if (deleteResponse.status === 'ok') alert('Раздел удален');
   }
