@@ -1,4 +1,4 @@
-class Details extends Block {
+class Details extends Request {
     async renderView() {
         let productID = document.URL.replace(`${location.protocol}//${location.host}/`, '');
         productID = productID.replace(/\w{24}\//i, '');
@@ -23,7 +23,6 @@ class Details extends Block {
 
         document.title = `${product.name} | Easy Compare`;
 
-        console.log(product)
         title.appendChild(document.createTextNode(product.name));
         image.src = product.preview_url;
         imgAttr.className = 'container';

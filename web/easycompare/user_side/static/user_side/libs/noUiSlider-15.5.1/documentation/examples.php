@@ -20,7 +20,7 @@
 		<li><a href="#section-skipping">Skipping values on a slider</a></li>
 		<li><a href="#section-huge-numbers">Working with huge numbers</a></li>
 		<li><a href="#section-toggle">Create a toggle</a></li>
-		<li><a href="#section-soft-limits">Block the edges of a slider</a></li>
+		<li><a href="#section-soft-limits">Request the edges of a slider</a></li>
 		<li><a href="#section-from-center">Connect to the center of a slider</a></li>
 	</ul>
 </section>

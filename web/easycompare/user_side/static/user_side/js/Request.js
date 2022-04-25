@@ -1,4 +1,4 @@
-class Block {
+class Request {
     async getJSON (url, method, body, header) {
         let headers = {
                 'Content-Type': 'application/json',
@@ -6,7 +6,6 @@ class Block {
             };
         if (header) {
             for (let [key, value] of Object.entries(header)) {
-                // console.log(key, value);
                 if (typeof value === "object") {
                     value = encodeURIComponent(JSON.stringify(value))
                 }
