@@ -99,6 +99,7 @@ class MongoWorker:
             product_types_list.append({
                 'id': encoder.default(product_type['_id']),
                 'name': product_type['name'],
+                'parent_section': product_type['section']
             })
         return {
                 'status': 'ok',
