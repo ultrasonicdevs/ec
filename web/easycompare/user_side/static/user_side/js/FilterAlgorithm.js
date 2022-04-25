@@ -1,4 +1,4 @@
-class FilterAlgorithm extends Block {
+class FilterAlgorithm extends Request {
     constructor() {
         super();
         this.typeID = document.URL.replace(`${location.protocol}//${location.host}/`, '');
@@ -8,7 +8,6 @@ class FilterAlgorithm extends Block {
 
 
     renderCards() {
-        console.log(this.products)
         const productsContainer = document.querySelector('#products');
         productsContainer.innerHTML = '';
         this.products.forEach(product => {
@@ -51,14 +50,11 @@ class FilterAlgorithm extends Block {
 
 
     checkPrice() {
-        // let productsArray = [];
         this.products.forEach(product =>{
             product.attributes.forEach(attribute => {
                 let card = document.getElementById(product._id);
-                // console.log(card)
                 if (attribute.verbose_name === 'Цена') {
                     if (Number(attribute.value) >= this.inputs[0] && Number(attribute.value) <= this.inputs[1]){
-                        // productsArray.push(product);
                         card.style.display = 'block';
                     } else {
                         card.style.display = 'none';
@@ -66,8 +62,6 @@ class FilterAlgorithm extends Block {
                 }
             });
         });
-        // this.products = productsArray
-        // this.renderCards();
     }
 
 
@@ -124,14 +118,12 @@ class FilterAlgorithm extends Block {
                 }
             });
         }
-        // const typeID = document.URL.replace(`${location.protocol}//${location.host}/`, '');
         this.products = await super.getJSON(
             `${location.protocol}//${location.host}/api/product-types/${this.typeID}get-filtered/`,
             "GET",
             null,
             headers
         );
-        // console.log(this);
         this.renderCards();
         this.checkPrice();
     }
@@ -143,10 +135,8 @@ class FilterAlgorithm extends Block {
         await this.renderFilters();
     }
 
+
     async renderFilters() {
-        // console.log(this.products)
-        // console.log(this);
-        // this.renderCards();
         const typeInfo = await super.getJSON(`${location.protocol}//${location.host}/api/product-types/${this.typeID}filters/`, "GET", null),
             container = document.querySelector('#characteristics');
 
