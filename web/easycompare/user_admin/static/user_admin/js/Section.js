@@ -1,4 +1,4 @@
-class Section extends Request {
+class Section extends Block {
   constructor (options) { // id, name, parent
     super(options); // id, name
     this.parentContainer = options.parent;

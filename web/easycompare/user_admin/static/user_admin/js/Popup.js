@@ -119,7 +119,7 @@ class Popup extends Request {
       productTypeInfo['attributes'].push(values);
     };
 
-    await this.sendRequest (this.urlToProductTypes, 'POST', JSON.stringify(productTypeInfo), null, true);
+    await this.sendRequest(this.urlToProductTypes, 'POST', JSON.stringify(productTypeInfo), null, true);
 
     this.clearFields();
   }

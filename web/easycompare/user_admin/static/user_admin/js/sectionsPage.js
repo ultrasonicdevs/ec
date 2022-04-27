@@ -1,18 +1,18 @@
-class Page {
+class Page extends Request {
   constructor () {
+    super();
     this.generator = new Generator ();
     this.host = location.host;
   }
 
   async renderPage () {
-    const sectionsData = await this.getJSON(`http://${this.host}/api/sections/`).then(res => res.response);
-
+    const sectionsData = await this.sendRequest(this.urlToSections, 'GET').then(res => res.response);
+    
     // Генерация разделов
     this.generator.generateSections(sectionsData);
 
     this.addEventToEditBtn ();
     this.addEventToActivateDeleteModeBtn ();
-
 
     // Добавление событий по клику на раздел (открытие менюшки товаров)
     const sectionsContainers = Array.from(document.querySelectorAll('.section__container'));
@@ -94,10 +94,6 @@ class Page {
         .forEach(deleteSectionBtn => deleteSectionBtn.classList.add('remove-mode'));
       }
     })
-  }
-
-  async getJSON (url, method, body = null) {
-    return await fetch(url, {method, body}).then(response => response.json());
   }
 }
 
