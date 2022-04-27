@@ -3,6 +3,7 @@ class ProductType extends Block {
     super (options) // id, name
 
     this.parentContainer = options.parent;
+    this.urlToProductType = `${this.urlToProductTypes}${this.id}/`;
     this.urlToDetailView = `${location.protocol}//${location.host}/${this.id}`;
     
     this.createProduct ();
@@ -10,10 +11,16 @@ class ProductType extends Block {
 
   createProduct () {
     const productContainer = document.createElement('li'),
-          productName = document.createElement('span');
+          productName = document.createElement('span'),
+          deleteProductTypeBtn = document.createElement('button'),
+          deleteProductTypeBtnRelative = document.createElement('div');
 
     productContainer.id = this.id;
     productName.textContent = this.name;
+    deleteProductTypeBtn.className = 'delete-product-type-btn cross-btn';
+    deleteProductTypeBtnRelative.className = 'delete-product-type-btn-relative cross-btn-relative';
+
+    deleteProductTypeBtn.addEventListener('click', () => this.removeChildFromParent(productContainer));
 
     productContainer.className = 'product__container';
     productName.className = 'product-name';
@@ -22,6 +29,8 @@ class ProductType extends Block {
       window.open(this.urlToDetailView);
     });
 
+    deleteProductTypeBtn.appendChild(deleteProductTypeBtnRelative);
+    productContainer.appendChild(deleteProductTypeBtn);
     productContainer.appendChild(productName);
 
     this.appendChildToParent (productContainer)
@@ -29,5 +38,11 @@ class ProductType extends Block {
 
   appendChildToParent (children) {
     this.parentContainer.appendChild(children);
+  }
+
+  async removeChildFromParent (child) {
+    const deleteResponse = await this.sendRequest(this.urlToProductType, 'DELETE', null, null, true);
+    this.parentContainer.removeChild(child);
+    if (deleteResponse.status === 'ok') alert('Тип товара удален');
   }
 }

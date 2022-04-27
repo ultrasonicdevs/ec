@@ -77,6 +77,10 @@ h2
           left: calc(100% + 2rem)
           @include animationVisible
 
+          .product__container
+            position: relative
+            .product-name
+
       .section__container
         position: relative
         margin-top: 1rem
@@ -104,6 +108,7 @@ h2
           left: 70%
           top: 0
           font-weight: 500
+          width: 50%
           @include animationHidden
 
           li
@@ -112,40 +117,40 @@ h2
             .product-name
               font-size: 16px
               cursor: pointer
-
-        .delete-section-btn.remove-mode
-          @include animationVisible
+            
+.cross-btn.remove-mode
+  @include animationVisible
           
-        .cross-btn
-          width: 1.3em
-          height: 1.3em
-          position: absolute
-          top: 0
-          right: 20%
-          @include animationHidden
+.cross-btn
+  width: 1.3em
+  height: 1.3em
+  position: absolute
+  top: 0
+  right: 20%
+  @include animationHidden
 
-          // Крестик
-          .cross-btn-relative
-            position: relative
-            width: inherit
-            height: inherit
+  // Крестик
+  .cross-btn-relative
+    position: relative
+    width: inherit
+    height: inherit
 
-            &::after, &::before
-              content: ''
-              display: block
-              height: 100%
-              width: .1em
-              background-color: #000
-              position: absolute
-              left: 50%
-              top: 0
-              transition: $transition
+    &::after, &::before
+      content: ''
+      display: block
+      height: 100%
+      width: .1em
+      background-color: #000
+      position: absolute
+      left: 50%
+      top: 0
+      transition: $transition
 
-            &::after
-              transform: rotate(45deg)
+    &::after
+      transform: rotate(45deg)
 
-            &::before
-              transform: rotate(135deg)
+    &::before
+      transform: rotate(135deg)
 
 .editing-buttons__container_wrapper
   display: flex

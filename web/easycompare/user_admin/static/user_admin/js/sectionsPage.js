@@ -83,14 +83,17 @@ class Page extends Request {
   addEventToActivateDeleteModeBtn () {
     const activateDeleteModeBtn = document.querySelector('.activate-delete-mode-btn');
     activateDeleteModeBtn.addEventListener('click', () => {
-      this.closeProductMenu ();
       if (activateDeleteModeBtn.classList.contains('remove-mode')) {
         activateDeleteModeBtn.classList.remove('remove-mode');
         Array.from(document.querySelectorAll('.delete-section-btn'))
         .forEach(deleteSectionBtn => deleteSectionBtn.classList.remove('remove-mode'));
+        Array.from(document.querySelectorAll('.delete-product-type-btn'))
+        .forEach(deleteSectionBtn => deleteSectionBtn.classList.remove('remove-mode'));
       } else {
         activateDeleteModeBtn.classList.add('remove-mode');
         Array.from(document.querySelectorAll('.delete-section-btn'))
+        .forEach(deleteSectionBtn => deleteSectionBtn.classList.add('remove-mode'));
+        Array.from(document.querySelectorAll('.delete-product-type-btn'))
         .forEach(deleteSectionBtn => deleteSectionBtn.classList.add('remove-mode'));
       }
     })
