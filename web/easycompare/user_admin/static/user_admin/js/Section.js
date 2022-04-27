@@ -2,7 +2,7 @@ class Section extends Block {
   constructor (options) { // id, name, parent
     super(options); // id, name
     this.parentContainer = options.parent;
-    this.urlToSection = `${location.protocol}//${location.host}/api/sections/${this.id}/`;
+    this.urlToSection = `${this.urlToSections}${this.id}/`;
 
     this.createSection ();
   }
@@ -25,7 +25,7 @@ class Section extends Block {
 
     deleteSectionBtn.addEventListener('click', () => this.removeChildFromParent(sectionContainer));
 
-    deleteSectionBtn.appendChild(deleteSectionBtnRelative)
+    deleteSectionBtn.appendChild(deleteSectionBtnRelative);
     sectionContainer.appendChild(sectionName);
     sectionContainer.appendChild(productMenu);
     sectionContainer.appendChild(deleteSectionBtn);

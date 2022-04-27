@@ -93,6 +93,10 @@ h2 {
   transition: 0.5s ease;
 }
 
+.section__container_outer .sections .sections__container-of-several-elements .section__container.product-menu-opened .products-menu .product__container {
+  position: relative;
+}
+
 .section__container_outer .sections .sections__container-of-several-elements .section__container {
   position: relative;
   margin-top: 1rem;
@@ -125,6 +129,7 @@ h2 {
   left: 70%;
   top: 0;
   font-weight: 500;
+  width: 50%;
   opacity: 0;
   visibility: hidden;
   -webkit-transition: 0.5s ease;
@@ -140,14 +145,14 @@ h2 {
   cursor: pointer;
 }
 
-.section__container_outer .sections .sections__container-of-several-elements .section__container .delete-section-btn.remove-mode {
+.cross-btn.remove-mode {
   opacity: 1;
   visibility: visible;
   -webkit-transition: 0.5s ease;
   transition: 0.5s ease;
 }
 
-.section__container_outer .sections .sections__container-of-several-elements .section__container .cross-btn {
+.cross-btn {
   width: 1.3em;
   height: 1.3em;
   position: absolute;
@@ -159,13 +164,13 @@ h2 {
   transition: 0.5s ease;
 }
 
-.section__container_outer .sections .sections__container-of-several-elements .section__container .cross-btn .cross-btn-relative {
+.cross-btn .cross-btn-relative {
   position: relative;
   width: inherit;
   height: inherit;
 }
 
-.section__container_outer .sections .sections__container-of-several-elements .section__container .cross-btn .cross-btn-relative::after, .section__container_outer .sections .sections__container-of-several-elements .section__container .cross-btn .cross-btn-relative::before {
+.cross-btn .cross-btn-relative::after, .cross-btn .cross-btn-relative::before {
   content: '';
   display: block;
   height: 100%;
@@ -178,12 +183,12 @@ h2 {
   transition: 0.5s ease;
 }
 
-.section__container_outer .sections .sections__container-of-several-elements .section__container .cross-btn .cross-btn-relative::after {
+.cross-btn .cross-btn-relative::after {
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
 }
 
-.section__container_outer .sections .sections__container-of-several-elements .section__container .cross-btn .cross-btn-relative::before {
+.cross-btn .cross-btn-relative::before {
   -webkit-transform: rotate(135deg);
           transform: rotate(135deg);
 }
