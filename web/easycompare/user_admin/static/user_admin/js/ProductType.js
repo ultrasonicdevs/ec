@@ -1,4 +1,4 @@
-class ProductType extends Request {
+class ProductType extends Block {
   constructor (options) { // id, name, parent
     super (options) // id, name
 
