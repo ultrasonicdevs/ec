@@ -3,6 +3,25 @@ from mongoengine import *
 connect('ec_products')
 
 
+class Section(Document):
+    name = StringField(required=True)
+    parent_section = ReferenceField(
+        'self', 
+        reference_delete_rule=CASCADE,
+    )
+    meta = {'collection': 'sections'}
+
+    @queryset_manager
+    def serialized(self, queryset):
+        data = []
+        for section in queryset:
+            data.append({
+                'id': str(section.id),
+                'name': section.name,
+                'parent_section': str(section.parent_section.id if section.parent_section else None)
+            })
+        return data
+
 class AbstractAttribute(EmbeddedDocument):
     type = StringField(required=True)
     verbose_name = StringField(required=True)

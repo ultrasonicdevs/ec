@@ -1,21 +1,30 @@
 import json
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, HttpResponseGone, JsonResponse
 from ec_admin.mongoworker import MongoWorker
 import urllib.parse
+from .models import *
+from bson import ObjectId
+
 
 #TODO: Make all CBV
 def index(request):
     return HttpResponse('Zatychka')
 
 def sections(request):
-    worker = MongoWorker()
     if request.is_ajax and request.method == "GET":
-        return JsonResponse(worker.get_sections())
+        return JsonResponse({'response': Section.serialized}, safe=False)
     elif request.is_ajax and request.method == "POST":
         section_json = json.loads(request.body)
-        return JsonResponse(worker.insert_section(section_json))
+        section_name = section_json['name']
+        parent_section_id = section_json['parent_section']
+        Section(
+            name=section_name,
+            parent_section=Section.objects(id=ObjectId(parent_section_id))[0] if parent_section_id else None
+        ).save()
+        return HttpResponse(status=201)
     elif request.is_ajax and request.method == "DELETE":
-        return JsonResponse(worker.delete_all_sections())
+        Section.objects.delete()
+        return HttpResponseGone()
 
 def product_types(request):
     worker = MongoWorker()
