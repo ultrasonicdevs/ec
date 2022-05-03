@@ -75,24 +75,38 @@ class SectionDetail(RetrieveUpdateDestroyAPIView):
     queryset = Section.objects.all()
     lookup_field = 'id'
 
-def product_type_detail(request, type_id):
-    worker = MongoWorker()
-    if request.is_ajax and request.method == "GET":
-        return JsonResponse(worker.get_product_type(type_id))
-    elif request.is_ajax and request.method == "DELETE":
-        return JsonResponse(worker.delete_product_type(type_id))
+    #TODO: Удалить после того, как фронты избавяться от response в их js коде
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response({'response': serializer.data})
+
+class ProductTypeDetail(RetrieveUpdateDestroyAPIView):
+    serializer_class = ProductTypeSerializer
+    queryset = ProductType.objects.all()
+    lookup_field = 'id'
+
+    #TODO: Удалить после того, как фронты избавяться от response в их js коде
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response({'response': serializer.data})
 
 def product_type_filters(request, type_id):
     worker = MongoWorker()
     if request.is_ajax and request.method == "GET":
         return JsonResponse(worker.get_product_type_filters(type_id))
 
-def product_detail(request, product_id):
-    worker = MongoWorker()
-    if request.is_ajax and request.method == "GET":
-        return JsonResponse(worker.get_product(product_id))
-    elif request.is_ajax and request.method == "DELETE":
-        return JsonResponse(worker.delete_product_by_id(product_id))
+class ProductDetail(RetrieveUpdateDestroyAPIView):
+    serializer_class = ProductSerializer
+    queryset = Product.objects.all()
+    lookup_field = 'id'
+
+    #TODO: Удалить после того, как фронты избавяться от response в их js коде
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response({'response': serializer.data})
 
 def section_product_types(request, section_id):
     worker = MongoWorker()
