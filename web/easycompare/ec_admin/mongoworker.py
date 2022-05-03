@@ -393,7 +393,7 @@ class JSONEncoder(json.JSONEncoder):
 
 def main():
     w = MongoWorker()
-    print(w.delete_all_product_types())
+    print(w.delete_all_sections())
 
 
 if __name__ == '__main__':

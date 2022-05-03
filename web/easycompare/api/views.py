@@ -76,13 +76,6 @@ class SectionDetail(RetrieveUpdateDestroyAPIView):
     queryset = Section.objects.all()
     lookup_field = 'id'
 
-def section_detail(request, section_id):
-    worker = MongoWorker()
-    if request.is_ajax and request.method == "GET":
-        return JsonResponse(worker.get_section(section_id))
-    elif request.is_ajax and request.method == "DELETE":
-        return JsonResponse(worker.delete_section(section_id))
-
 def product_type_detail(request, type_id):
     worker = MongoWorker()
     if request.is_ajax and request.method == "GET":
