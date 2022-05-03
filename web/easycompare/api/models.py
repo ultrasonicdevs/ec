@@ -7,7 +7,8 @@ class Section(Document):
     name = StringField(required=True)
     parent_section = ReferenceField(
         'self', 
-        reference_delete_rule=CASCADE,
+        reverse_delete_rule=CASCADE,
+        null=True
     )
     meta = {'collection': 'sections'}
 
@@ -28,7 +29,7 @@ class AbstractAttribute(EmbeddedDocument):
 
 class ProductType(Document):
     name = StringField(required=True)
-    section = ReferenceField(Section, reference_delete_rule=CASCADE)
+    section = ReferenceField(Section, reverse_delete_rule=CASCADE)
     attributes = EmbeddedDocumentListField(AbstractAttribute)
     meta = {'collection': 'product_types'}
 
@@ -39,7 +40,7 @@ class Attribute(EmbeddedDocument):
 
 class Product(Document):
     name = StringField(required=True)
-    type = ReferenceField(ProductType, reference_delete_rule=CASCADE)
+    type = ReferenceField(ProductType, reverse_delete_rule=CASCADE)
     preview_url = StringField()
     attributes = EmbeddedDocumentListField(Attribute)
     meta = {'collection': 'products'}
