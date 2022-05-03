@@ -1,4 +1,3 @@
-from cgitb import lookup
 import json
 from django.http import HttpResponse, JsonResponse
 from rest_framework.renderers import JSONRenderer
@@ -9,7 +8,7 @@ from ec_admin.mongoworker import MongoWorker
 import urllib.parse
 from rest_framework import status
 
-from api.serializers import *
+from .serializers import *
 from .models import *
 
 
@@ -33,7 +32,7 @@ class Sections(APIView):
 
     def delete(self, request):
         Section.objects.all().delete()
-        return Response(status=status.HTTP_410_GONE)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 class ProductTypes(APIView):
     renderer_classes = [JSONRenderer]
@@ -51,7 +50,7 @@ class ProductTypes(APIView):
 
     def delete(self, request):
         ProductType.objects.all().delete()
-        return Response(status=status.HTTP_410_GONE)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 class Products(APIView):
     renderer_classes = [JSONRenderer]
@@ -69,7 +68,7 @@ class Products(APIView):
 
     def delete(self, request):
         Product.objects.all().delete()
-        return Response(status=status.HTTP_410_GONE)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 class SectionDetail(RetrieveUpdateDestroyAPIView):
     serializer_class = SectionSerializer
