@@ -1,7 +1,15 @@
+from cgitb import lookup
 import json
-from django.http import HttpResponse, HttpResponseGone, JsonResponse
+from django.http import HttpResponse, JsonResponse
+from rest_framework.renderers import JSONRenderer
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.generics import RetrieveUpdateDestroyAPIView
 from ec_admin.mongoworker import MongoWorker
 import urllib.parse
+from rest_framework import status
+
+from api.serializers import *
 from .models import *
 from bson import ObjectId
 
@@ -10,31 +18,59 @@ from bson import ObjectId
 def index(request):
     return HttpResponse('Zatychka')
 
-def sections(request):
-    if request.is_ajax and request.method == "GET":
-        return JsonResponse({'response': Section.serialized}, safe=False)
-    elif request.is_ajax and request.method == "POST":
-        section_json = json.loads(request.body)
-        section_name = section_json['name']
-        parent_section_id = section_json['parent_section']
-        Section(
-            name=section_name,
-            parent_section=Section.objects(id=ObjectId(parent_section_id))[0] if parent_section_id else None
-        ).save()
-        return HttpResponse(status=201)
-    elif request.is_ajax and request.method == "DELETE":
-        Section.objects.delete()
-        return HttpResponseGone()
+class Sections(APIView):
+    renderer_classes = [JSONRenderer]
+    def get(self, request):
+        queryset = Section.objects.all()
+        serializer = SectionSerializer(queryset, many=True)
+        return Response({'response': serializer.data})
 
-def product_types(request):
-    worker = MongoWorker()
-    if request.is_ajax and request.method == "GET":
-        return JsonResponse(worker.get_product_types())
-    elif request.is_ajax and request.method == "POST":
-        product_type_json = json.loads(request.body)
-        return JsonResponse(worker.insert_product_type(product_type_json))
-    elif request.is_ajax and request.method == "DELETE":
-        return JsonResponse(worker.delete_all_product_types())
+    def post(self, request):
+        serializer = SectionSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request):
+        Section.objects.all().delete()
+        return Response(status=status.HTTP_410_GONE)
+
+class ProductTypes(APIView):
+    renderer_classes = [JSONRenderer]
+    def get(self, request):
+        queryset = ProductType.objects.all()
+        serializer = ProductTypeSerializer(queryset, many=True)
+        return Response({'response': serializer.data})
+
+    def post(self, request):
+        serializer = ProductTypeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request):
+        ProductType.objects.all().delete()
+        return Response(status=status.HTTP_410_GONE)
+
+class Products(APIView):
+    renderer_classes = [JSONRenderer]
+    def get(self, request):
+        queryset = Product.objects.all()
+        serializer = ProductSerializer(queryset, many=True)
+        return Response({'response': serializer.data})
+
+    def post(self, request):
+        serializer = ProductSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request):
+        Product.objects.all().delete()
+        return Response(status=status.HTTP_410_GONE)
 
 def products(request):
     worker = MongoWorker()
