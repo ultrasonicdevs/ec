@@ -11,7 +11,6 @@ from rest_framework import status
 
 from api.serializers import *
 from .models import *
-from bson import ObjectId
 
 
 #TODO: Make all CBV
@@ -72,14 +71,10 @@ class Products(APIView):
         Product.objects.all().delete()
         return Response(status=status.HTTP_410_GONE)
 
-def products(request):
-    worker = MongoWorker()
-    if request.is_ajax and request.method == "GET":
-        return JsonResponse(worker.get_products())
-    elif request.is_ajax and request.method == "POST":
-        return JsonResponse(worker.insert_product(json.loads(request.body)))
-    elif request.is_ajax and request.method == "DELETE":
-        return JsonResponse(worker.delete_all_products())
+class SectionDetail(RetrieveUpdateDestroyAPIView):
+    serializer_class = SectionSerializer
+    queryset = Section.objects.all()
+    lookup_field = 'id'
 
 def section_detail(request, section_id):
     worker = MongoWorker()

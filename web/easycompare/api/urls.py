@@ -6,6 +6,7 @@ app_name = 'api'
 urlpatterns = [
     path('', views.index, name='index'),
     path('sections/', views.Sections.as_view(), name='sections'),
+    path('sections/<str:id>/', views.SectionDetail.as_view(), name='section-detail'),
     path('sections/<str:section_id>/product-types/', views.section_product_types, name='section-detail'),
     path('product-types/', views.ProductTypes.as_view(), name='product-types'),
     path('product-types/<str:type_id>/', views.product_type_detail, name='product_type_detail'),

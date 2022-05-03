@@ -1,4 +1,3 @@
-from unicodedata import name
 from mongoengine import *
 connect('ec_products')
 
@@ -11,17 +10,6 @@ class Section(Document):
         null=True
     )
     meta = {'collection': 'sections'}
-
-    @queryset_manager
-    def serialized(self, queryset):
-        data = []
-        for section in queryset:
-            data.append({
-                'id': str(section.id),
-                'name': section.name,
-                'parent_section': str(section.parent_section.id if section.parent_section else None)
-            })
-        return data
 
 class AbstractAttribute(EmbeddedDocument):
     type = StringField(required=True)
