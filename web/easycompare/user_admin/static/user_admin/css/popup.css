@@ -32,6 +32,8 @@
   position: absolute;
   top: 1.3em;
   right: 1.3em;
+  opacity: 1;
+  visibility: visible;
 }
 
 .popup__background .popup__container .cross-btn .cross-btn-relative {

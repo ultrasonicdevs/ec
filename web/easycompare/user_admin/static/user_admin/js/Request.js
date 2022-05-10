@@ -22,12 +22,12 @@ class Request {
         headers[key] = value;
       }
     }
-
+    
     return await fetch(url, {
       method,
       body,
       headers,
-    }).then(response => response.json())
+    }).then(response => response.json());
   }
 
   getCookieByName(name) {

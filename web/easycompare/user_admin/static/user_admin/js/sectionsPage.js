@@ -7,7 +7,7 @@ class Page extends Request {
 
   async renderPage () {
     const sectionsData = await this.sendRequest(this.urlToSections).then(res => res.response);
-
+    
     // Генерация разделов
     this.generator.generateSections(sectionsData);
 
@@ -17,27 +17,29 @@ class Page extends Request {
     // Добавление событий по клику на раздел (открытие менюшки товаров)
     const sectionsContainers = Array.from(document.querySelectorAll('.section__container'));
     sectionsContainers.forEach(sectionContainer => 
-      sectionContainer.addEventListener('click', (e) => {
-        const currentSectionContainer = e.target.parentNode;
-        // Условие нажатия по названию раздела
-        if (!e.target.classList.contains('section-name')) return;
-        // Очистка всех меню товаров
-        Array.from(document.querySelectorAll('.products-menu'))
-          .forEach(productsMenu => productsMenu.innerHTML = '');
-
-        // Изменение цвета для всех разделов на неактивный
-        Array.from(document.querySelectorAll('.section__container'))
-          .forEach(sectionContainer => sectionContainer.style.color = '#CCC');
-          
-        currentSectionContainer.style.color = '#000';
-        
-        if (currentSectionContainer.classList.contains('product-menu-opened')) {
-          this.closeProductMenu ();
-        } else {
-          this.openProductMenu (currentSectionContainer);
-        };
-      })
+      sectionContainer.addEventListener('click', (e) => this.sectionClickHandler(e))
     );
+  }
+
+  sectionClickHandler (e) {
+    const currentSectionContainer = e.target.parentNode;
+    // Условие нажатия по названию раздела
+    if (!e.target.classList.contains('section-name')) return;
+    // Очистка всех меню товаров
+    Array.from(document.querySelectorAll('.products-menu'))
+      .forEach(productsMenu => productsMenu.innerHTML = '');
+
+    // Изменение цвета для всех разделов на неактивный
+    Array.from(document.querySelectorAll('.section__container'))
+      .forEach(sectionContainer => sectionContainer.style.color = '#CCC');
+      
+    currentSectionContainer.style.color = '#000';
+    
+    if (currentSectionContainer.classList.contains('product-menu-opened')) {
+      this.closeProductMenu ();
+    } else {
+      this.openProductMenu (currentSectionContainer);
+    }
   }
 
   openProductMenu (currentSectionContainer) {
@@ -62,7 +64,22 @@ class Page extends Request {
   addEventToEditBtn () {
     const editBtn = document.querySelector('.edit-btn');
     editBtn.addEventListener('click', () => {
+      const sectionsNames = document.querySelectorAll('.section-name').length ? 
+        document.querySelectorAll('.section-name') : 
+        document.querySelectorAll('.section-name-input');
+      console.log(sectionsNames);
+      sectionsNames.forEach(sectionName => {
+        this.changeToInputOrSpan(sectionName);
+      })
       if (editBtn.classList.contains('edit-mode')) {
+        Array.from(document.querySelectorAll('.section-name'))
+        .forEach(sectionName => {
+          const data = {
+            id: sectionName.parentNode.id,
+            name: sectionName.textContent,
+          };
+          this.sendRequest(this.urlToSections + `${data.id}/`, 'PUT', JSON.stringify(data), null, true);
+        });
         editBtn.textContent = 'Редактировать';
         editBtn.classList.remove('edit-mode');
         Array.from(document.querySelectorAll('.delete-section-btn'))
@@ -71,6 +88,8 @@ class Page extends Request {
         document.querySelector('.add-new-type-btn').classList.remove('edit-mode');
         document.querySelector('#editing-tooltip').classList.remove('edit-mode');
       } else {
+        Array.from(document.querySelectorAll('.product-menu-opened'))
+        .forEach(item => item.classList.remove('product-menu-opened'))
         editBtn.textContent = 'Сохранить изменения';
         editBtn.classList.add('edit-mode');
         document.querySelector('.activate-delete-mode-btn').classList.add('edit-mode');
@@ -97,6 +116,23 @@ class Page extends Request {
         .forEach(deleteSectionBtn => deleteSectionBtn.classList.add('remove-mode'));
       }
     })
+  }
+
+  changeToInputOrSpan (element) {
+    let newElement = null;
+    if (element.tagName === 'SPAN') {
+      newElement = document.createElement('input')
+      newElement.value = element.textContent;
+      newElement.className = element.className + '-input';
+    }
+    else {
+      newElement = document.createElement('span');
+      newElement.textContent = element.value;
+      newElement.className = 'section-name';
+    }
+    element.parentNode.insertBefore(newElement, element);
+    element.parentNode.removeChild(element);
+    return newElement;
   }
 }
 
