@@ -5,8 +5,8 @@ describe('Block generation test', () => {
   const expect = {
     id: 1,
     name: 'block',
-    urlToProductTypes: 'http://192.168.0.128:8000/api/product-types/',
-    urlToSections: 'http://192.168.0.128:8000/api/sections/',
+    urlToProductTypes: `${location.protocol}//${location.host}/api/product-types/`,
+    urlToSections: `${location.protocol}//${location.host}/api/sections/`,
   }
 
   before ('Block initialization', () => {
@@ -18,3 +18,4 @@ describe('Block generation test', () => {
   })
 
 })
+

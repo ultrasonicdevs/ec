@@ -1,4 +1,4 @@
-describe('Request method tests', () => {
+describe('Request Sim method test', () => {
 
   const actual = [];
 
@@ -20,9 +20,10 @@ describe('Request method tests', () => {
     })
   })
 
-
-  it('sendRequest test', () => {
+  it('sendRequest sim test', () => {
     assert.sameDeepMembers(actual, expect);
   })
 
 })
+
+
