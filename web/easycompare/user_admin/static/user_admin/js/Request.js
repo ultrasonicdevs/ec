@@ -4,7 +4,7 @@ class Request {
     this.urlToProductTypes = `${location.protocol}//${location.host}/api/product-types/`;
   }
 
-  async sendRequest (url, method, body = null, headersHTTP = null, hasCSRFtoken = null) {
+  async sendRequest (url, method = 'GET', body = null, headersHTTP = null, hasCSRFtoken = null) {
     const XCSRFtoken = hasCSRFtoken ? this.getCookieByName('csrftoken') : null;
 
     const headers = {

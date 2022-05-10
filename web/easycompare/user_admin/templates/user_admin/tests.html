@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Tests</title>
+
+        <!-- Mocha и стили -->
+        <script 
+            src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.js">
+        </script>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.css">
+
+        <!-- Mocha setup -->
+        <script>mocha.setup('bdd')</script>
+
+        <!-- Chai и chai.assert -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/chai/2.0.0/chai.js">
+        </script>
+        <script>const assert = chai.assert;</script>
+
+        <!-- Модули для тестов -->
+        <script src="{% static 'user_admin/js/Request.js' %}"></script>
+        <script src="{% static 'user_admin/js/Block.js' %}"></script>
+
+    </head>
+
+    <body>
+        <!-- Тесты -->
+        <script src="{% static 'user_admin/js/tests/Request.test.js' %}"></script>
+        <script src="{% static 'user_admin/js/tests/Block.test.js' %}"></script>
+
+        <!-- Результаты тестов -->
+        <div id="mocha"></div>
+
+        <script>mocha.run()</script>
+    </body>
+</html>

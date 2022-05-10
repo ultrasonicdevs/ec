@@ -10,4 +10,4 @@ class UserAdminView(View):
 class UserAdminViewTest(View):
     @staticmethod
     def get(request):
-        return render(request, 'user_admin/testForm.html')
+        return render(request, 'user_admin/tests.html')
