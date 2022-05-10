@@ -7,7 +7,7 @@ class Page extends Request {
 
   async renderPage () {
     const sectionsData = await this.sendRequest(this.urlToSections).then(res => res.response);
-    
+
     // Генерация разделов
     this.generator.generateSections(sectionsData);
 

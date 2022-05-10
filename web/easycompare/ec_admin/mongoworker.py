@@ -45,7 +45,7 @@ class MongoWorker:
     def get_product_type_filters(self, type_id):
         query = self.products_coll.aggregate([
         {
-            '$match': { 'type': str(type_id)}
+            '$match': { 'type': ObjectId(type_id)}
         },
 
         {
@@ -60,15 +60,13 @@ class MongoWorker:
             '$project': {'_id': 0, 'filter_group_name': '$_id', 'attributes': 1}
         },
         ])
-
+        product_type_filters = list(query)
         return {
                 'status': 'ok',
                 'response': {
                     'product_type_name': self.get_product_type(type_id)['response']['name'],
-                    'product_type_filters': list(query),
+                    'product_type_filters': product_type_filters,
                 }
-                
-                
             }
 
     def get_sections(self):
@@ -125,7 +123,7 @@ class MongoWorker:
     def get_section_product_types(self, section_id):
         product_types_list = []
         encoder = JSONEncoder()
-        for product_type in self.product_types_coll.find({'section': section_id}):
+        for product_type in self.product_types_coll.find({'section': ObjectId(section_id)}):
             product_types_list.append({
                 'id': encoder.default(product_type['_id']),
                 'name': product_type['name'],
@@ -148,8 +146,9 @@ class MongoWorker:
     def get_products_of_certain_type(self, type_id):
         products_list = []
         encoder = JSONEncoder()
-        for product in self.products_coll.find({'type': type_id}):
+        for product in self.products_coll.find({'type': ObjectId(type_id)}):
             product['_id'] = encoder.default(product['_id'])
+            product['type'] = encoder.default(product['type'])
             products_list.append(product)
         print(products_list)
         return {
@@ -355,7 +354,7 @@ class MongoWorker:
         exp = {
             '$and': [
                 {
-                    'type': product_type
+                    'type': ObjectId(product_type)
                 },
             ]
         }
@@ -378,6 +377,7 @@ class MongoWorker:
         response = []
         for document in query:
             document['_id'] = JSONEncoder().default(document['_id'])
+            document['type'] = JSONEncoder().default(document['type'])
             response.append(document)
         return {
             'status': 'ok',
@@ -394,7 +394,7 @@ class JSONEncoder(json.JSONEncoder):
 
 def main():
     w = MongoWorker()
-    print(w.delete_all_product_types())
+    print(w.delete_all_sections())
 
 
 if __name__ == '__main__':

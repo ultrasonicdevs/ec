@@ -34,9 +34,9 @@ function sendSectionJsonToServer() {
 
 function getSectionJson(){
     let sectionName = sectionNameInput.value;
-    let parentSectionName = parentSectionSelect.value;
+    let parentSection = parentSectionSelect.value;
 
-    let isFieldsEmpty = (sectionName === '') || (parentSectionName === '');
+    let isFieldsEmpty = (sectionName === '');
    
     if (isFieldsEmpty) {
         alert('Заполните поля!');
@@ -45,7 +45,7 @@ function getSectionJson(){
 
     let sectionJson = {
         'name': sectionName,
-        'parent_section': parentSectionName,
+        'parent_section': parentSection,
     };
 
     return sectionJson;

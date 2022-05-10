@@ -25,6 +25,8 @@ INSTALLED_APPS = [
     'ec_admin',
     'user_side',
     'user_admin',
+    'rest_framework',
+    'rest_framework_mongoengine',
 ]
 
 MIDDLEWARE = [

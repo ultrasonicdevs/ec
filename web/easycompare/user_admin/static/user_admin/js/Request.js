@@ -5,6 +5,7 @@ class Request {
   }
 
   async sendRequest (url, method = 'GET', body = null, headersHTTP = null, hasCSRFtoken = null) {
+
     const XCSRFtoken = hasCSRFtoken ? this.getCookieByName('csrftoken') : null;
 
     const headers = {
