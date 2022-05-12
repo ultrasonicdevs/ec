@@ -122,12 +122,14 @@ function renderAllProductCards(e){
 function renderProductCard(productJson) {
     const productCard = document.createElement('div');
     const productPreview = document.createElement('img');
-    const productName = document.createElement('h1');
+    const productName = document.createElement('a');
 
     productPreview.src = productJson.preview_url;
     productPreview.width = 250;
     productPreview.height = 250;
     productName.innerHTML = productJson.name;
+    let href = `${location.protocol}//${location.host}/${productTypeSelect.value}/${productJson._id}/`
+    productName.href = href;
 
     productCard.appendChild(productPreview);
     productCard.appendChild(productName);
