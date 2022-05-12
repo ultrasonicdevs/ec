@@ -377,6 +377,8 @@ class MongoWorker:
         response = []
         for document in query:
             document['_id'] = JSONEncoder().default(document['_id'])
+            document['id'] = document['_id']
+            del document['_id']
             document['type'] = JSONEncoder().default(document['type'])
             response.append(document)
         return {

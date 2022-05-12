@@ -128,7 +128,7 @@ function renderProductCard(productJson) {
     productPreview.width = 250;
     productPreview.height = 250;
     productName.innerHTML = productJson.name;
-    let href = `${location.protocol}//${location.host}/${productTypeSelect.value}/${productJson._id}/`
+    let href = `${location.protocol}//${location.host}/${productTypeSelect.value}/${productJson.id}/`
     productName.href = href;
 
     productCard.appendChild(productPreview);
