@@ -17,7 +17,6 @@ def index(request):
     return HttpResponse('Zatychka')
 
 class Sections(APIView):
-    renderer_classes = [JSONRenderer]
     def get(self, request):
         queryset = Section.objects.all()
         serializer = SectionSerializer(queryset, many=True)
@@ -35,7 +34,6 @@ class Sections(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class ProductTypes(APIView):
-    renderer_classes = [JSONRenderer]
     def get(self, request):
         queryset = ProductType.objects.all()
         serializer = ProductTypeSerializer(queryset, many=True)
@@ -53,7 +51,6 @@ class ProductTypes(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class Products(APIView):
-    renderer_classes = [JSONRenderer]
     def get(self, request):
         queryset = Product.objects.all()
         serializer = ProductSerializer(queryset, many=True)
