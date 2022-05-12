@@ -29,6 +29,6 @@ class Attribute(EmbeddedDocument):
 class Product(Document):
     name = StringField(required=True)
     type = ReferenceField(ProductType, reverse_delete_rule=CASCADE)
-    preview_url = StringField()
+    preview_url = StringField(null=True)
     attributes = EmbeddedDocumentListField(Attribute)
     meta = {'collection': 'products'}
