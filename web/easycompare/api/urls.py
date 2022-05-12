@@ -1,4 +1,3 @@
-from unicodedata import name
 from django.urls import path
 from api import views
 
@@ -7,7 +6,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('sections/', views.Sections.as_view(), name='sections'),
     path('sections/<str:id>/', views.SectionDetail.as_view(), name='section-detail'),
-    path('sections/<str:section_id>/product-types/', views.section_product_types, name='section-detail'),
+    path('sections/<str:section_id>/product-types/', views.section_product_types, name='section-product-types'),
     path('product-types/', views.ProductTypes.as_view(), name='product-types'),
     path('product-types/<str:id>/', views.ProductTypeDetail.as_view(), name='product_type_detail'),
     path('product-types/<str:type_id>/filters/', views.product_type_filters, name='product_type_filters'),
