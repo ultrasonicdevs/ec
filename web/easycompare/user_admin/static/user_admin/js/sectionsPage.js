@@ -9,6 +9,19 @@ class Page extends Request {
     const sectionsData = await this.sendRequest(this.urlToSections).then(res => res.response);
     
     // Генерация разделов
+    if (sectionsData.length === 0) {
+      document.querySelector('.sections').innerHTML = `
+        <div>
+          <h3 style="color: red">Вы не создали ни одного раздела</h3>
+          <a 
+            href="${location.protocol}//${location.host}/ec-admin/add-section/"
+            target="blank"
+            style="color: red"
+          >Создать</a>
+        </div>
+      `
+      return;
+    }
     this.generator.generateSections(sectionsData);
 
     this.addEventToEditBtn ();
