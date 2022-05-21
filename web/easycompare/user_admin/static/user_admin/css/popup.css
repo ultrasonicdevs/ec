@@ -24,6 +24,7 @@
   font-size: calc( (100vw - 320px)/(1200 - 320) * (49 - 16) + 1rem);
   position: relative;
   transtition: .5s;
+  max-height: 80%;
 }
 
 .popup__background .popup__container .cross-btn {
@@ -115,6 +116,14 @@
           box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
 }
 
+.popup__background .popup__container .product-form {
+  max-height: 300px;
+  height: 100%;
+  overflow-y: auto;
+  margin-bottom: 5rem;
+  margin-top: 1rem;
+}
+
 .popup__background .popup__container .product-form .filter__container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -123,7 +132,6 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin: 1em 0;
 }
 
 .popup__background .popup__container .product-form .product-edit-btns__container {

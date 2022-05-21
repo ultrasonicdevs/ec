@@ -29,4 +29,4 @@ Linux:
 8. Перейдите на один из следующих адресов:  
 `http://localhost:8000/`  
 `http://localhost:8000/ec-admin/`  
-`http://localhost:8000/user_admin/`   
+`http://localhost:8000/user-admin/`   

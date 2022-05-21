@@ -17,6 +17,7 @@
     font-size: calc( (100vw - 320px)/(1200 - 320) * (49 - 16) + 1rem)
     position: relative
     transtition: .5s
+    max-height: 80%
 
     .cross-btn
       width: 2em
@@ -77,10 +78,15 @@
           box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset
 
     .product-form
+      max-height: 300px
+      height: 100%
+      overflow-y: auto
+      margin-bottom: 5rem
+      margin-top: 1rem
+
       .filter__container
         display: flex
         flex-direction: column
-        margin: 1em 0
 
       .product-edit-btns__container
         position: absolute
