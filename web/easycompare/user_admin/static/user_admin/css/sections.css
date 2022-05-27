@@ -124,8 +124,9 @@ h2 {
   font-weight: 700;
 }
 
-.section__container_outer .sections .sections__container-of-several-elements .section__container .section-name-input, .section__container_outer .sections .sections__container-of-several-elements .section__container .product-name-input {
+.section__container_outer .sections .sections__container-of-several-elements .section__container .section-name-input {
   border-bottom: 1px solid #A5A5A5;
+  cursor: text;
 }
 
 .section__container_outer .sections .sections__container-of-several-elements .section__container .products-menu {
@@ -144,9 +145,14 @@ h2 {
 }
 
 .section__container_outer .sections .sections__container-of-several-elements .section__container .products-menu li .product-name, .section__container_outer .sections .sections__container-of-several-elements .section__container .products-menu li .product-name-input {
+  cursor: pointer;
   font-size: 16px;
   font-weight: 500;
-  cursor: pointer;
+}
+
+.section__container_outer .sections .sections__container-of-several-elements .section__container .products-menu li .product-name-input {
+  border-bottom: 1px solid #A5A5A5;
+  cursor: text;
 }
 
 .cross-btn.remove-mode {
