@@ -102,25 +102,25 @@ h2
           cursor: pointer
           font-size: .9em
           font-weight: 700
-        
-        .section-name-input:focus
-          border-bottom: 1px solid #A5A5A5
 
+        .section-name-input, .product-name-input
+          border-bottom: 1px solid #A5A5A5
+        
         .products-menu
           position: absolute
           left: 70%
           top: 0
-          font-weight: 500
           width: 50%
           @include animationHidden
 
           li
             margin-bottom: 1rem
             
-            .product-name
+            .product-name, .product-name-input
               font-size: 16px
+              font-weight: 500
               cursor: pointer
-            
+
 .cross-btn.remove-mode
   @include animationVisible
           

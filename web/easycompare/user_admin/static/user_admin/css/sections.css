@@ -124,7 +124,7 @@ h2 {
   font-weight: 700;
 }
 
-.section__container_outer .sections .sections__container-of-several-elements .section__container .section-name-input:focus {
+.section__container_outer .sections .sections__container-of-several-elements .section__container .section-name-input, .section__container_outer .sections .sections__container-of-several-elements .section__container .product-name-input {
   border-bottom: 1px solid #A5A5A5;
 }
 
@@ -132,7 +132,6 @@ h2 {
   position: absolute;
   left: 70%;
   top: 0;
-  font-weight: 500;
   width: 50%;
   opacity: 0;
   visibility: hidden;
@@ -144,8 +143,9 @@ h2 {
   margin-bottom: 1rem;
 }
 
-.section__container_outer .sections .sections__container-of-several-elements .section__container .products-menu li .product-name {
+.section__container_outer .sections .sections__container-of-several-elements .section__container .products-menu li .product-name, .section__container_outer .sections .sections__container-of-several-elements .section__container .products-menu li .product-name-input {
   font-size: 16px;
+  font-weight: 500;
   cursor: pointer;
 }
 

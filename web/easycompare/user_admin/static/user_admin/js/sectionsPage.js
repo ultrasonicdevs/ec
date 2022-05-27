@@ -80,9 +80,14 @@ class Page extends Request {
       const sectionsNames = document.querySelectorAll('.section-name').length ? 
         document.querySelectorAll('.section-name') : 
         document.querySelectorAll('.section-name-input');
-      console.log(sectionsNames);
+      const productTypes = document.querySelectorAll('.product-name').length ?
+        document.querySelectorAll('.product-name') :
+        document.querySelectorAll('.product-name-input');
       sectionsNames.forEach(sectionName => {
-        this.changeToInputOrSpan(sectionName);
+        this.changeToInputOrSpan(sectionName, 'section');
+      });
+      productTypes.forEach(productType => {
+        this.changeToInputOrSpan(productType, 'product');
       })
       if (editBtn.classList.contains('edit-mode')) {
         [...document.querySelectorAll('.section-name')]
@@ -93,6 +98,14 @@ class Page extends Request {
           };
           this.sendRequest(this.urlToSections + `${data.id}/`, 'PUT', JSON.stringify(data), null, true);
         });
+        [...document.querySelectorAll('.product-name')]
+        .forEach(productNane => {
+          const data = {
+            id: productNane.parentNode.id,
+            name: productNane.textContent,
+          };
+          this.sendRequest(this.urlToProductTypes + `${data.id}/`, 'PUT', JSON.stringify(data), null, true);
+        });
         editBtn.textContent = 'Редактировать';
         editBtn.classList.remove('edit-mode');
         [...document.querySelectorAll('.delete-section-btn')]
@@ -101,8 +114,6 @@ class Page extends Request {
         document.querySelector('.add-new-type-btn').classList.remove('edit-mode');
         document.querySelector('#editing-tooltip').classList.remove('edit-mode');
       } else {
-        [...document.querySelectorAll('.product-menu-opened')]
-        .forEach(item => item.classList.remove('product-menu-opened'))
         editBtn.textContent = 'Сохранить изменения';
         editBtn.classList.add('edit-mode');
         document.querySelector('.activate-delete-mode-btn').classList.add('edit-mode');
@@ -131,7 +142,7 @@ class Page extends Request {
     })
   }
 
-  changeToInputOrSpan (element) {
+  changeToInputOrSpan (element, type) {
     let newElement = null;
     if (element.tagName === 'SPAN') {
       newElement = document.createElement('input')
@@ -141,7 +152,7 @@ class Page extends Request {
     else {
       newElement = document.createElement('span');
       newElement.textContent = element.value;
-      newElement.className = 'section-name';
+      newElement.className = `${type}-name`;
     }
     element.parentNode.insertBefore(newElement, element);
     element.parentNode.removeChild(element);
