@@ -10,11 +10,11 @@ class Generator extends Request {
     let i = 0;
     while (i < sectionsData.length) {
       const sectionsContainerOfSixElems = document.createElement('ul'),
-            howManyElems = 6;
+            elemsCount = 6;
 
       sectionsContainerOfSixElems.className = `sections__container-of-several-elements`;
 
-      for (let j = 0; j < howManyElems; j++) {
+      for (let j = 0; j < elemsCount; j++) {
         const {id, name} = sectionsData[i];
 
         new Section ({

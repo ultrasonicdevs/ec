@@ -12,11 +12,11 @@ class Page extends Request {
     if (sectionsData.length === 0) {
       document.querySelector('.sections').innerHTML = `
         <div>
-          <h3 style="color: red">Вы не создали ни одного раздела</h3>
+          <h3>Вы не создали ни одного раздела</h3>
           <a 
             href="${location.protocol}//${location.host}/ec-admin/add-section/"
             target="blank"
-            style="color: red"
+            style="color: black"
           >Создать</a>
         </div>
       `
@@ -28,7 +28,7 @@ class Page extends Request {
     this.addEventToActivateDeleteModeBtn ();
 
     // Добавление событий по клику на раздел (открытие менюшки товаров)
-    const sectionsContainers = Array.from(document.querySelectorAll('.section__container'));
+    const sectionsContainers = [...document.querySelectorAll('.section__container')];
     sectionsContainers.forEach(sectionContainer => 
       sectionContainer.addEventListener('click', (e) => this.sectionClickHandler(e))
     );
@@ -39,11 +39,11 @@ class Page extends Request {
     // Условие нажатия по названию раздела
     if (!e.target.classList.contains('section-name')) return;
     // Очистка всех меню товаров
-    Array.from(document.querySelectorAll('.products-menu'))
+    [...document.querySelectorAll('.products-menu')]
       .forEach(productsMenu => productsMenu.innerHTML = '');
 
     // Изменение цвета для всех разделов на неактивный
-    Array.from(document.querySelectorAll('.section__container'))
+    [...document.querySelectorAll('.section__container')]
       .forEach(sectionContainer => sectionContainer.style.color = '#CCC');
       
     currentSectionContainer.style.color = '#000';
@@ -58,7 +58,7 @@ class Page extends Request {
   openProductMenu (currentSectionContainer) {
     document.querySelector('.sections').classList.add('flex');
     // Удаление метки открытого меню товара со всех контейнеров разделов
-    Array.from(document.querySelectorAll('.section__container'))
+    [...document.querySelectorAll('.section__container')]
       .forEach(sectionContainer => sectionContainer.classList.remove('product-menu-opened'));
 
     currentSectionContainer.classList.add('product-menu-opened');
@@ -67,11 +67,11 @@ class Page extends Request {
 
   closeProductMenu () {
     // Возврат черного цвета для всех разделов
-    Array.from(document.querySelectorAll('.section__container'))
+    [...document.querySelectorAll('.section__container')]
       .forEach(sectionContainer => sectionContainer.style.color = '#000');
 
     document.querySelector('.sections').classList.remove('flex');
-    Array.from(document.querySelectorAll('.product-menu-opened')).forEach(sectionContainer => sectionContainer.classList.remove('product-menu-opened'));
+    [...document.querySelectorAll('.product-menu-opened')].forEach(sectionContainer => sectionContainer.classList.remove('product-menu-opened'));
   }
 
   addEventToEditBtn () {
@@ -85,7 +85,7 @@ class Page extends Request {
         this.changeToInputOrSpan(sectionName);
       })
       if (editBtn.classList.contains('edit-mode')) {
-        Array.from(document.querySelectorAll('.section-name'))
+        [...document.querySelectorAll('.section-name')]
         .forEach(sectionName => {
           const data = {
             id: sectionName.parentNode.id,
@@ -95,13 +95,13 @@ class Page extends Request {
         });
         editBtn.textContent = 'Редактировать';
         editBtn.classList.remove('edit-mode');
-        Array.from(document.querySelectorAll('.delete-section-btn'))
+        [...document.querySelectorAll('.delete-section-btn')]
         .forEach(deleteSectionBtn => deleteSectionBtn.classList.remove('remove-mode'));
         document.querySelector('.activate-delete-mode-btn').classList.remove('edit-mode');
         document.querySelector('.add-new-type-btn').classList.remove('edit-mode');
         document.querySelector('#editing-tooltip').classList.remove('edit-mode');
       } else {
-        Array.from(document.querySelectorAll('.product-menu-opened'))
+        [...document.querySelectorAll('.product-menu-opened')]
         .forEach(item => item.classList.remove('product-menu-opened'))
         editBtn.textContent = 'Сохранить изменения';
         editBtn.classList.add('edit-mode');
@@ -117,15 +117,15 @@ class Page extends Request {
     activateDeleteModeBtn.addEventListener('click', () => {
       if (activateDeleteModeBtn.classList.contains('remove-mode')) {
         activateDeleteModeBtn.classList.remove('remove-mode');
-        Array.from(document.querySelectorAll('.delete-section-btn'))
+        [...document.querySelectorAll('.delete-section-btn')]
         .forEach(deleteSectionBtn => deleteSectionBtn.classList.remove('remove-mode'));
-        Array.from(document.querySelectorAll('.delete-product-type-btn'))
+        [...document.querySelectorAll('.delete-product-type-btn')]
         .forEach(deleteSectionBtn => deleteSectionBtn.classList.remove('remove-mode'));
       } else {
         activateDeleteModeBtn.classList.add('remove-mode');
-        Array.from(document.querySelectorAll('.delete-section-btn'))
+        [...document.querySelectorAll('.delete-section-btn')]
         .forEach(deleteSectionBtn => deleteSectionBtn.classList.add('remove-mode'));
-        Array.from(document.querySelectorAll('.delete-product-type-btn'))
+        [...document.querySelectorAll('.delete-product-type-btn')]
         .forEach(deleteSectionBtn => deleteSectionBtn.classList.add('remove-mode'));
       }
     })
