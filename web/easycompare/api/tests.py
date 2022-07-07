@@ -102,7 +102,10 @@ class SectionDeleteTests(APITestCase):
 class ProductTypeCreateTests(APITestCase):
     def setUp(self):
         disconnect('default')
-        connect('mongoenginetest', host='mongomock://localhost') 
+        connect('mongoenginetest', host='mongomock://localhost')
+
+    def tearDown(self):
+        disconnect('mongoenginetest')
 
     def test_create_valid_product_type(self):
         self.parent_section_id = self.client.post(
@@ -135,6 +138,9 @@ class ProductTypeDeleteTests(APITestCase):
     def setUp(self):
         disconnect('default')
         connect('mongoenginetest', host='mongomock://localhost') 
+
+    def tearDown(self):
+        disconnect('mongoenginetest')
 
     def test_delete_product_type(self):
         self.parent_section_id = self.client.post(
@@ -264,8 +270,11 @@ class ProductDeleteTests(APITestCase):
             format='json'
         ).data['id']
 
+    def tearDown(self):
+        disconnect()
+
     def test_product_delete(self):
         response = self.client.delete(
-            reverse('product_detail', args=[self.product_id])
+            reverse('api:product_detail', args=[self.product_id])
         )
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
