@@ -27,7 +27,7 @@ class NavBar extends Request {
         });
         const sectionAct = document.getElementById(sectionID);
         sectionAct.className = 'section act';
-        const productTypesList = this.productTypes.filter(productType => productType.parent_section === sectionID);
+        const productTypesList = this.productTypes.filter(productType => productType.section === sectionID);
         productTypesList.forEach(productType => {
             const liProductType = document.createElement('li'),
                 link = document.createElement('a');
