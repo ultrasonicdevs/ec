@@ -8,7 +8,7 @@ from django.core.files.storage import default_storage
 
 
 class MongoWorker:
-    client = MongoClient('localhost', 27017)
+    client = MongoClient('mongo_database:27017')
     db = client['ec_products']
     sections_coll = db['sections']
     product_types_coll = db['product_types']

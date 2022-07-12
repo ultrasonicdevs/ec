@@ -5,6 +5,12 @@ import socket
 from pathlib import Path
 
 
+from mongoengine import connect
+connect(
+    db='ec_products',
+    host='mongo_database'
+)
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-zaxb%94cv+w)s=7_j%8b*nxw#xb#!&wrvu-xdo)to*dixu47i*'

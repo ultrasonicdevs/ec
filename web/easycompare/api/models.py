@@ -1,5 +1,4 @@
 from mongoengine import *
-connect('ec_products')
 
 
 class Section(Document):
