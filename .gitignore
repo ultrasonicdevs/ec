@@ -137,3 +137,6 @@ dmypy.json
 # sass cache
 *.map
 .sass-cache/
+
+# docker db data volume
+db/data
