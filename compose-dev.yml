@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  db:
+    image: mongo:5.0.6
+    container_name: mongo_database
+    volumes: 
+      - ./db/data:/data/db
+    ports:
+      - 27017:27072
+  app:
+    image: ec_dev
+    build: 
+      context: ./web/
+      target: development_env
+    container_name: django_ec_dev_interpreter
+    volumes: 
+      - type: bind
+        source: ./web/easycompare
+        target: /code
+    ports:
+      - 8000:8000
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - mongo
