@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#TODO: Непозиционные именованные аргументы name и path
+#TODO: Help
+
 save_backup_to() {
     local path=$1
     docker exec mongo_database sh -c 'exec mongodump --archive' > $path
@@ -34,7 +37,6 @@ if [ -z "$mongo_is_running" ]
 then
     start_db_container
     save_backup_to $backup_full_path
-
     docker-compose -f ./compose-dev.yml stop db
 else
     save_backup_to $backup_full_path
