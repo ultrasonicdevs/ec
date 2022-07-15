@@ -1,11 +1,8 @@
 version: '3'
 
 services:
-  mongo:
-    container_name: mongo_database_prod
-  django:
+  app:
     image: ec_prod
     build: 
       target: production_img
     container_name: django_prod
-    command: 
