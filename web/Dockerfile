@@ -8,4 +8,3 @@ RUN pip install -r requirements.txt && rm ./requirements.txt
 
 FROM development_env AS production_img
 COPY ./easycompare/* .
-CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
